@@ -1,0 +1,64 @@
+Psfx: 
+  description_eng: "personal suffix", 
+  description_turk: "şahıs eki",
+  function: gen_all_as_table,
+  grammar_role: :person,
+  lexical_rule: "",
+  lexical_hash: { 
+    :ben -> "@Y @4 M", 
+    :sen -> "S @4 N", 
+    :o -> φ, 
+    :biz -> "@Y @4 Z", 
+    :siz -> "S @4 N @4 Z", 
+    :onlar -> "L @2 R"}",
+  exceptions: {}
+
+@4: 
+  description_eng: 4-way vowel harmony,
+  description_turk: "dörtlü ünlü uyumu",
+  function: verb_suffix_vowel_harmony,
+  grammar_role: :harmony,
+  lexical_rule: "", 
+  lexical_hash: {(a,ı) -> ı, (o,u) -> u, (e,i) -> i, (ö,ü) -> ü},
+  exceptions: {}
+
+@2: 
+  description_eng: 2-way vowel harmony,
+  description_turk: "iki ünlü uyumu",
+  function: verb_suffix_vowel_harmony, 
+  grammar_role: :harmony,
+  lexical_rule: "",
+  lexical_hash: {(a,ı,o,u) -> a, (e,i,ö,ü) -> e},
+  exceptions: {}
+
+IndefPast: 
+  description_eng: "Indefinite Past tense",
+  description_turk: "personal suffix",
+  function: parse_lexical_rule, 
+  grammar_role: :past_tense,
+  lexical_rule: "~V M @4 Ş &Psfx",
+  lexical_hash: {},
+  exceptions: {}
+
+@K:
+  description_eng: "consonant-stem transformation",
+  description_turk: "ünsüz yumuşaması",
+  function: verb_suffix_consonant_harmony,
+  grammar_role: :harmony,
+  lexical_rule: "",
+  lexical_hash: {},
+  exceptions: {}
+
+@Y:
+  description_eng: "vowel buffer transformation",
+  description_turk: "",
+  function: verb_vowel_buffer_harmony,
+  grammar_role: :harmony,
+  lexical_rule: "",
+  lexical_hash: {},
+  exceptions: {}
+
+
+
+
+
