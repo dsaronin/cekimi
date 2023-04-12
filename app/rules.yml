@@ -12,12 +12,12 @@ Psfx:
   grammar_role: :person,
   lexical_rule: "",
   lexical_hash: { 
-    :ben -> "@Y @4 M", 
-    :sen -> "S @4 N", 
-    :o -> φ, 
-    :biz -> "@Y @4 Z", 
-    :siz -> "S @4 N @4 Z", 
-    :onlar -> "L @2 R"}",
+    :ben => "@Y @4 M", 
+    :sen => "S @4 N", 
+    :o => φ, 
+    :biz => "@Y @4 Z", 
+    :siz => "S @4 N @4 Z", 
+    :onlar => "L @2 R"}",
   exceptions: {}
 
 @4: 
@@ -26,7 +26,7 @@ Psfx:
   function: verb_suffix_vowel_harmony,
   grammar_role: :harmony,
   lexical_rule: "", 
-  lexical_hash: {(a,ı) -> ı, (o,u) -> u, (e,i) -> i, (ö,ü) -> ü},
+  lexical_hash: {(a,ı) => ı, (o,u) => u, (e,i) => i, (ö,ü) => ü},
   exceptions: {}
 
 @2: 
@@ -35,7 +35,7 @@ Psfx:
   function: verb_suffix_vowel_harmony, 
   grammar_role: :harmony,
   lexical_rule: "",
-  lexical_hash: {(a,ı,o,u) -> a, (e,i,ö,ü) -> e},
+  lexical_hash: {(a,ı,o,u) => a, (e,i,ö,ü) => e},
   exceptions: {}
 
 IndefPast: 
