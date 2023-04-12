@@ -1,3 +1,10 @@
+---
+# 
+# Çekimi conjugation rules
+# Copyright (c) 2023 David S Anderson, All Rights Reserved
+#
+cekimi_rules_version: 1.01
+#
 Psfx: 
   description_eng: "personal suffix", 
   description_turk: "şahıs eki",
