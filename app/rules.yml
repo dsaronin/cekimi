@@ -2,70 +2,107 @@
 # 
 # Çekimi conjugation rules
 # Copyright (c) 2023 David S Anderson, All Rights Reserved
-#   up 2
-cekimi_rules_version: 1.01
+#   
+# cekimi_rules_version: 1.01
 #
-Psfx: 
-  description_eng: "personal suffix", 
-  description_turk: "şahıs eki",
-  function: gen_all_as_table,
-  grammar_role: :person,
-  lexical_rule: "",
-  lexical_hash: { 
-    :ben => "@Y @4 M", 
-    :sen => "S @4 N", 
-    :o => φ, 
-    :biz => "@Y @4 Z", 
-    :siz => "S @4 N @4 Z", 
-    :onlar => "L @2 R"}",
-  exceptions: {}
+
+indef_past:
+  !ruby/object:CekimiRule
+    caption_eng: indefinite past tense
+    caption_turk: belirlisiz geçmis zaman
+    gen_method: parse_lexical_rule 
+    grammar_role: :past_tense
+    lexical_rule: "~V M @4 Ş &pers_sfx"
+    parent_conj: ~
+    child_conj: ~
+    next_list: ~
+    rule_info: ~
+    exceptions: ~
+
+pers_sfx: 
+  !ruby/object:CekimiRule
+    caption_eng: personal suffix
+    caption_turk: şahıs eki
+    gen_method: gen_all_as_table
+    grammar_role: :person
+    lexical_rule: ~
+    parent_conj: ~
+    child_conj: ~
+    next_list: ~
+    rule_info:
+      :ben: "@Y @4 M"
+      :sen: "S @4 N"
+      :o: ""
+      :biz: "@Y @4 Z"
+      :siz: "S @4 N @4 Z"
+      :onlar: "L @2 R"
+    exceptions: ~
 
 @4: 
-  description_eng: 4-way vowel harmony,
-  description_turk: "dörtlü ünlü uyumu",
-  function: verb_suffix_vowel_harmony,
-  grammar_role: :harmony,
-  lexical_rule: "", 
-  lexical_hash: {(a,ı) => ı, (o,u) => u, (e,i) => i, (ö,ü) => ü},
-  exceptions: {}
+  !ruby/object:CekimiRule
+    caption_eng: 4-way vowel harmony
+    caption_turk: dörtlü ünlü uyumu
+    gen_method: verb_suffix_vowel_harmony
+    grammar_role: :harmony
+    lexical_rule: ~
+    parent_conj: ~
+    child_conj: ~
+    next_list: ~
+    rule_info: 
+      :a: ı 
+      :ı: ı 
+      :e: i 
+      :i: i 
+      :o: u 
+      :u: u 
+      :ö: ü
+      :ü: ü
+    exceptions: ~
 
 @2: 
-  description_eng: 2-way vowel harmony,
-  description_turk: "iki ünlü uyumu",
-  function: verb_suffix_vowel_harmony, 
-  grammar_role: :harmony,
-  lexical_rule: "",
-  lexical_hash: {(a,ı,o,u) => a, (e,i,ö,ü) => e},
-  exceptions: {}
+  !ruby/object:CekimiRule
+    caption_eng: 2-way vowel harmony
+    caption_turk: iki ünlü uyumu
+    gen_method: verb_suffix_vowel_harmony
+    grammar_role: :harmony
+    lexical_rule: ~
+    parent_conj: ~
+    child_conj: ~
+    next_list: ~
+    rule_info: 
+      :a: a 
+      :ı: a 
+      :o: a 
+      :u: a 
+      :e: e
+      :i: e
+      :ö: e
+      :ü: e
+    exceptions: ~
 
-IndefPast: 
-  description_eng: "Indefinite Past tense",
-  description_turk: "personal suffix",
-  function: parse_lexical_rule, 
-  grammar_role: :past_tense,
-  lexical_rule: "~V M @4 Ş &Psfx",
-  lexical_hash: {},
-  exceptions: {}
-
-@K:
-  description_eng: "consonant-stem transformation",
-  description_turk: "ünsüz yumuşaması",
-  function: verb_suffix_consonant_harmony,
-  grammar_role: :harmony,
-  lexical_rule: "",
-  lexical_hash: {},
-  exceptions: {}
+@K4:
+  !ruby/object:CekimiRule
+    caption_eng: consonant-stem transformation
+    caption_turk: ünsüz yumuşaması
+    gen_method: verb_suffix_consonant_harmony
+    grammar_role: :harmony
+    lexical_rule: ~
+    parent_conj: ~
+    child_conj: ~
+    next_list: ~
+    rule_info: ~
+    exceptions: ~
 
 @Y:
-  description_eng: "vowel buffer transformation",
-  description_turk: "",
-  function: verb_vowel_buffer_harmony,
-  grammar_role: :harmony,
-  lexical_rule: "",
-  lexical_hash: {},
-  exceptions: {}
-
-
-
-
+  !ruby/object:CekimiRule
+    caption_eng: vowel buffer transformation
+    caption_turk: sesli harf arabelleği değişikliği 
+    gen_method: verb_vowel_buffer_harmony
+    grammar_role: :harmony
+    lexical_rule: ~
+    parent_conj: ~
+    child_conj: ~
+    next_list: ~
+    rule_info: ~
+    exceptions: ~
 
