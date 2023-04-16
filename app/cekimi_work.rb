@@ -23,7 +23,7 @@ private
 
   def setup_work()
     Environ.log_info( "starting..." )
-    Environ.put_prompt "\t#{ Environ.get_prompt }: merhaba dunia!\n"
+    Environ.put_message "\n\t#{ Environ.get_prompt }: otomatik fiil çekimi yazılımı; İstemde bir fiil girin.\n"
   end
 
   def do_work()
@@ -69,16 +69,22 @@ private
   end
 
   def do_list        
+    Environ.put_info ">>>>> list rules "
   end
   def do_status        
+    Environ.put_info ">>>>> status "
   end
   def do_flags        
+    Environ.put_info ">>>>>  flags "
   end
   def do_help        
+    Environ.put_info Environ.get_help_str
   end
   def do_version        
+    Environ.put_info Environ.get_prompt + " v" + Environ.get_version
   end
   def do_options        
+    Environ.put_info( ">>>>> options ")
   end
   def do_conjugate( list )        
   end

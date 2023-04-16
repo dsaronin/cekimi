@@ -93,14 +93,15 @@ module AnsiColor
     def wrapRed(str) ANSI_RED + str + ANSI_RESET end
     def wrapRedBold(str) RED_BOLD + str + ANSI_RESET end
 
-    def wrapYellow(str) ANSI_YELLOW + str + ANSI_RESET end
-    def wrapYellowBold(str) YELLOW_BOLD + str + ANSI_RESET end
+    def wrapYellow(str) YELLOW_BRIGHT + str + ANSI_RESET end
+    def wrapYellowBold(str) YELLOW_BRIGHT + str + ANSI_RESET end
 
 # helper methods to print warnings, information, prompts, and errors to STDOUT
     def put_warn(s)   puts wrapGreenBold(s) end
     def put_info(s)   puts wrapCyan(s)      end
     def put_error(s)  puts wrapRedBold(s)   end
 
-    def put_prompt(s) puts wrapYellow(s)    end
+    def put_prompt(s) print wrapYellow(s)    end
+    def put_message(s) puts wrapYellow(s)    end
 
 end  # module AnsiColor

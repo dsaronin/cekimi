@@ -25,8 +25,18 @@ class Environ
 # constants ... #TODO replace with config file?
   APP_NAME = "Çekimi"
   APP_NAME_HEAD = APP_NAME + ": "
+  CEKIMI_VERSION = "0.01"
+  CEKIMI_HELP = "list (l), status (s), options (o), help (h), quit (q), exit (x)"
 
   @@logger = Logger.new(STDERR)
+
+  def Environ.get_version   
+    return CEKIMI_VERSION  
+  end
+
+  def Environ.get_help_str   
+    return CEKIMI_HELP  
+  end
 
 
   # log_debug -- wraps a logger message in AnsiColor & Cekimi name
