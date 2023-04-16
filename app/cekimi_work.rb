@@ -19,15 +19,18 @@ class CekimiWork
     return 1
   end
 
+private
+
   def setup_work()
     Environ.log_info( "starting..." )
-    Environ.put_prompt "\tçekimi: merhaba dunia!\n"
+    Environ.put_prompt "\t#{ Environ.get_prompt }: merhaba dunia!\n"
   end
 
   def do_work()
-      # command prompt
-    Environ.put_prompt("${getPrompt()} > ")  until 
-      parse_commands( Environ.get_command_line )
+      # command prompt & user input
+    begin
+      Environ.put_prompt("\n#{ Environ.get_prompt } > ")  
+    end    while    parse_commands( Environ.get_input_list )
  
   end
 
@@ -40,38 +43,46 @@ class CekimiWork
   #   cmdlist: array of syntatical elements
   # returns boolean: true if continue looping
   def parse_commands( cmdlist )        
-        loop = true                 # user input loop while true
-        dropCount = 1               # assume need to drop cmd from list head
+    loop = true                 # user input loop while true
 
         # parse command
-        when ( cmd = cmdlist.first().trim() ) {
-            # list rules
-            "list"  -> 
-            "l"     -> 
+    case ( cmdlist.first || ""  ).chomp
+      when  "l", "list"      then  do_list      # list rules
+      when  "s", "status"    then  do_status    # print status
 
+      when  "f", "flags"     then  do_flags     # print flags
+      when  "h", "help"      then  do_help      # print help
+      when  "v", "version"   then  do_version   # print version
+      when  "o", "options"   then  do_options   # print options
 
-            # status
-            "sts", "status" -> 
-            "s"   -> 
+      when  "x", "exit"      then  loop = false  # exit program
+      when  "q", "quit"      then  loop = false  # exit program
 
-            "f", "flags"     -> 
-            "h", "help"      -> 
-            "v", "version"   -> 
-            "o", "options"   -> 
+      when  ""               then  loop = true   # empty line; NOP
+      else        
+        # treat as cekimi conjugate request
+        do_conjugate( cmdlist )
+    end
 
-            "x", "ex", "exit"       -> loop = false   # exit program
-            "q", "quit"             -> loop = false  # exit program
-
-            ""               -> loop = true   # empty line; NOP
-            else        ->   # treat as cekimi conjugate request
-        }
-
-        # useKamusi will be non-null if a search command was encountered
-        # searchKeyList( cmdlist.drop(dropCount) )   # conjugate
-
-        return loop
+    return loop
                 
   end
+
+  def do_list        
+  end
+  def do_status        
+  end
+  def do_flags        
+  end
+  def do_help        
+  end
+  def do_version        
+  end
+  def do_options        
+  end
+  def do_conjugate( list )        
+  end
+
 
 
 end  # class CekimiWork

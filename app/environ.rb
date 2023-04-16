@@ -54,5 +54,21 @@ class Environ
     @@logger.fatal wrapRedBold APP_NAME_HEAD + msg
   end
 
+  # get_prompt: returns the app name as the prompt string
+  def Environ.get_prompt  
+    return APP_NAME
+  end
+  
+  # get_input_list  -- returns an array of input line arguments
+  # arg:  exit_cmd -- a command used if EOF is encountered; to force exit
+  # input line will be stripped of lead/trailing whitespace
+  # will then be split into elements using whitespace as delimiter
+  # resultant non-nil (but possibly empty) list is returned
+  def Environ.get_input_list( exit_cmd = "q" )
+    # check for EOF nil and replace with exit_cmd if was EOF
+    return  (gets || exit_cmd ).strip.split
+  end
+
+
   
 end  # Class Environ
