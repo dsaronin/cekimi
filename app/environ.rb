@@ -15,12 +15,6 @@
 
 class Environ
   include Singleton
-
-# mixin AnsiColor Module to provide prettier ansi output
-# makes all methods in AnsiColor become Environ class methods
-  class << self   
-    include AnsiColor
-  end
   
 # constants ... #TODO replace with config file?
   APP_NAME = "Çekimi"
@@ -28,30 +22,45 @@ class Environ
   CEKIMI_VERSION = "0.01"
   CEKIMI_HELP = "list (l), status (s), options (o), help (h), quit (q), exit (x)"
 
+# initialize the class-level instance variables
+  @cekimi_version = CEKIMI_VERSION
+  @app_name = APP_NAME 
+  @app_name_head = APP_NAME_HEAD 
+  @cekimi_help = CEKIMI_HELP 
+
+
+  class << self   
+        # mixin AnsiColor Module to provide prettier ansi output
+        # makes all methods in AnsiColor become Environ class methods
+    include AnsiColor
+        # makes the following class-level instance variables w/ accessors
+    attr_accessor :cekimi_version, :app_name, :app_name_head, :cekimi_help
+  end
+  
   @@logger = Logger.new(STDERR)
 
-  def Environ.get_version   
-    return CEKIMI_VERSION  
-  end
+  #def Environ.get_version   
+  #return CEKIMI_VERSION  
+  #end
 
-  def Environ.get_help_str   
-    return CEKIMI_HELP  
-  end
+  #def Environ.get_help_str   
+  #return CEKIMI_HELP  
+  #end
 
 
   # log_debug -- wraps a logger message in AnsiColor & Cekimi name
   def Environ.log_debug( msg )
-    @@logger.debug wrapYellow APP_NAME_HEAD + msg
+    @@logger.debug wrapYellow app_name_head + msg
   end
 
   # log_info -- wraps a logger message in AnsiColor & Cekimi name
   def Environ.log_info( msg )
-    @@logger.info wrapCyan APP_NAME_HEAD + msg
+    @@logger.info wrapCyan app_name_head + msg
   end
 
   # log_warn -- wraps a logger message in AnsiColor & Cekimi name
   def Environ.log_warn( msg )
-    @@logger.warn wrapGreen APP_NAME_HEAD + msg
+    @@logger.warn wrapGreen app_name_head + msg
   end
 
   # log_error -- wraps a logger message in AnsiColor & Cekimi name
@@ -61,13 +70,13 @@ class Environ
 
   # log_fatal -- wraps a logger message in AnsiColor & Cekimi name
   def Environ.log_fatal( msg )
-    @@logger.fatal wrapRedBold APP_NAME_HEAD + msg
+    @@logger.fatal wrapRedBold app_name_head + msg
   end
 
   # get_prompt: returns the app name as the prompt string
-  def Environ.get_prompt  
-    return APP_NAME
-  end
+  #def Environ.get_prompt  
+    #return APP_NAME
+  #end
   
   # get_input_list  -- returns an array of input line arguments
   # arg:  exit_cmd -- a command used if EOF is encountered; to force exit

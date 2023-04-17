@@ -6,9 +6,13 @@
 
 class CekimiWork
   require_relative 'environ'
+  require_relative 'cekimi_rules'
 
   def initialize()
+    
     @my_env = Environ.instance
+    @my_rules = CekimiRules.new
+
   end
 
   def cekimi()
@@ -23,13 +27,13 @@ private
 
   def setup_work()
     Environ.log_info( "starting..." )
-    Environ.put_message "\n\t#{ Environ.get_prompt }: otomatik fiil çekimi yazılımı; İstemde bir fiil girin.\n"
+    Environ.put_message "\n\t#{ Environ.app_name }: otomatik fiil çekimi yazılımı; İstemde bir fiil girin.\n"
   end
 
   def do_work()
       # command prompt & user input
     begin
-      Environ.put_prompt("\n#{ Environ.get_prompt } > ")  
+      Environ.put_prompt("\n#{ Environ.app_name } > ")  
     end    while    parse_commands( Environ.get_input_list )
  
   end
@@ -78,10 +82,10 @@ private
     Environ.put_info ">>>>>  flags "
   end
   def do_help        
-    Environ.put_info Environ.get_help_str
+    Environ.put_info Environ.cekimi_help
   end
   def do_version        
-    Environ.put_info Environ.get_prompt + " v" + Environ.get_version
+    Environ.put_info Environ.app_name + " v" + Environ.cekimi_version
   end
   def do_options        
     Environ.put_info( ">>>>> options ")
