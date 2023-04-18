@@ -75,9 +75,12 @@ private
   def do_list        
     Environ.put_info ">>>>> list rules "
   end
+  
   def do_status        
-    Environ.put_info ">>>>> status "
+    Environ.put_info ">>>>> status #{ CekimiRules.cekimi_rules_count } rules"
+    puts CekimiRules.cekimi_rules.keys
   end
+
   def do_flags        
     Environ.put_info ">>>>>  flags "
   end

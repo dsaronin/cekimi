@@ -39,14 +39,6 @@ class Environ
   
   @@logger = Logger.new(STDERR)
 
-  #def Environ.get_version   
-  #return CEKIMI_VERSION  
-  #end
-
-  #def Environ.get_help_str   
-  #return CEKIMI_HELP  
-  #end
-
 
   # log_debug -- wraps a logger message in AnsiColor & Cekimi name
   def Environ.log_debug( msg )
@@ -73,10 +65,6 @@ class Environ
     @@logger.fatal wrapRedBold app_name_head + msg
   end
 
-  # get_prompt: returns the app name as the prompt string
-  #def Environ.get_prompt  
-    #return APP_NAME
-  #end
   
   # get_input_list  -- returns an array of input line arguments
   # arg:  exit_cmd -- a command used if EOF is encountered; to force exit
