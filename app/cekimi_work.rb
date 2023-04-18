@@ -7,6 +7,7 @@
 class CekimiWork
   require_relative 'environ'
   require_relative 'cekimi_rules'
+  require_relative 'verb'
 
   def initialize()
     
@@ -93,7 +94,14 @@ private
   def do_options        
     Environ.put_info( ">>>>> options ")
   end
-  def do_conjugate( list )        
+
+  def do_conjugate( list )
+    begin
+      verb = Verb.new( list.shift )
+    rescue ArgumentError
+      Environ.put_error( ">>  " + $!.message )
+    end  # exception handling
+
   end
 
 

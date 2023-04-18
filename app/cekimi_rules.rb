@@ -1,5 +1,5 @@
 # 
-# Çekimi conjugation rules
+# Çekimi conjugation rules objects
 # Copyright (c) 2023 David S Anderson, All Rights Reserved
 #   
 #
