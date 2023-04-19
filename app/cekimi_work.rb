@@ -98,6 +98,8 @@ private
   def do_conjugate( list )
     begin
       verb = Verb.new( list.shift )
+      puts verb.to_s
+
     rescue ArgumentError
       Environ.put_error( ">>  " + $!.message )
     end  # exception handling
