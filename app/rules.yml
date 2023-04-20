@@ -12,7 +12,7 @@ indef_past:
     caption_turk: belirlisiz geçmis zaman
     gen_method: parse_lexical_rule 
     grammar_role: :past_tense
-    lexical_rule: "~V M @4 Ş &pers_sfx"
+    lexical_rule: $w(~V M @4 Ş &pers_sfx)
     parent_conj: ~
     child_conj: ~
     next_list: ~
@@ -30,12 +30,12 @@ pers_sfx:
     child_conj: ~
     next_list: ~
     rule_info:
-      :ben: "@Y @4 M"
-      :sen: "S @4 N"
-      :o: ""
-      :biz: "@Y @4 Z"
-      :siz: "S @4 N @4 Z"
-      :onlar: "L @2 R"
+      :ben:   $w(@Y @4 M Ω)
+      :sen:   $w(S @4 N Ω)
+      :o:     $w(Ω)
+      :biz:   $w(@Y @4 Z Ω)
+      :siz:   $w(S @4 N @4 Z Ω)
+      :onlar: $w(L @2 R Ω)
     exceptions: ~
 
 _@4: 
