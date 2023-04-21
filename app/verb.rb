@@ -25,14 +25,14 @@ class Verb
   #
 #-------------------------------------------------------------------
   def initialize( fiil )
+      @suffix_chain = ""  # make suffix chain empty
+
        # preliminary massage to lowercase and remove lead/trailing whitespace
     @verb_infinitive = (fiil || "").strip.downcase
        # unicode \p{L} = \w
     if @verb_infinitive.match  LEGAL_INFINITIVES 
-      @verb_stem = @verb_infinitive.gsub( STRIP_INFIN_SUFFIX , "" )
-      @suffix_chain = ""  # make suffix chain empty
-      @is_t_except = @verb_stem.match( T_EXCEPTIONS ) ? true : false
-      @is_e_except = @verb_stem.match( E_EXCEPTIONS ) ? true : false
+      set_stem
+      grammar_exceptions_check
       last_vowel_setup 
       last_consonent_setup 
     else
@@ -47,12 +47,29 @@ class Verb
            "\nstem_end_vwl?: #{@stem_end_vowel}, last_v: #{@last_vowel}, last_pure_v: #{@last_pure_vowel}"
   end
 
-#-------------------------------------------------------------------
-# last_vowel_setup -- finds last vowel for vowel harmony
+  #  -------------------------------------------------------------------
+  #  set_stem -- verb stem setup
+  #  -------------------------------------------------------------------
+
+  def set_stem
+    @verb_stem = @verb_infinitive.gsub( STRIP_INFIN_SUFFIX , "" )
+  end
+
+  #  -------------------------------------------------------------------
+  #  grammar_exceptions_check -- check for verb exceptions
+  #  -------------------------------------------------------------------
+
+  def grammar_exceptions_check
+    @is_t_except = @verb_stem.match( T_EXCEPTIONS ) ? true : false
+    @is_e_except = @verb_stem.match( E_EXCEPTIONS ) ? true : false
+  end
+
+  #  -------------------------------------------------------------------
+  # last_vowel_setup -- finds last vowel for vowel harmony
   # also groups together all the vowel checking logic
-# side effects: 
-#   @stem_end_vowel, @last_vowel, @last_pure_vowel
-#-------------------------------------------------------------------
+  # side effects: 
+  #   @stem_end_vowel, @last_vowel, @last_pure_vowel
+  #-------------------------------------------------------------------
   def last_vowel_setup
     @stem_end_vowel = false   # assume stem doesn't end in vowel
     vs = @verb_stem.reverse   # reverse the stem to proc backwards
@@ -77,9 +94,10 @@ class Verb
     end
   end
 
-#-------------------------------------------------------------------
-# last_consonent_setup -- handles voiced/unvoiced consonent prep
-#-------------------------------------------------------------------
+  #  -------------------------------------------------------------------
+  # last_consonent_setup -- handles voiced/unvoiced consonent prep
+  #  -------------------------------------------------------------------
+
   def last_consonent_setup 
   end
 
