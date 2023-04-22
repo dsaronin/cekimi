@@ -99,6 +99,8 @@ private
     begin
       verb = Verb.new( list.shift )
       puts verb.to_s
+      rule = CekimiRules.get_rule( :indef_past )
+      rule.parse_rule( verb )
 
     rescue ArgumentError
       Environ.put_error( ">>  " + $!.message )

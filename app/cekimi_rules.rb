@@ -5,6 +5,7 @@
 #
 
   require "yaml"
+  require_relative "table_out"
 
 class CekimiRules
   attr_accessor :caption_eng, :caption_turk, :gen_method, :grammar_role, :lexical_rule
@@ -20,6 +21,22 @@ class CekimiRules
   def CekimiRules.cekimi_rules
     return @@cekimi_rules
   end
+
+  def CekimiRules.get_rule( rule_key )
+    return @@cekimi_rules[ rule_key ]
+  end
+
+#-------------------------------------------------------------------
+  # parse_rule -- parses a rule & generates conjugation
+  # args: 
+  #   my_verb -- verb being conjugated
+  #
+#-------------------------------------------------------------------
+  def parse_rule( my_verb )
+    puts "starting parsing rule..."
+    table_out = TableOut.new( my_verb, self)
+  end
+#-------------------------------------------------------------------
 
  
 end

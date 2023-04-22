@@ -13,7 +13,9 @@ class Verb
 # constants
   TURK_VOWEL_REGEX = /[aeiouıöü]/  # all turkish vowels
   TURK_CONSONENT_REGEX = /[^aeiouıöü]/  # all turkish consonents
-  TURK_CHANGABLE_VOICED_CONSONENTS = /[kptç]/
+  T_MATCH = /t/    # matches a trailing t in stem
+  D_VOICED  = "d"    # replaces a T with D before vowel-suffixes
+  TURK_CHANGABLE_UNVOICED_CONSONENTS = /[fstkçşhp]/
   LEGAL_INFINITIVES = /\p{L}\p{L}+m[ae]k$/  # filter valid Türkçe fiiller
   STRIP_INFIN_SUFFIX = /m[ae]k$/  # strips off mak/mek from infinitive
   T_EXCEPTIONS = /^(gi)|(e)t$/  # special handling for Ts
@@ -42,9 +44,10 @@ class Verb
 #-------------------------------------------------------------------
 
   def to_s
-    return "verb: #{@verb_infinitive}, stem: -#{@verb_stem}, sfx: #{@suffix_chain}" + 
-           ", is_t_exc?: #{@is_t_except}, is_e_exc?: #{@is_e_except}"  +
-           "\nstem_end_vwl?: #{@stem_end_vowel}, last_v: #{@last_vowel}, last_pure_v: #{@last_pure_vowel}"
+    return "verb: #{@verb_infinitive}, stem: -#{@verb_stem}" + 
+           ", end_vwl?: #{@stem_end_vowel}, t_exc?: #{@is_t_except}, e_exc?: #{@is_e_except}" +
+           "\nlast_pure_v: #{@last_pure_vowel}, last_v: #{@last_vowel}, f_cons: #{@final_cons}" +
+           "\nchain: #{@suffix_chain}"
   end
 
   #  -------------------------------------------------------------------
@@ -95,19 +98,12 @@ class Verb
   end
 
   #  -------------------------------------------------------------------
-  # last_consonent_setup -- handles voiced/unvoiced consonent prep
+  # last_consonent_setup -- handles t/d trailing-consonent prep
   #  -------------------------------------------------------------------
 
   def last_consonent_setup 
+    @final_cons = 
+      ( !@is_t_except  &&  @verb_stem[-1].match( T_MATCH ) )  ?  D_VOICED  :  ""
   end
-
-#-------------------------------------------------------------------
-  # parse_rule -- parses a rule & generates conjugation
-  # args: rule -- object of CekimiRules
-  #
-#-------------------------------------------------------------------
-  def parse_rule( rule )
-  end
-#-------------------------------------------------------------------
 
 end   # class Verb
