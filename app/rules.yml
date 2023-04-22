@@ -6,7 +6,7 @@
 # cekimi_rules_version: 1.01
 #
 
-indef_past:
+:indef_past:
   !ruby/object:CekimiRules
     caption_eng: indefinite past tense
     caption_turk: belirlisiz geçmis zaman
@@ -19,7 +19,7 @@ indef_past:
     rule_info: ~
     exceptions: ~
 
-pers_sfx: 
+:pers_sfx: 
   !ruby/object:CekimiRules
     caption_eng: personal suffix
     caption_turk: şahıs eki
@@ -38,7 +38,7 @@ pers_sfx:
       :onlar: $w(L @2 R Ω)
     exceptions: ~
 
-_@4: 
+:_@4: 
   !ruby/object:CekimiRules
     caption_eng: 4-way vowel harmony
     caption_turk: dörtlü ünlü uyumu
@@ -59,7 +59,7 @@ _@4:
       :ü: ü
     exceptions: ~
 
-_@2: 
+:_@2: 
   !ruby/object:CekimiRules
     caption_eng: 2-way vowel harmony
     caption_turk: iki ünlü uyumu
@@ -80,7 +80,7 @@ _@2:
       :ü: e
     exceptions: ~
 
-_@K4:
+:_@K4:
   !ruby/object:CekimiRules
     caption_eng: consonant-stem transformation
     caption_turk: ünsüz yumuşaması
@@ -93,7 +93,7 @@ _@K4:
     rule_info: ~
     exceptions: ~
 
-_@Y:
+:_@Y:
   !ruby/object:CekimiRules
     caption_eng: vowel buffer transformation
     caption_turk: sesli harf arabelleği değişikliği 
