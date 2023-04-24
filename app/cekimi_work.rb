@@ -80,6 +80,7 @@ private
   def do_status        
     Environ.put_info ">>>>> status #{ CekimiRules.cekimi_rules_count } rules"
     puts CekimiRules.cekimi_rules.keys
+    puts :indef_past.to_s + ":  " + CekimiRules.get_rule( :indef_past ).to_s
   end
 
   def do_flags        

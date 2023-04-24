@@ -26,17 +26,28 @@ class CekimiRules
     return @@cekimi_rules[ rule_key ]
   end
 
-#-------------------------------------------------------------------
+  #  -----------------------------------------------------------------
   # parse_rule -- parses a rule & generates conjugation
   # args: 
   #   my_verb -- verb being conjugated
   #
-#-------------------------------------------------------------------
+  #  -----------------------------------------------------------------
   def parse_rule( my_verb )
     puts "starting parsing rule..."
     table_out = TableOut.new( my_verb, self)
   end
-#-------------------------------------------------------------------
+
+  #  ----------------------------------------------------------------
+  #  to_s -- debuigging trace output for a CekimiRule object
+  #  ----------------------------------------------------------------
+  
+  def to_s
+    "#{@caption_eng}, #{@grammar_role},  #{@lexical_rule}, " + 
+    "#{@rule_info}"
+
+  end
+  
+  #  ----------------------------------------------------------------
 
  
 end
