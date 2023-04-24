@@ -10,6 +10,7 @@
 class CekimiRules
   attr_accessor :caption_eng, :caption_turk, :gen_method, :grammar_role, :lexical_rule
   attr_accessor :parent_conj, :child_conj, :next_list, :rule_info, :exceptions
+  attr_accessor :my_key
 
   # initialize rules here if not already 
   @@cekimi_rules ||= YAML.unsafe_load_file( "app/rules.yml" )
@@ -23,7 +24,9 @@ class CekimiRules
   end
 
   def CekimiRules.get_rule( rule_key )
-    return @@cekimi_rules[ rule_key ]
+      rule = @@cekimi_rules[ rule_key ]
+      return rule unless rule.nil?
+      raise NameError, "#{rule_key}: ÇekimiRule not found or undefined." 
   end
 
   #  -----------------------------------------------------------------
@@ -34,7 +37,7 @@ class CekimiRules
   #   table_out object with result
   #  -----------------------------------------------------------------
   def prep_and_parse( my_verb )
-    puts "starting parsing rule..."
+    Environ.log_info( "starting parsing rule: #{@my_key}..." )
     table_out = TableOut.new( my_verb, self)
     parse_rule( table_out )   # begins parsing a rule
     return table_out
@@ -58,13 +61,14 @@ class CekimiRules
   #    table_out  -- TableOut object for generating the conjugation
   #  ----------------------------------------------------------------
   def parse_rule( table_out )
-    idex = 0
-    while idex < @lexical_rule.length   begin 
-      token = @lexical_rule[idex++]  # 'pop' token
+    @lexical_rule.each   do |token|
       case token
-      when /^~V/ : table_out.chain = table_out.my_verb.verb_stem
-      when /^(@\w+)/ : get_rule(
-    end
+        when /^~V/  then  table_out.chain = table_out.my_verb.verb_stem
+        when /^(@\w+)/  then  
+        else
+          
+        end  # case
+    end  # foreach token
   end
 
  

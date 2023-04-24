@@ -107,6 +107,8 @@ private
 
     rescue ArgumentError
       Environ.put_error( ">>  " + $!.message )
+    rescue NameError
+      Environ.put_error( ">>  " + $!.message )
     end  # exception handling
 
   end

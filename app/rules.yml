@@ -8,6 +8,7 @@
 
 :indef_past:
   !ruby/object:CekimiRules
+    my_key: indef_past
     caption_eng: indefinite past tense
     caption_turk: belirlisiz geçmis zaman
     gen_method: parse_lexical_rule 
@@ -21,6 +22,7 @@
 
 :pers_sfx: 
   !ruby/object:CekimiRules
+    my_key: pers_sfx
     caption_eng: personal suffix
     caption_turk: şahıs eki
     gen_method: gen_all_as_table
@@ -40,6 +42,7 @@
 
 :_@4: 
   !ruby/object:CekimiRules
+    my_key: _@4
     caption_eng: 4-way vowel harmony
     caption_turk: dörtlü ünlü uyumu
     gen_method: verb_suffix_vowel_harmony
@@ -61,6 +64,7 @@
 
 :_@2: 
   !ruby/object:CekimiRules
+    my_key: _@2
     caption_eng: 2-way vowel harmony
     caption_turk: iki ünlü uyumu
     gen_method: verb_suffix_vowel_harmony
@@ -82,6 +86,7 @@
 
 :_@K4:
   !ruby/object:CekimiRules
+    my_key: _@K4
     caption_eng: consonant-stem transformation
     caption_turk: ünsüz yumuşaması
     gen_method: verb_suffix_consonant_harmony
@@ -95,6 +100,7 @@
 
 :_@Y:
   !ruby/object:CekimiRules
+    my_key: _@Y
     caption_eng: vowel buffer transformation
     caption_turk: sesli harf arabelleği değişikliği 
     gen_method: verb_vowel_buffer_harmony
