@@ -27,14 +27,17 @@ class CekimiRules
   end
 
   #  -----------------------------------------------------------------
-  # parse_rule -- parses a rule & generates conjugation
+  # prep_and_parse -- preps for recursive descent parsing
   # args: 
   #   my_verb -- verb being conjugated
-  #
+  # returns:
+  #   table_out object with result
   #  -----------------------------------------------------------------
-  def parse_rule( my_verb )
+  def prep_and_parse( my_verb )
     puts "starting parsing rule..."
     table_out = TableOut.new( my_verb, self)
+    parse_rule( table_out )   # begins parsing a rule
+    return table_out
   end
 
   #  ----------------------------------------------------------------
@@ -48,6 +51,21 @@ class CekimiRules
   end
   
   #  ----------------------------------------------------------------
+  #  parse_rule -- parses a rule & generates conjugation
+  #  recursive-descent parser
+  #  output of parser is in the table_out.chain field
+  #  args:
+  #    table_out  -- TableOut object for generating the conjugation
+  #  ----------------------------------------------------------------
+  def parse_rule( table_out )
+    idex = 0
+    while idex < @lexical_rule.length   begin 
+      token = @lexical_rule[idex++]  # 'pop' token
+      case token
+      when /^~V/ : table_out.chain = table_out.my_verb.verb_stem
+      when /^(@\w+)/ : get_rule(
+    end
+  end
 
  
 end
