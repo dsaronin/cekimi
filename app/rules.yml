@@ -4,7 +4,7 @@
 # Copyright (c) 2023 David S Anderson, All Rights Reserved
 #   
 # cekimi_rules_version: 1.01
-#
+# NOTE: make sure the my_key field matches the key.
 
 :indef_past:
   !ruby/object:CekimiRules
