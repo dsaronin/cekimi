@@ -25,16 +25,16 @@ class CekimiRules
   CONS_TRANSFORM  =  /K/    # unvoiced > voiced consonent transform op
 
   # parse_rule REGEX for token switch
-  STEM_RULE_REGEX = /^~V/   # matches rule requesting verb stem
+  STEM_RULE_REGEX   = /^~V/   # matches rule requesting verb stem
   INVOKE_RULE_REGEX = /^&(\w+)/  # matches recursive rule parse req
   OUTPUT_RULE_REGEX = /^Ω/  # table_out the result
   ATOM_TOKEN_REGEX  = /\p{L}+/  # matches any alpha
-  RULE_OP_REGEX = /^@([AYK])(\d)/ # matches rule requesting an operation
-  # side effect of matching: 
-  #   $1 will be the op request
-  #   $2 will be the sub-type of the op request
-  # ex: @A4 -- request 4-way vowel harmony
-  # ex: @Y  -- request vowel-vowel buffering
+  RULE_OP_REGEX     = /^@([AYK])(\d)/ # matches rule requesting an operation
+      # side effect of matching: 
+      #   $1 will be the op request
+      #   $2 will be the sub-type of the op request
+      # ex: @A4 -- request 4-way vowel harmony
+      # ex: @Y  -- request vowel-vowel buffering
 
   
 
@@ -117,17 +117,52 @@ class CekimiRules
   end
 
 
+  #  ----------------------------------------------------------------
+  #  inplace_operation -- handles an in-place alpha transformation
+  #  args:
+  #    op_type -- string for the type of inplace operation: A,K,X,Y
+  #    op_subtype  -- [optional]: digit to indicate subtype
+  #  ----------------------------------------------------------------
   def inplace_operation(op_type, op_subtype)
     rule =  CekimiRules.get_rule( "_@#{op_type}#{op_subtype}".to_sym )
     case op_type
-      when VOWEL_HARMONY  then  gen "A" # nop
-      when BUFFER_VOWEL  then true # nop
-      when CONS_TRANSFORM  then true # nop
-      when DROP_VOWEL   then true # nop
+      when VOWEL_HARMONY   then  op_vowel_harmony( rule )
+      when BUFFER_VOWEL    then  op_buffer_vowel( rule )
+      when CONS_TRANSFORM  then  op_cons_transform( rule )
+      when DROP_VOWEL      then  op_drop_stem_vowel( rule )
       else
         Environ.log_warn( "in-place operation not found: #{token}; ignored." )
     end   #  case
   end
+
+  #  ----------------------------------------------------------------
+  #  op_x_y  -- 
+  #  arg: rule  [might be nil in future]
+  #  ----------------------------------------------------------------
+  def op_vowel_harmony( rule )
+  end
+
+  #  ----------------------------------------------------------------
+  #  op_x_y  -- 
+  #  arg: rule  [might be nil in future]
+  #  ----------------------------------------------------------------
+  def op_buffer_vowel( rule )
+  end
+
+  #  ----------------------------------------------------------------
+  #  op_x_y  -- 
+  #  arg: rule  [might be nil in future]
+  #  ----------------------------------------------------------------
+  def op_cons_transform( rule )
+  end
+
+  #  ----------------------------------------------------------------
+  #  op_x_y  -- 
+  #  arg: rule  [might be nil in future]
+  #  ----------------------------------------------------------------
+  def op_drop_stem_vowel( rule )
+  end
+
 
  
 end
