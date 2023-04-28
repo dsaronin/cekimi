@@ -45,7 +45,7 @@
     my_key: _@4
     caption_eng: 4-way vowel harmony
     caption_turk: dörtlü ünlü uyumu
-    gen_method: verb_suffix_vowel_harmony
+    gen_method: suffix_vowel_harmony
     grammar_role: :harmony
     lexical_rule: ~
     parent_conj: ~
@@ -67,7 +67,7 @@
     my_key: _@2
     caption_eng: 2-way vowel harmony
     caption_turk: iki ünlü uyumu
-    gen_method: verb_suffix_vowel_harmony
+    gen_method: suffix_vowel_harmony
     grammar_role: :harmony
     lexical_rule: ~
     parent_conj: ~
