@@ -76,6 +76,11 @@ class Environ
     return  (gets || exit_cmd ).strip.split
   end
 
+  def Environ.put_and_log_error( str )
+    self.put_error( str )
+    self.log_error( str )
+  end
+
 
   
 end  # Class Environ

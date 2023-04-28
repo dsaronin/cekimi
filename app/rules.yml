@@ -13,7 +13,7 @@
     caption_turk: belirlisiz geçmis zaman
     gen_method: parse_lexical_rule 
     grammar_role: :past_tense
-    lexical_rule: ['~V', 'M', '@4', 'Ş', '&pers_sfx']
+    lexical_rule: ['~V', 'M', '@A4', 'Ş', '&pers_sfx']
     parent_conj: ~
     child_conj: ~
     next_list: ~
@@ -32,17 +32,17 @@
     child_conj: ~
     next_list: ~
     rule_info:
-      :ben:   ['@Y', '@4', 'M', 'Ω']
-      :sen:   ['S', '@4', 'N', 'Ω']
+      :ben:   ['@Y', '@A4', 'M', 'Ω']
+      :sen:   ['S', '@A4', 'N', 'Ω']
       :o:     ['Ω']
-      :biz:   ['@Y', '@4', 'Z', 'Ω']
-      :siz:   ['S', '@4', 'N', '@4', 'Z', 'Ω']
-      :onlar: ['L', '@2', 'R', 'Ω']
+      :biz:   ['@Y', '@A4', 'Z', 'Ω']
+      :siz:   ['S', '@A4', 'N', '@A4', 'Z', 'Ω']
+      :onlar: ['L', '@A2', 'R', 'Ω']
     exceptions: ~
 
-:_@4: 
+:_@A4: 
   !ruby/object:CekimiRules
-    my_key: _@4
+    my_key: _@A4
     caption_eng: 4-way vowel harmony
     caption_turk: dörtlü ünlü uyumu
     gen_method: suffix_vowel_harmony
@@ -62,9 +62,9 @@
       :ü: ü
     exceptions: ~
 
-:_@2: 
+:_@A2: 
   !ruby/object:CekimiRules
-    my_key: _@2
+    my_key: _@A2
     caption_eng: 2-way vowel harmony
     caption_turk: iki ünlü uyumu
     gen_method: suffix_vowel_harmony

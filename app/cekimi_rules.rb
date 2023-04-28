@@ -16,9 +16,19 @@ class CekimiRules
   #  CONSTANTS
   #  ------------------------------------------------------------
 
+  TRACE_GEN  = false  # to trace the transformation each token
+
+  # inplace_operation REGEX for op switch
+  VOWEL_HARMONY   =  /A/    # 4way/2way vowel harmony op
+  BUFFER_VOWEL    =  /Y/    # add Y buffer for double vowel op
+  DROP_VOWEL      =  /X/    # drop vowel-stem final vowel op
+  CONS_TRANSFORM  =  /K/    # unvoiced > voiced consonent transform op
+
+  # parse_rule REGEX for token switch
   STEM_RULE_REGEX = /^~V/   # matches rule requesting verb stem
-  INVOKE_RULE_REGEX = /^&(\d+)/  # matches recursive rule parse req
+  INVOKE_RULE_REGEX = /^&(\w+)/  # matches recursive rule parse req
   OUTPUT_RULE_REGEX = /^Ω/  # table_out the result
+  ATOM_TOKEN_REGEX  = /\p{L}+/  # matches any alpha
   RULE_OP_REGEX = /^@([AYK])(\d)/ # matches rule requesting an operation
   # side effect of matching: 
   #   $1 will be the op request
@@ -47,18 +57,21 @@ class CekimiRules
     Environ.log_debug( "searching for rule: #{rule_key}" )
     rule = @@cekimi_rules[ rule_key ]
     return rule unless rule.nil?
-    raise NameError, "#{rule_key}: ÇekimiRule not found or undefined." 
+    raise ArgumentError, "#{rule_key}: ÇekimiRule not found or undefined." 
   end
 
   #  -----------------------------------------------------------------
   # prep_and_parse -- preps for recursive descent parsing
   # args: 
   #   my_verb -- verb being conjugated
+  # returns:
+  #   @my_table_out: formed result for output
   #  -----------------------------------------------------------------
   def prep_and_parse( my_verb )
     Environ.log_debug( "starting parsing rule: #{@my_key}..." )
     @my_table_out = TableOut.new( my_verb, self)
     parse_rule( )   # begins parsing a rule
+    return @my_table_out 
   end
 
   #  ----------------------------------------------------------------
@@ -68,8 +81,17 @@ class CekimiRules
   def to_s
     "#{@caption_eng}, #{@grammar_role},  #{@lexical_rule}, " + 
     "#{@rule_info}"
-
   end
+
+  #  ----------------------------------------------------------------
+  #  ----------------------------------------------------------------
+  #  ----------------------------------------------------------------
+  
+  def gen( str )
+    @my_table_out.chain << str 
+    puts "gen: #{@my_table_out.chain}"  if TRACE_GEN
+  end
+
   
   #  ----------------------------------------------------------------
   #  parse_rule -- parses a rule & generates conjugation
@@ -82,10 +104,10 @@ class CekimiRules
     unless @lexical_rule.nil? then
       @lexical_rule.each   do |token|
         case token
-          when STEM_RULE_REGEX  then  
-            @my_table_out.chain = @my_table_out.my_verb.verb_stem
-          when RULE_OP_REGEX  then  inplace_operation( $1, $2 )  
           when INVOKE_RULE_REGEX  then true # nop
+          when STEM_RULE_REGEX  then  gen @my_table_out.my_verb.verb_stem
+          when RULE_OP_REGEX  then  inplace_operation( $1, $2 )  
+          when ATOM_TOKEN_REGEX  then  gen token
           when OUTPUT_RULE_REGEX  then true # nop
           else
             Environ.log_warn( "Rule token not found: #{token}; ignored." )
@@ -96,10 +118,17 @@ class CekimiRules
 
 
   def inplace_operation(op_type, op_subtype)
-    rule =  CekimiRules.get_rule( ":_@#{op_type}#{op_subtype}" )
+    rule =  CekimiRules.get_rule( "_@#{op_type}#{op_subtype}".to_sym )
+    case op_type
+      when VOWEL_HARMONY  then  gen "A" # nop
+      when BUFFER_VOWEL  then true # nop
+      when CONS_TRANSFORM  then true # nop
+      when DROP_VOWEL   then true # nop
+      else
+        Environ.log_warn( "in-place operation not found: #{token}; ignored." )
+    end   #  case
   end
 
-  
  
 end
 

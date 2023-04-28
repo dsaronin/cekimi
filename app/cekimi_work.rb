@@ -101,14 +101,13 @@ private
       verb = Verb.new( list.shift )
       puts verb.to_s
       rule = CekimiRules.get_rule( :indef_past )
-      table_out = prep_and_parse( verb )  # kicks off recursive descent parser
-      puts table_out.chain
+      table_out = rule.prep_and_parse( verb )  # kicks off recursive descent parser
+      Environ.log_debug( ":indef_past result: " + table_out.chain )
+
       # table_out holds the result
 
     rescue ArgumentError
-      Environ.put_error( ">>  " + $!.message )
-    rescue NameError
-      Environ.put_error( ">>  " + $!.message )
+      Environ.put_and_log_error( ">>  " + $!.message )
     end  # exception handling
 
   end

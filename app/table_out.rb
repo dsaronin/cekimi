@@ -38,6 +38,8 @@
 
 class TableOut
 
+  attr_accessor  :my_verb, :my_rule, :chain, :my_table
+
   #  ----------------------------------------------------------------
   #  get_table_index
   #  returns a [x,y] array for accessing the correct person in table
