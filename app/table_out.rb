@@ -38,7 +38,7 @@
 
 class TableOut
 
-  attr_accessor  :my_verb, :my_rule, :chain, :my_table
+  attr_accessor  :my_verb, :my_rule, :chain, :my_table, :last_vowel
 
   #  ----------------------------------------------------------------
   #  get_table_index
@@ -56,6 +56,7 @@ class TableOut
     @my_rule = my_rule
     @chain = ""
     @my_table = Array.new(2){ Array.new(3) }
+    @last_vowel = my_verb.last_vowel  # initialize chain's 1st last vwl
   end
 
 end  # class TableOut

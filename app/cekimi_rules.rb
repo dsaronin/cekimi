@@ -16,7 +16,7 @@ class CekimiRules
   #  CONSTANTS
   #  ------------------------------------------------------------
 
-  TRACE_GEN  = false  # to trace the transformation each token
+  TRACE_GEN  = true  # to trace the transformation each token
 
   # inplace_operation REGEX for op switch
   VOWEL_HARMONY   =  /A/    # 4way/2way vowel harmony op
@@ -136,34 +136,52 @@ class CekimiRules
   end
 
   #  ----------------------------------------------------------------
-  #  op_x_y  -- 
+  #  op_vowel_harmony  -- does vowel harmony with last seen vowel
   #  arg: rule  [might be nil in future]
   #  ----------------------------------------------------------------
   def op_vowel_harmony( rule )
+      # lookup corresponding harmony
+    lookup = @my_table_out.last_vowel.to_sym
+    vwl = rule.rule_info[ lookup ]
+    if vwl then  # vowel harmony was found; use it
+      gen vwl    # push to output queue
+      @my_table_out.last_vowel = vwl   # becomes new last vowel
+    else  # error: expected harmony not found
+        Environ.log_warn( "vowel harmony key not found: #{lookup}; ignored." )
+    end  # if.then.else check that harmony match found
   end
 
   #  ----------------------------------------------------------------
-  #  op_x_y  -- 
+  #  op_buffer_vowel  -- adds buffer for vowel if last in chain
   #  arg: rule  [might be nil in future]
   #  ----------------------------------------------------------------
   def op_buffer_vowel( rule )
+    if @my_table_out.chain[-1] =~ TURK_VOWEL_REGEX
+      gen "Y"   # push buffer to queue
+    end
+
   end
 
   #  ----------------------------------------------------------------
-  #  op_x_y  -- 
+  #  op_cons_transform
   #  arg: rule  [might be nil in future]
   #  ----------------------------------------------------------------
   def op_cons_transform( rule )
   end
 
   #  ----------------------------------------------------------------
-  #  op_x_y  -- 
+  #  op_drop_stem_vowel  -- drops a verb stem vowel
   #  arg: rule  [might be nil in future]
   #  ----------------------------------------------------------------
   def op_drop_stem_vowel( rule )
+    if @my_table_out.my_verb.stem_end_vowel then
+      @my_table_out.last_vowel = @my_table_out.my_verb.last_pure_vowel
+      @my_table_out.chain.chomp
+    end
   end
 
-
+  #  ----------------------------------------------------------------
+  #  ----------------------------------------------------------------
  
-end
+end  #class CekimiRules
 
