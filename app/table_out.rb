@@ -9,8 +9,8 @@
 # TableOut
 #   @my_verb : Verb Object being conjugated
 #   @my_rule : CekimiRules object with precedence
-#   @next_table : next table in a chain of conjugated tables; else nil
-#   @chain : the output chain which the parser is currently building
+#   @next_table : next table in a stub of conjugated tables; else nil
+#   @stub : the output stub which the parser is currently building
 #   @my_table : [2][3] array of conjugated strings
 #               [S1][P1]   1st person sing | plural
 #               [S2][P2]   2nd person sing | plural
@@ -38,7 +38,7 @@
 
 class TableOut
 
-  attr_accessor  :my_verb, :my_rule, :chain, :my_table, :last_vowel
+  attr_accessor  :my_verb, :my_rule, :stub, :my_table, :last_vowel
 
   #  ----------------------------------------------------------------
   #  get_table_index
@@ -54,10 +54,23 @@ class TableOut
   def initialize(my_verb,my_rule)
     @my_verb = my_verb
     @my_rule = my_rule
-    @chain = ""
+    @stub = ""
     @my_table = Array.new(2){ Array.new(3) }
-    @last_vowel = my_verb.last_vowel  # initialize chain's 1st last vwl
+    @last_vowel = my_verb.last_vowel  # initialize stub's 1st last vwl
   end
 
+  #  ----------------------------------------------------------------
+  #  conjugate -- places completed stub into the table, per pronoun
+  #  arg
+  #    pronoun: turkish pronoun, as symbol
+  #    :ben, :sen, :o, :biz, :siz, :onlar
+  #  ----------------------------------------------------------------
+  def conjugate( pronoun )
+    (ix, iy) = TURK2INDX[ pronoun ]  # translates a pronoun into x,y
+    @my_table[ix][iy] = @stub  # grab the stub
+  end
+
+  #  ----------------------------------------------------------------
+  #  ----------------------------------------------------------------
 end  # class TableOut
 

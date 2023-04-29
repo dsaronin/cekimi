@@ -7,7 +7,7 @@
 class Verb
 
   attr_accessor  :verb_infinitive, :verb_stem, :last_vowel, :final_cons
-  attr_accessor  :a2_sfx, :a4_sfx, :k4_chg, :suffix_chain
+  attr_accessor  :a2_sfx, :a4_sfx, :k4_chg, :suffix_stub
   attr_accessor  :is_t_except, :is_e_except
 
 # constants
@@ -27,7 +27,7 @@ class Verb
   #
 #-------------------------------------------------------------------
   def initialize( fiil )
-      @suffix_chain = ""  # make suffix chain empty
+      @suffix_stub = ""  # make suffix stub empty
 
        # preliminary massage to lowercase and remove lead/trailing whitespace
     @verb_infinitive = (fiil || "").strip.downcase
@@ -47,7 +47,7 @@ class Verb
     return "verb: #{@verb_infinitive}, stem: -#{@verb_stem}" + 
            ", end_vwl?: #{@stem_end_vowel}, t_exc?: #{@is_t_except}, e_exc?: #{@is_e_except}" +
            "\nlast_pure_v: #{@last_pure_vowel}, last_v: #{@last_vowel}, f_cons: #{@final_cons}" +
-           "\nchain: #{@suffix_chain}"
+           "\nstub: #{@suffix_stub}"
   end
 
   #  -------------------------------------------------------------------

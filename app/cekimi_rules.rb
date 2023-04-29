@@ -88,27 +88,28 @@ class CekimiRules
   #  ----------------------------------------------------------------
   
   def gen( str )
-    @my_table_out.chain << str 
-    puts "gen: #{@my_table_out.chain}"  if TRACE_GEN
+    @my_table_out.stub << str 
+    puts "gen: #{@my_table_out.stub}"  if TRACE_GEN
   end
 
   
   #  ----------------------------------------------------------------
   #  parse_rule -- parses a rule & generates conjugation
   #  recursive-descent parser
-  #  output of parser is in the table_out.chain field
+  #  output of parser is in the table_out.stub field
   #  assumption:
   #    @my_table_out  -- TableOut object for generating the conjugation
   #  ----------------------------------------------------------------
   def parse_rule( )
     unless @lexical_rule.nil? then
-      @lexical_rule.each   do |token|
+      @lexical_rule.each  do  |token|
         case token
           when INVOKE_RULE_REGEX  then true # nop
           when STEM_RULE_REGEX  then  gen @my_table_out.my_verb.verb_stem
-          when RULE_OP_REGEX  then  inplace_operation( $1, $2 )  
+          when RULE_OP_REGEX    then  inplace_operation( $1, $2 )  
           when ATOM_TOKEN_REGEX  then  gen token
-          when OUTPUT_RULE_REGEX  then true # nop
+          when OUTPUT_RULE_REGEX  then true  # nop
+          when INVOKE_RULE_REGEX  then table_generation( $1 )
           else
             Environ.log_warn( "Rule token not found: #{token}; ignored." )
           end  # case
@@ -152,11 +153,11 @@ class CekimiRules
   end
 
   #  ----------------------------------------------------------------
-  #  op_buffer_vowel  -- adds buffer for vowel if last in chain
+  #  op_buffer_vowel  -- adds buffer for vowel if last in stub
   #  arg: rule  [might be nil in future]
   #  ----------------------------------------------------------------
   def op_buffer_vowel( rule )
-    if @my_table_out.chain[-1] =~ TURK_VOWEL_REGEX
+    if @my_table_out.stub[-1] =~ TURK_VOWEL_REGEX
       gen "Y"   # push buffer to queue
     end
 
@@ -176,8 +177,32 @@ class CekimiRules
   def op_drop_stem_vowel( rule )
     if @my_table_out.my_verb.stem_end_vowel then
       @my_table_out.last_vowel = @my_table_out.my_verb.last_pure_vowel
-      @my_table_out.chain.chomp
+      @my_table_out.stub.chomp
     end
+  end
+
+  #  ----------------------------------------------------------------
+  #  table_generation  -- generates a table of conjugations for
+  #    all six personal cases
+  #  ----------------------------------------------------------------
+ 
+  def table_generation( rulekey )
+
+    rule =  CekimiRules.get_rule( rulekey.to_sym )
+
+    restore_stub = @my_table_out.stub  # remember stub
+    # 
+    # TODO? do we need to remember last_vowel also??
+    #
+    rule.lexical_hash.each do |pronoun, prule|
+
+      prule.my_table_out  = @my_table_out  # parse_rule expects this
+      prule.parse_rule  # parse a rule for person
+      @my_table_out.conjugate(pronoun)
+      @my_table_out.stub = restore_stub  # reset the stub
+
+    end  # do each hash
+
   end
 
   #  ----------------------------------------------------------------
