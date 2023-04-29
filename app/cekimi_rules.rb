@@ -27,9 +27,9 @@ class CekimiRules
   # parse_rule REGEX for token switch
   STEM_RULE_REGEX   = /^~V/   # matches rule requesting verb stem
   INVOKE_RULE_REGEX = /^&(\w+)/  # matches recursive rule parse req
-  OUTPUT_RULE_REGEX = /^Ω/  # table_out the result
+  OUTPUT_RULE_REGEX = /^Ω/  # table_out the result  (DEPRECATED)
   ATOM_TOKEN_REGEX  = /\p{L}+/  # matches any alpha
-  RULE_OP_REGEX     = /^@([AYK])(\d)/ # matches rule requesting an operation
+  RULE_OP_REGEX     = /^@([AYK])(\d)?/ # matches rule requesting an operation
       # side effect of matching: 
       #   $1 will be the op request
       #   $2 will be the sub-type of the op request
@@ -156,7 +156,7 @@ class CekimiRules
   #  arg: rule  [might be nil in future]
   #  ----------------------------------------------------------------
   def op_buffer_vowel( rule )
-    if @my_table_out.stub[-1] =~ TURK_VOWEL_REGEX
+    if @my_table_out.stub[-1] =~ Verb::TURK_VOWEL_REGEX
       gen "Y"   # push buffer to queue
     end
 
@@ -190,7 +190,8 @@ class CekimiRules
     rule =  CekimiRules.get_rule( rulekey.to_sym )
     rule.my_table_out = @my_table_out
 
-    restore_stub = @my_table_out.stub  # remember stub
+    restore_stub = String.new( @my_table_out.stub )  # remember stub
+    stub_len = restore_stub.length
     # 
     # TODO? do we need to remember last_vowel also??
     #
@@ -198,7 +199,7 @@ class CekimiRules
       rule.lexical_rule = lexrule
       rule.parse_rule  # parse a rule for person
       @my_table_out.conjugate(pronoun)
-      @my_table_out.stub = restore_stub  # reset the stub
+      @my_table_out.stub = restore_stub[0,stub_len]  # reset the stub
 
     end  # do each hash
 
