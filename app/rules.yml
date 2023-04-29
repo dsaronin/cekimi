@@ -32,12 +32,12 @@
     child_conj: ~
     next_list: ~
     rule_info:
-      :ben:   ['@Y', '@A4', 'M', 'Ω']
-      :sen:   ['S', '@A4', 'N', 'Ω']
+      :ben:   ['@Y', '@A4', 'M']
+      :sen:   ['S', '@A4', 'N']
       :o:     []
-      :biz:   ['@Y', '@A4', 'Z', 'Ω']
-      :siz:   ['S', '@A4', 'N', '@A4', 'Z', 'Ω']
-      :onlar: ['L', '@A2', 'R', 'Ω']
+      :biz:   ['@Y', '@A4', 'Z']
+      :siz:   ['S', '@A4', 'N', '@A4', 'Z']
+      :onlar: ['L', '@A2', 'R']
     exceptions: ~
 
 :_@A4: 

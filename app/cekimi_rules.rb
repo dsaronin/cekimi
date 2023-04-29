@@ -10,7 +10,7 @@
 class CekimiRules
   attr_accessor :caption_eng, :caption_turk, :gen_method, :grammar_role, :lexical_rule
   attr_accessor :parent_conj, :child_conj, :next_list, :rule_info, :exceptions
-  attr_accessor :my_key
+  attr_accessor :my_key, :my_table_out
 
   #  ------------------------------------------------------------
   #  CONSTANTS
@@ -104,12 +104,11 @@ class CekimiRules
     unless @lexical_rule.nil? then
       @lexical_rule.each  do  |token|
         case token
-          when INVOKE_RULE_REGEX  then true # nop
-          when STEM_RULE_REGEX  then  gen @my_table_out.my_verb.verb_stem
-          when RULE_OP_REGEX    then  inplace_operation( $1, $2 )  
-          when ATOM_TOKEN_REGEX  then  gen token
-          when OUTPUT_RULE_REGEX  then true  # nop
-          when INVOKE_RULE_REGEX  then table_generation( $1 )
+          when INVOKE_RULE_REGEX  then  table_generation( $1 )
+          when STEM_RULE_REGEX    then  gen @my_table_out.my_verb.verb_stem
+          when RULE_OP_REGEX      then  inplace_operation( $1, $2 )  
+          when ATOM_TOKEN_REGEX   then  gen token
+          when OUTPUT_RULE_REGEX  then  true  # nop
           else
             Environ.log_warn( "Rule token not found: #{token}; ignored." )
           end  # case
@@ -189,15 +188,15 @@ class CekimiRules
   def table_generation( rulekey )
 
     rule =  CekimiRules.get_rule( rulekey.to_sym )
+    rule.my_table_out = @my_table_out
 
     restore_stub = @my_table_out.stub  # remember stub
     # 
     # TODO? do we need to remember last_vowel also??
     #
-    rule.lexical_hash.each do |pronoun, prule|
-
-      prule.my_table_out  = @my_table_out  # parse_rule expects this
-      prule.parse_rule  # parse a rule for person
+    rule.rule_info.each do |pronoun, lexrule|
+      rule.lexical_rule = lexrule
+      rule.parse_rule  # parse a rule for person
       @my_table_out.conjugate(pronoun)
       @my_table_out.stub = restore_stub  # reset the stub
 
