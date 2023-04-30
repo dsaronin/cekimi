@@ -40,7 +40,7 @@
 class TableOut
 
   attr_accessor  :my_verb, :my_rule, :stub, :my_table, :last_vowel
-  attr_accessor  :cell_width
+  attr_accessor  :cell_width, :empty
 
   #  ----------------------------------------------------------------
   #  get_table_index
@@ -56,10 +56,13 @@ class TableOut
   def initialize(my_verb,my_rule)
     @my_verb = my_verb
     @my_rule = my_rule
+    @last_vowel = my_verb.last_vowel  # initialize stub's 1st last vwl
+
     @stub = ""
     @cell_width = MIN_CELL_WIDTH   # size of output cell width in chars
+
     @my_table = Array.new(2){ Array.new(3) }
-    @last_vowel = my_verb.last_vowel  # initialize stub's 1st last vwl
+    @empty = true    # will be false if table has anything in it
   end
 
   #  ----------------------------------------------------------------
@@ -73,6 +76,7 @@ class TableOut
     @my_table[ix][iy] = @stub  # grab the stub
        # reset cell width if we encounter a length longer 
     @cell_width = @stub.length if ( @stub.length > @cell_width )
+    @empty = false
   end
 
   #  ----------------------------------------------------------------
@@ -81,15 +85,32 @@ class TableOut
   FORMAT_HEADER = "\n%s: \t%s  -->  %s"
   FORMAT_LINE   = "    %-Xs\t%-Xs"
 
+  #  ----------------------------------------------------------------
+  #  show_table  -- displays the conjugation table to console
+  #  ----------------------------------------------------------------
   def show_table()
+
     str = sprintf( FORMAT_HEADER, @my_rule.caption_turk, @my_verb.verb_infinitive, @stub.downcase )
     puts Environ.wrapGreen str
 
-    cellformat = FORMAT_LINE.gsub( /X/, @cell_width.to_s )
-    (P1..P3).each do |iy|
-      str = sprintf( cellformat, @my_table[SINGLR][iy].downcase, @my_table[PLURAL][iy].downcase )
-      puts Environ.wrapYellow str
-    end  # each do
+    if !is_empty?
+         # adjust format line to account for max cell of results
+      cellformat = FORMAT_LINE.gsub( /X/, @cell_width.to_s )
+
+         # for each person of each singular/plural, output a row
+      (P1..P3).each do |iy|
+        str = sprintf( cellformat, @my_table[SINGLR][iy].downcase, @my_table[PLURAL][iy].downcase )
+        puts Environ.wrapYellow str
+      end  # each do
+
+    end  # if table not empty
+  end
+
+  #  ----------------------------------------------------------------
+  #  is_empty?  -- returns true if table is empty
+  #  ----------------------------------------------------------------
+  def is_empty?
+    return @empty
   end
 
   #  ----------------------------------------------------------------
