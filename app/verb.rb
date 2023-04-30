@@ -8,7 +8,7 @@ class Verb
 
   attr_accessor  :verb_infinitive, :verb_stem, :last_vowel, :final_cons
   attr_accessor  :a2_sfx, :a4_sfx, :k4_chg, :suffix_stub
-  attr_accessor  :is_t_except, :is_e_except
+  attr_accessor  :is_t_except, :is_e_except, :stem_end_vowel,:last_pure_vowel
 
 # constants
   TURK_VOWEL_REGEX = /[aeiouıöü]/  # all turkish vowels

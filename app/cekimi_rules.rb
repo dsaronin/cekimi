@@ -8,7 +8,7 @@
   require_relative "table_out"
 
 class CekimiRules
-  attr_accessor :caption_eng, :caption_turk, :gen_method, :grammar_role, :lexical_rule
+  attr_accessor :caption_eng, :caption_turk, :grammar_role, :lexical_rule
   attr_accessor :parent_conj, :child_conj, :next_list, :rule_info, :exceptions
   attr_accessor :my_key, :my_table_out
 
@@ -29,7 +29,7 @@ class CekimiRules
   INVOKE_RULE_REGEX = /^&(\w+)/  # matches recursive rule parse req
   OUTPUT_RULE_REGEX = /^Ω/  # table_out the result  (DEPRECATED)
   ATOM_TOKEN_REGEX  = /\p{L}+/  # matches any alpha
-  RULE_OP_REGEX     = /^@([AYK])(\d)?/ # matches rule requesting an operation
+  RULE_OP_REGEX     = /^@([AYKX])(\d)?/ # matches rule requesting an operation
       # side effect of matching: 
       #   $1 will be the op request
       #   $2 will be the sub-type of the op request
