@@ -16,7 +16,7 @@ class CekimiRules
   #  CONSTANTS
   #  ------------------------------------------------------------
 
-  TRACE_GEN  = true  # to trace the transformation each token
+  TRACE_GEN  = false  # to trace the transformation each token
 
   # inplace_operation REGEX for op switch
   VOWEL_HARMONY   =  /A/    # 4way/2way vowel harmony op

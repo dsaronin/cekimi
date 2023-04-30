@@ -103,6 +103,7 @@ private
       rule = CekimiRules.get_rule( :indef_past )
       table_out = rule.prep_and_parse( verb )  # kicks off recursive descent parser
       Environ.log_debug( ":indef_past result: " + table_out.stub )
+      table_out.show_table
 
       # table_out holds the result
 
