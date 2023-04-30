@@ -78,14 +78,17 @@ class TableOut
   #  ----------------------------------------------------------------
   #  ----------------------------------------------------------------
 
-  FORMAT_HEADER = "\n%s: \n%s  -->  %s\n"
-  FORMAT_LINE   = "\t%-Xs\t%-Xs\n"
+  FORMAT_HEADER = "\n%s: \t%s  -->  %s"
+  FORMAT_LINE   = "    %-Xs\t%-Xs"
 
   def show_table()
-    printf( FORMAT_HEADER, @my_rule.caption_turk, @my_verb.verb_infinitive, @stub.downcase )
+    str = sprintf( FORMAT_HEADER, @my_rule.caption_turk, @my_verb.verb_infinitive, @stub.downcase )
+    puts Environ.wrapGreen str
+
     cellformat = FORMAT_LINE.gsub( /X/, @cell_width.to_s )
     (P1..P3).each do |iy|
-      printf( cellformat, @my_table[SINGLR][iy].downcase, @my_table[PLURAL][iy].downcase )
+      str = sprintf( cellformat, @my_table[SINGLR][iy].downcase, @my_table[PLURAL][iy].downcase )
+      puts Environ.wrapYellow str
     end  # each do
   end
 

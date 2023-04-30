@@ -38,6 +38,7 @@ class Environ
   end
   
   @@logger = Logger.new(STDERR)
+  @@logger.level = Logger::WARN
 
 
   # log_debug -- wraps a logger message in AnsiColor & Cekimi name
