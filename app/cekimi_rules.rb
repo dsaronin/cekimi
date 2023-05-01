@@ -17,6 +17,7 @@ class CekimiRules
   #  ------------------------------------------------------------
 
   TRACE_GEN  = false  # to trace the transformation each token
+  LAST_VOWEL_REGEX = /[aeiouıöü][bcçdfgğhjklmnprsştvyz]*$/i
 
   # inplace_operation REGEX for op switch
   VOWEL_HARMONY   =  /A/    # 4way/2way vowel harmony op
@@ -84,11 +85,16 @@ class CekimiRules
   end
 
   #  ----------------------------------------------------------------
+  #  gen  -- append a suffix to the stub
   #  ----------------------------------------------------------------
-  #  ----------------------------------------------------------------
-  
   def gen( str )
-    @my_table_out.stub << str 
+    @my_table_out.stub << str   # append to stub
+
+    # check for the last vowel and remember it
+    if( idex = str.index LAST_VOWEL_REGEX ) then
+      @my_table_out.last_vowel = str[idex].downcase   # becomes new last vowel
+    end 
+ 
     puts "gen: #{@my_table_out.stub}"  if TRACE_GEN
   end
 
@@ -176,7 +182,7 @@ class CekimiRules
   def op_drop_stem_vowel( rule )
     if @my_table_out.my_verb.stem_end_vowel then
       @my_table_out.last_vowel = @my_table_out.my_verb.last_pure_vowel
-      @my_table_out.stub.chomp
+      @my_table_out.stub.chop!   # remove the trailing vowl
     end
   end
 

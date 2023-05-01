@@ -10,7 +10,7 @@ class CekimiWork
   require_relative 'verb'
 
   #  ------------------------------------------------------------
-  TRACE_GEN  = false  # to trace verb parameter breakdown
+  TRACE_GEN  = true  # to trace verb parameter breakdown
   #  ------------------------------------------------------------
  
   #  ------------------------------------------------------------
