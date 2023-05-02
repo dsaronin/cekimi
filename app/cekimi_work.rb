@@ -151,14 +151,25 @@ private
       verb = Verb.new( list.shift )  # pop next entry; assume its a verb
       puts verb.to_s  if  TRACE_GEN  # trace output if enabled
 
+  #  ------------------------------------------------------------
       # TODO: dynamically get the rules to be conjugated
-      rule = CekimiRules.get_rule( :progressive )
+      rule = CekimiRules.get_rule( :indef_past )
 
       table_out = rule.prep_and_parse( verb )  # kicks off recursive descent parser
-      Environ.log_debug( ":progressive result: " + table_out.stub )
+      Environ.log_debug( ":past_indefinite result: " + table_out.stub )
 
       # table_out holds the result
       table_out.show_table 
+  #  ------------------------------------------------------------
+      # TODO: dynamically get the rules to be conjugated
+      rule = CekimiRules.get_rule( :neg_indef_past )
+
+      table_out = rule.prep_and_parse( verb )  # kicks off recursive descent parser
+      Environ.log_debug( ":neg_past_indefinite result: " + table_out.stub )
+
+      # table_out holds the result
+      table_out.show_table 
+  #  ------------------------------------------------------------
 
     rescue ArgumentError
       Environ.put_and_log_error( ">>  " + $!.message )
