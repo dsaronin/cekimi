@@ -7,10 +7,12 @@
 class Verb
 
   attr_accessor  :verb_infinitive, :verb_stem, :last_vowel, :final_cons
-  attr_accessor  :a2_sfx, :a4_sfx, :k4_chg, :suffix_stub
+  attr_accessor  :a2_sfx, :a4_sfx, :k4_chg, :stem_syllables
   attr_accessor  :is_t_except, :is_e_except, :stem_end_vowel,:last_pure_vowel
+  attr_accessor  :verb_stem_td
 
 # constants
+  TURK_VOWELS      = "aeiouıöü"
   TURK_VOWEL_REGEX = /[aeiouıöü]/  # all turkish vowels
   TURK_CONSONENT_REGEX = /[^aeiouıöü]/  # all turkish consonents
   T_MATCH = /t/    # matches a trailing t in stem
@@ -21,13 +23,12 @@ class Verb
   T_EXCEPTIONS = /^(gi)|(e)t$/  # special handling for Ts
   E_EXCEPTIONS = /^[yd]e$/   # special handling for Es
 
-#-------------------------------------------------------------------
-  # instantiate by Verb.new( fiil )
-  # returns new obj or raises exception if invalid turkish verb
+  #  -------------------------------------------------------------------
+  #  instantiate by Verb.new( fiil )
+  #  returns new obj or raises exception if invalid turkish verb
   #
-#-------------------------------------------------------------------
+  #  -------------------------------------------------------------------
   def initialize( fiil )
-      @suffix_stub = ""  # make suffix stub empty
 
        # preliminary massage to lowercase and remove lead/trailing whitespace
     @verb_infinitive = (fiil || "").strip.downcase
@@ -41,21 +42,23 @@ class Verb
       raise ArgumentError, "#{fiil}: Türkçe bir fiil değildir."
     end
   end
-#-------------------------------------------------------------------
+  #  -------------------------------------------------------------------
 
+  #  -------------------------------------------------------------------
+  #  to_s  -- inspect object as a string
+  #  -------------------------------------------------------------------
   def to_s
-    return "verb: #{@verb_infinitive}, stem: -#{@verb_stem}" + 
+    return "verb: #{@verb_infinitive}, stem: -#{@verb_stem}/#{@verb_stem_td}" + 
            ", end_vwl?: #{@stem_end_vowel}, t_exc?: #{@is_t_except}, e_exc?: #{@is_e_except}" +
-           "\nlast_pure_v: #{@last_pure_vowel}, last_v: #{@last_vowel}, f_cons: #{@final_cons}" +
-           "\nstub: #{@suffix_stub}"
+           "\nlast_pure_v: #{@last_pure_vowel}, last_v: #{@last_vowel}, f_cons: #{@final_cons}, n_syll: #{@stem_syllables}"
   end
 
   #  -------------------------------------------------------------------
   #  set_stem -- verb stem setup
   #  -------------------------------------------------------------------
-
   def set_stem
     @verb_stem = @verb_infinitive.gsub( STRIP_INFIN_SUFFIX , "" )
+    @stem_syllables = @verb_stem.count TURK_VOWELS
   end
 
   #  -------------------------------------------------------------------
@@ -65,6 +68,9 @@ class Verb
   def grammar_exceptions_check
     @is_t_except = @verb_stem.match( T_EXCEPTIONS ) ? true : false
     @is_e_except = @verb_stem.match( E_EXCEPTIONS ) ? true : false
+
+       # prepare the alternate voiced stem if a T-exception verb
+    @verb_stem_td =  ( @is_t_except ?  @verb_stem.chop + D_VOICED : @verb_stem )
   end
 
   #  -------------------------------------------------------------------

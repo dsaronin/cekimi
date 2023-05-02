@@ -25,7 +25,7 @@
     caption_eng: indefinite past tense
     caption_turk: belirlisiz geçmis zaman
     grammar_role: :past_tense
-    lexical_rule: ['~V', '@D', '@A4', '&past_sfx']
+    lexical_rule: ['~W', '@D', '@A4', '&past_sfx']
     parent_conj: ~
     child_conj: ~
     next_list: ~
@@ -65,7 +65,7 @@
     caption_eng: progressive tense
     caption_turk: şimdi zaman
     grammar_role: :present_tense
-    lexical_rule: ['~V', '@X', '@Y', '@A4', 'YOR', '&pers_sfx']
+    lexical_rule: ['~W', '@X', '@Y', '@A4', 'YOR', '&pers_sfx']
     parent_conj: ~
     child_conj: ~
     next_list: ~
@@ -90,7 +90,7 @@
     caption_eng: future tense
     caption_turk: gelecek zaman
     grammar_role: :future_tense
-    lexical_rule: ['~V', '@Y', '@A2', 'C', '@A2', 'K', '&futr_sfx']
+    lexical_rule: ['~W', '@Y', '@A2', 'C', '@A2', 'K', '&futr_sfx']
     parent_conj: ~
     child_conj: ~
     next_list: ~

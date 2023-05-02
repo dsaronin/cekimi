@@ -38,6 +38,7 @@ class CekimiRules
 
   # parse_rule REGEX for token switch
   STEM_RULE_REGEX   = /^~V/   # matches rule requesting verb stem
+  TD_STEM_RULE_REGEX   = /^~W/   # matches rule requesting voiced verb stem
   INVOKE_RULE_REGEX = /^&(\w+)/  # matches recursive rule parse req
   OUTPUT_RULE_REGEX = /^Ω/  # table_out the result  (DEPRECATED)
   ATOM_TOKEN_REGEX  = /\p{L}+/  # matches any alpha
@@ -123,6 +124,7 @@ class CekimiRules
         case token
           when INVOKE_RULE_REGEX  then  table_generation( $1 )
           when STEM_RULE_REGEX    then  gen @my_table_out.my_verb.verb_stem
+          when TD_STEM_RULE_REGEX then  gen @my_table_out.my_verb.verb_stem_td
           when RULE_OP_REGEX      then  inplace_operation( $1, $2 )  
           when ATOM_TOKEN_REGEX   then  gen token
           when OUTPUT_RULE_REGEX  then  true  # nop
