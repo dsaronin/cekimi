@@ -6,6 +6,38 @@
 # cekimi_rules_version: 1.01
 # NOTE: make sure the my_key field matches the key.
 
+:aorist:
+  !ruby/object:CekimiRules
+    my_key: aorist
+    caption_eng: general/present tense
+    caption_turk: geniş zaman
+    grammar_role: :aorist
+    lexical_rule: ['~W', '@A6', 'R', '&pers_sfx']
+    parent_conj: ~
+    child_conj: ~
+    next_list: ~
+    rule_info: ~
+    exceptions:
+      :al: alır
+      :bil: bilir
+      :bul: bulur
+      :den: denir
+      :dur: durur
+      :gel: gelir
+      :gör: görür
+      :kal: kalır
+      :kıl: kılır
+      :kon: konur
+      :ol: olur
+      :öl: ölür
+      :san: sanır
+      :var: varır
+      :ver: verir
+      :vur: vurur
+      :yen: yenir
+      :yıl: yılır
+
+
 :indef_past:
   !ruby/object:CekimiRules
     my_key: indef_past

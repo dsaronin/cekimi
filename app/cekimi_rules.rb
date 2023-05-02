@@ -27,6 +27,8 @@ class CekimiRules
   D_CONS_SUFFIX  = "D" 
   T_CONS_SUFFIX  = "T"
   G_CONS_SUFFIX  = "Ğ"
+  
+  AORIST_TYPE  = "6"  # special case for aorist vowel harmony choices
 
   # inplace_operation REGEX for op switch
   VOWEL_HARMONY   =  /A/    # 4way/2way vowel harmony op
@@ -125,7 +127,7 @@ class CekimiRules
           when INVOKE_RULE_REGEX  then  table_generation( $1 )
           when STEM_RULE_REGEX    then  gen @my_table_out.my_verb.verb_stem
           when TD_STEM_RULE_REGEX then  gen @my_table_out.my_verb.verb_stem_td
-          when RULE_OP_REGEX      then  inplace_operation( $1, $2 )  
+          when RULE_OP_REGEX      then  prep_inplace_op( $1, $2 )  
           when ATOM_TOKEN_REGEX   then  gen token
           when OUTPUT_RULE_REGEX  then  true  # nop
           else
@@ -135,6 +137,21 @@ class CekimiRules
     end  # unless @lexical_rule nil
   end
 
+  #  ----------------------------------------------------------------
+  #  prep_inplace_op-- preprocessing for in-place op if @A6
+  #  args:
+  #    op_type -- string for the type of inplace operation: A,K,X,Y
+  #    op_subtype  -- [optional]: digit to indicate subtype
+  #  ----------------------------------------------------------------
+  def prep_inplace_op(op_type, op_subtype)
+    if op_type =~ VOWEL_HARMONY && op_subtype == AORIST_TYPE
+      case
+
+      end  # end case
+    end  # if aorist preprocessing for vowel harmony
+
+    inplace_operation(op_type, op_subtype) 
+  end
 
   #  ----------------------------------------------------------------
   #  inplace_operation -- handles an in-place alpha transformation
