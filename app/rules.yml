@@ -84,7 +84,6 @@
     rule_info: ~
     exceptions: ~
 
-
 :future:
   !ruby/object:CekimiRules
     my_key: future
@@ -92,6 +91,18 @@
     caption_turk: gelecek zaman
     grammar_role: :future_tense
     lexical_rule: ['~V', '@Y', '@A2', 'C', '@A2', 'K', '&futr_sfx']
+    parent_conj: ~
+    child_conj: ~
+    next_list: ~
+    rule_info: ~
+
+:neg_future:
+  !ruby/object:CekimiRules
+    my_key: neg_future
+    caption_eng: neg_future tense
+    caption_turk: gelecek zaman
+    grammar_role: :future_tense
+    lexical_rule: ['~V', 'M', '@A2', 'Y', '@A2', 'C', '@A2', 'K', '&futr_sfx']
     parent_conj: ~
     child_conj: ~
     next_list: ~
@@ -128,10 +139,10 @@
     child_conj: ~
     next_list: ~
     rule_info:
-      :ben:   ['@K', '@A4', 'M']
+      :ben:   ['@G', '@A4', 'M']
       :sen:   ['S', '@A4', 'N']
       :o:     []
-      :biz:   ['@K', '@A4', 'Z']
+      :biz:   ['@G', '@A4', 'Z']
       :siz:   ['S', '@A4', 'N', '@A4', 'Z']
       :onlar: ['L', '@A2', 'R']
     exceptions: ~
@@ -198,9 +209,9 @@
       :ü: e
     exceptions: ~
 
-:_@K4:
+:_@K:
   !ruby/object:CekimiRules
-    my_key: _@K4
+    my_key: _@K
     caption_eng: consonant-stem transformation
     caption_turk: ünsüz yumuşaması
     grammar_role: :harmony
@@ -208,7 +219,11 @@
     parent_conj: ~
     child_conj: ~
     next_list: ~
-    rule_info: ~
+    rule_info:
+      :k: ğ
+      :p: b
+      :t: d
+      :ç: c
     exceptions: ~
 
 
@@ -242,6 +257,19 @@
   !ruby/object:CekimiRules
     my_key: _@D
     caption_eng: TD leading suffix consonant transformation
+    caption_turk: tupu
+    grammar_role: :harmony
+    lexical_rule: ~
+    parent_conj: ~
+    child_conj: ~
+    next_list: ~
+    rule_info: ~
+    exceptions: ~
+
+:_@G:
+  !ruby/object:CekimiRules
+    my_key: _@G
+    caption_eng: KĞ trailing stub consonant transformation
     caption_turk: tupu
     grammar_role: :harmony
     lexical_rule: ~

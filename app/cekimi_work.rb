@@ -153,19 +153,19 @@ private
 
   #  ------------------------------------------------------------
       # TODO: dynamically get the rules to be conjugated
-      rule = CekimiRules.get_rule( :indef_past )
+      rule = CekimiRules.get_rule( :future )
 
       table_out = rule.prep_and_parse( verb )  # kicks off recursive descent parser
-      Environ.log_debug( ":past_indefinite result: " + table_out.stub )
+      Environ.log_debug( ":future result: " + table_out.stub )
 
       # table_out holds the result
       table_out.show_table 
   #  ------------------------------------------------------------
       # TODO: dynamically get the rules to be conjugated
-      rule = CekimiRules.get_rule( :neg_indef_past )
+      rule = CekimiRules.get_rule( :neg_future )
 
       table_out = rule.prep_and_parse( verb )  # kicks off recursive descent parser
-      Environ.log_debug( ":neg_past_indefinite result: " + table_out.stub )
+      Environ.log_debug( ":neg_future result: " + table_out.stub )
 
       # table_out holds the result
       table_out.show_table 

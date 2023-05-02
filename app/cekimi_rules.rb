@@ -23,8 +23,10 @@ class CekimiRules
 
   D_CONS_REGEX   = /[aeiouıöübcdgğjlmnrvyz]/i
   T_CONS_REGEX   = /[çfhkpsşt]/i
+  K_CONS_REGEX   = /k$/i
   D_CONS_SUFFIX  = "D" 
   T_CONS_SUFFIX  = "T"
+  G_CONS_SUFFIX  = "Ğ"
 
   # inplace_operation REGEX for op switch
   VOWEL_HARMONY   =  /A/    # 4way/2way vowel harmony op
@@ -32,13 +34,14 @@ class CekimiRules
   DROP_VOWEL      =  /X/    # drop vowel-stem final vowel op
   CONS_TRANSFORM  =  /K/    # unvoiced > voiced consonent transform op
   TD_TRANSFORM    =  /D/    # suffix changes depending stub consonant type
+  KG_TRANSFORM    =  /G/    # suffix changes when K before vowel
 
   # parse_rule REGEX for token switch
   STEM_RULE_REGEX   = /^~V/   # matches rule requesting verb stem
   INVOKE_RULE_REGEX = /^&(\w+)/  # matches recursive rule parse req
   OUTPUT_RULE_REGEX = /^Ω/  # table_out the result  (DEPRECATED)
   ATOM_TOKEN_REGEX  = /\p{L}+/  # matches any alpha
-  RULE_OP_REGEX     = /^@([AYKXD])(\d)?/ # matches rule requesting an operation
+  RULE_OP_REGEX     = /^@([AYKXDG])(\d)?/ # matches rule requesting an operation
       # side effect of matching: 
       #   $1 will be the op request
       #   $2 will be the sub-type of the op request
@@ -144,6 +147,7 @@ class CekimiRules
       when BUFFER_VOWEL    then  op_buffer_vowel( rule )
       when CONS_TRANSFORM  then  op_cons_transform( rule )
       when TD_TRANSFORM    then  op_td_transform( rule )
+      when KG_TRANSFORM    then  op_kg_transform( rule )
       when DROP_VOWEL      then  op_drop_stem_vowel( rule )
       else
         Environ.log_warn( "in-place operation not found: #{token}; ignored." )
@@ -196,6 +200,18 @@ class CekimiRules
       gen T_CONS_SUFFIX
     end
 
+  end
+
+
+  #  ----------------------------------------------------------------
+  #  op_kg_transform  -- does the KĞ stem transformation
+  #  arg: rule  [might be nil in future]
+  #  ----------------------------------------------------------------
+  def op_kg_transform( rule )
+    if @my_table_out.stub[-1] =~ K_CONS_REGEX  then
+      @my_table_out.stub.chop!   # remove the trailing K
+      gen G_CONS_SUFFIX 
+    end
   end
 
 
