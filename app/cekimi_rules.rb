@@ -28,7 +28,9 @@ class CekimiRules
   T_CONS_SUFFIX  = "T"
   G_CONS_SUFFIX  = "Ğ"
   
-  AORIST_TYPE  = "6"  # special case for aorist vowel harmony choices
+  HARMONY_2WAY   = "2"  # two-way vowel harmony
+  HARMONY_4WAY   = "4"  # four-way vowel harmony
+  HARMONY_AORIST = "6"  # special case for aorist vowel harmony choices
 
   # inplace_operation REGEX for op switch
   VOWEL_HARMONY   =  /A/    # 4way/2way vowel harmony op
@@ -144,13 +146,20 @@ class CekimiRules
   #    op_subtype  -- [optional]: digit to indicate subtype
   #  ----------------------------------------------------------------
   def prep_inplace_op(op_type, op_subtype)
-    if op_type =~ VOWEL_HARMONY && op_subtype == AORIST_TYPE
-      case
-
-      end  # end case
+    if op_type =~ VOWEL_HARMONY && op_subtype == HARMONY_AORIST
+      # we're if if @A6 type of vowel_harmony logic for AORIST case
+      op_subtype  =  case
+        when @my_table_out.my_verb.stem_end_vowel then nil  # nop
+        when @exceptions[@my_table_out.my_verb.verb_stem.to_sym] then HARMONY_4WAY
+        when @my_table_out.my_verb.stem_syllables == 1 then HARMONY_2WAY
+        when @my_table_out.my_verb.stem_syllables >  1 then HARMONY_4WAY
+        else
+          Environ.log_warn( "impossible A6 subtype encountered" )
+          nil
+      end  # end case statement
     end  # if aorist preprocessing for vowel harmony
 
-    inplace_operation(op_type, op_subtype) 
+    inplace_operation(op_type, op_subtype) unless op_subtype.nil?
   end
 
   #  ----------------------------------------------------------------
