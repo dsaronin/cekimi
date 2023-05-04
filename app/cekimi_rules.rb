@@ -10,7 +10,7 @@
 class CekimiRules
   attr_accessor :caption_eng, :caption_turk, :grammar_role, :lexical_rule
   attr_accessor :parent_conj, :child_conj, :next_list, :rule_info, :exceptions
-  attr_accessor :my_key, :my_table_out
+  attr_accessor :my_key, :my_table_out, :is_neg, :my_pair
 
   #  ------------------------------------------------------------
   #  CONSTANTS

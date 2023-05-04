@@ -6,6 +6,7 @@
 # cekimi_rules_version: 1.01
 # NOTE: make sure the my_key field matches the key.
 
+# -----------------------------------------
 :aorist:
   !ruby/object:CekimiRules
     my_key: aorist
@@ -15,6 +16,8 @@
     lexical_rule: ['~W', '@A6', 'R', '&pers_sfx']
     parent_conj: ~
     child_conj: ~
+    is_neg: false
+    my_pair: :neg_aorist
     next_list: ~
     rule_info: ~
     exceptions:
@@ -37,7 +40,23 @@
       :yen: yenir
       :yıl: yılır
 
+:neg_aorist:
+  !ruby/object:CekimiRules
+    my_key: neg_aorist
+    caption_eng: general/present tense
+    caption_turk: geniş zaman
+    grammar_role: :aorist
+    lexical_rule: ['~V', 'M', '@A2', '&neg_pers_sfx']
+    parent_conj: ~
+    child_conj: ~
+    is_neg: true
+    my_pair: :aorist
+    next_list: ~
+    rule_info: ~
+    exceptions:
 
+# -----------------------------------------
+ 
 :indef_past:
   !ruby/object:CekimiRules
     my_key: indef_past
@@ -47,23 +66,11 @@
     lexical_rule: ['~V', 'M', '@A4', 'Ş', '&pers_sfx']
     parent_conj: ~
     child_conj: ~
+    is_neg: false
+    my_pair: :neg_indef_past
     next_list: ~
     rule_info: ~
     exceptions: ~
-
-:def_past:
-  !ruby/object:CekimiRules
-    my_key: def_past
-    caption_eng: indefinite past tense
-    caption_turk: belirlisiz geçmis zaman
-    grammar_role: :past_tense
-    lexical_rule: ['~W', '@D', '@A4', '&past_sfx']
-    parent_conj: ~
-    child_conj: ~
-    next_list: ~
-    rule_info: ~
-    exceptions: ~
-
 
 :neg_indef_past:
   !ruby/object:CekimiRules
@@ -74,6 +81,25 @@
     lexical_rule: ['~V', 'M', '@A2', 'M', '@A4', 'Ş', '&pers_sfx']
     parent_conj: ~
     child_conj: ~
+    is_neg: true
+    my_pair: :indef_past
+    next_list: ~
+    rule_info: ~
+    exceptions: ~
+
+# -----------------------------------------
+
+:def_past:
+  !ruby/object:CekimiRules
+    my_key: def_past
+    caption_eng: indefinite past tense
+    caption_turk: belirlisiz geçmis zaman
+    grammar_role: :past_tense
+    lexical_rule: ['~W', '@D', '@A4', '&past_sfx']
+    parent_conj: ~
+    child_conj: ~
+    is_neg: false
+    my_pair: :neg_def_past
     next_list: ~
     rule_info: ~
     exceptions: ~
@@ -87,9 +113,13 @@
     lexical_rule: ['~V', 'M', '@A2', 'D', '@A4', '&past_sfx']
     parent_conj: ~
     child_conj: ~
+    is_neg: true
+    my_pair: :def_past
     next_list: ~
     rule_info: ~
     exceptions: ~
+
+# -----------------------------------------
 
 :progressive:
   !ruby/object:CekimiRules
@@ -100,6 +130,8 @@
     lexical_rule: ['~W', '@X', '@Y', '@A4', 'YOR', '&pers_sfx']
     parent_conj: ~
     child_conj: ~
+    is_neg: false
+    my_pair: :neg_progressive
     next_list: ~
     rule_info: ~
 
@@ -112,9 +144,13 @@
     lexical_rule: ['~V', 'M', '@A4', 'YOR', '&pers_sfx']
     parent_conj: ~
     child_conj: ~
+    is_neg: true
+    my_pair: :progressive
     next_list: ~
     rule_info: ~
     exceptions: ~
+
+# -----------------------------------------
 
 :future:
   !ruby/object:CekimiRules
@@ -125,6 +161,8 @@
     lexical_rule: ['~W', '@Y', '@A2', 'C', '@A2', 'K', '&futr_sfx']
     parent_conj: ~
     child_conj: ~
+    is_neg: false
+    my_pair: :neg_future
     next_list: ~
     rule_info: ~
 
@@ -137,18 +175,24 @@
     lexical_rule: ['~V', 'M', '@A2', 'Y', '@A2', 'C', '@A2', 'K', '&futr_sfx']
     parent_conj: ~
     child_conj: ~
+    is_neg: true
+    my_pair: :future
     next_list: ~
     rule_info: ~
+
+# -----------------------------------------
 
 :pers_sfx: 
   !ruby/object:CekimiRules
     my_key: pers_sfx
-    caption_eng: personal suffix
+    caption_eng: general personal suffix
     caption_turk: şahıs eki
     grammar_role: :person
     lexical_rule: ~
     parent_conj: ~
     child_conj: ~
+    is_neg: ~
+    my_pair: ~
     next_list: ~
     rule_info:
       :ben:   ['@Y', '@A4', 'M']
@@ -169,6 +213,8 @@
     lexical_rule: ~
     parent_conj: ~
     child_conj: ~
+    is_neg: ~
+    my_pair: ~
     next_list: ~
     rule_info:
       :ben:   ['@G', '@A4', 'M']
@@ -177,6 +223,28 @@
       :biz:   ['@G', '@A4', 'Z']
       :siz:   ['S', '@A4', 'N', '@A4', 'Z']
       :onlar: ['L', '@A2', 'R']
+    exceptions: ~
+
+
+:neg_pers_sfx: 
+  !ruby/object:CekimiRules
+    my_key: neg_pers_sfx
+    caption_eng: negative aorist personal suffix
+    caption_turk: eki
+    grammar_role: :person
+    lexical_rule: ~
+    parent_conj: ~
+    child_conj: ~
+    is_neg: ~
+    my_pair: ~
+    next_list: ~
+    rule_info:
+      :ben:   ['M']
+      :sen:   ['ZS', '@A4', 'N']
+      :o:     ['Z']
+      :biz:   ['Y', '@A4', 'Z']
+      :siz:   ['ZS', '@A4', 'N', '@A4', 'Z']
+      :onlar: ['ZL', '@A2', 'R']
     exceptions: ~
 
 
@@ -189,6 +257,8 @@
     lexical_rule: ~
     parent_conj: ~
     child_conj: ~
+    is_neg: ~
+    my_pair: ~
     next_list: ~
     rule_info:
       :ben:   ['M']
@@ -199,6 +269,8 @@
       :onlar: ['L', '@A2', 'R']
     exceptions: ~
 
+# -----------------------------------------
+
 :_@A4: 
   !ruby/object:CekimiRules
     my_key: _@A4
@@ -208,6 +280,8 @@
     lexical_rule: ~
     parent_conj: ~
     child_conj: ~
+    is_neg: ~
+    my_pair: ~
     next_list: ~
     rule_info: 
       :a: ı 
@@ -229,6 +303,8 @@
     lexical_rule: ~
     parent_conj: ~
     child_conj: ~
+    is_neg: ~
+    my_pair: ~
     next_list: ~
     rule_info: 
       :a: a 
@@ -241,6 +317,8 @@
       :ü: e
     exceptions: ~
 
+# -----------------------------------------
+
 :_@K:
   !ruby/object:CekimiRules
     my_key: _@K
@@ -250,6 +328,8 @@
     lexical_rule: ~
     parent_conj: ~
     child_conj: ~
+    is_neg: ~
+    my_pair: ~
     next_list: ~
     rule_info:
       :k: ğ
@@ -258,6 +338,11 @@
       :ç: c
     exceptions: ~
 
+# -----------------------------------------
+# following are nop rules; place holders
+# the rule itself triggers a specific method 
+# which then handles the general transformation
+# -----------------------------------------
 
 :_@Y:
   !ruby/object:CekimiRules
@@ -268,9 +353,13 @@
     lexical_rule: ~
     parent_conj: ~
     child_conj: ~
+    is_neg: ~
+    my_pair: ~
     next_list: ~
     rule_info: ~
     exceptions: ~
+
+# -----------------------------------------
 
 :_@X:
   !ruby/object:CekimiRules
@@ -281,9 +370,13 @@
     lexical_rule: ~
     parent_conj: ~
     child_conj: ~
+    is_neg: ~
+    my_pair: ~
     next_list: ~
     rule_info: ~
     exceptions: ~
+
+# -----------------------------------------
 
 :_@D:
   !ruby/object:CekimiRules
@@ -294,9 +387,13 @@
     lexical_rule: ~
     parent_conj: ~
     child_conj: ~
+    is_neg: ~
+    my_pair: ~
     next_list: ~
     rule_info: ~
     exceptions: ~
+
+# -----------------------------------------
 
 :_@G:
   !ruby/object:CekimiRules
@@ -307,7 +404,11 @@
     lexical_rule: ~
     parent_conj: ~
     child_conj: ~
+    is_neg: ~
+    my_pair: ~
     next_list: ~
     rule_info: ~
     exceptions: ~
+
+# -----------------------------------------
 

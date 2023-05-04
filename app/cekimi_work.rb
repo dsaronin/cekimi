@@ -10,7 +10,7 @@ class CekimiWork
   require_relative 'verb'
 
   #  ------------------------------------------------------------
-  TRACE_GEN  = true  # to trace verb parameter breakdown
+  TRACE_GEN  = false  # to trace verb parameter breakdown
   #  ------------------------------------------------------------
  
   #  ------------------------------------------------------------
@@ -153,19 +153,19 @@ private
 
   #  ------------------------------------------------------------
       # TODO: dynamically get the rules to be conjugated
-      rule = CekimiRules.get_rule( :future )
+      rule = CekimiRules.get_rule( :aorist )
 
       table_out = rule.prep_and_parse( verb )  # kicks off recursive descent parser
-      Environ.log_debug( ":future result: " + table_out.stub )
+      Environ.log_debug( ":aorist result: " + table_out.stub )
 
       # table_out holds the result
       table_out.show_table 
   #  ------------------------------------------------------------
       # TODO: dynamically get the rules to be conjugated
-      rule = CekimiRules.get_rule( :neg_future )
+      rule = CekimiRules.get_rule( :neg_aorist )
 
       table_out = rule.prep_and_parse( verb )  # kicks off recursive descent parser
-      Environ.log_debug( ":neg_future result: " + table_out.stub )
+      Environ.log_debug( ":neg_aorist result: " + table_out.stub )
 
       # table_out holds the result
       table_out.show_table 
