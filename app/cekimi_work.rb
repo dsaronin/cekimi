@@ -11,6 +11,7 @@ class CekimiWork
 
   #  ------------------------------------------------------------
   TRACE_GEN  = false  # to trace verb parameter breakdown
+  NEGPOZ_PAIR = true  # conjugate positive-negative pairs
   #  ------------------------------------------------------------
  
   #  ------------------------------------------------------------
@@ -155,20 +156,20 @@ private
       # TODO: dynamically get the rules to be conjugated
       rule = CekimiRules.get_rule( :aorist )
 
-      table_out = rule.prep_and_parse( verb )  # kicks off recursive descent parser
+      table_out = rule.prep_and_parse( verb, NEGPOZ_PAIR )  # kicks off recursive descent parser
       Environ.log_debug( ":aorist result: " + table_out.stub )
 
       # table_out holds the result
-      table_out.show_table 
+      table_out.show_table NEGPOZ_PAIR 
   #  ------------------------------------------------------------
       # TODO: dynamically get the rules to be conjugated
-      rule = CekimiRules.get_rule( :neg_aorist )
+      # rule = CekimiRules.get_rule( :neg_aorist )
 
-      table_out = rule.prep_and_parse( verb )  # kicks off recursive descent parser
-      Environ.log_debug( ":neg_aorist result: " + table_out.stub )
+      # table_out = rule.prep_and_parse( verb, NEGPOZ_PAIR )  # kicks off recursive descent parser
+      # Environ.log_debug( ":neg_aorist result: " + table_out.stub )
 
       # table_out holds the result
-      table_out.show_table 
+      # table_out.show_table  NEGPOZ_PAIR 
   #  ------------------------------------------------------------
 
     rescue ArgumentError

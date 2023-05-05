@@ -80,13 +80,34 @@ class CekimiRules
   #  -----------------------------------------------------------------
   # prep_and_parse -- preps for recursive descent parsing
   # args: 
-  #   my_verb -- verb being conjugated
+  #   my_conj_verb -- verb being conjugated
+  #   conjugate_pairs  -- true if conjugate the negative/positive pairs
   # returns:
   #   @my_table_out: formed result for output
   #  -----------------------------------------------------------------
-  def prep_and_parse( my_verb )
+  def prep_and_parse( my_conj_verb, conjugate_pairs )
+    parse_one_rule( my_conj_verb )
+      # if need conjugate pairs and a pair-rule exists
+    if conjugate_pairs  && 
+       @my_pair  &&
+       (rule = CekimiRules.get_rule( @my_pair.to_sym ))
+    then  # conjugate the paired rule
+      paired_table_out = rule.parse_one_rule( my_conj_verb )
+          # and link the tables for output
+      @my_table_out.pair_tables( paired_table_out )
+    end
+    return @my_table_out 
+  end
+
+  #  -----------------------------------------------------------------
+  #  parse_one_rule  -- setup for recursive descent parsing
+  #  args: 
+  #    my_conj_verb -- verb being conjugated
+  #  -----------------------------------------------------------------
+  def parse_one_rule( my_conj_verb )
     Environ.log_debug( "starting parsing rule: #{@my_key}..." )
-    @my_table_out = TableOut.new( my_verb, self)
+    @my_verb = my_conj_verb
+    @my_table_out = TableOut.new( my_conj_verb, self)
     parse_rule( )   # begins parsing a rule
     return @my_table_out 
   end
@@ -94,7 +115,6 @@ class CekimiRules
   #  ----------------------------------------------------------------
   #  to_s -- debuigging trace output for a CekimiRule object
   #  ----------------------------------------------------------------
-  
   def to_s
     "#{@caption_eng}, #{@grammar_role},  #{@lexical_rule}, " + 
     "#{@rule_info}"
@@ -127,8 +147,8 @@ class CekimiRules
       @lexical_rule.each  do  |token|
         case token
           when INVOKE_RULE_REGEX  then  table_generation( $1 )
-          when STEM_RULE_REGEX    then  gen @my_table_out.my_verb.verb_stem
-          when TD_STEM_RULE_REGEX then  gen @my_table_out.my_verb.verb_stem_td
+          when STEM_RULE_REGEX    then  gen @my_verb.verb_stem
+          when TD_STEM_RULE_REGEX then  gen @my_verb.verb_stem_td
           when RULE_OP_REGEX      then  prep_inplace_op( $1, $2 )  
           when ATOM_TOKEN_REGEX   then  gen token
           when OUTPUT_RULE_REGEX  then  true  # nop
@@ -149,10 +169,10 @@ class CekimiRules
     if op_type =~ VOWEL_HARMONY && op_subtype == HARMONY_AORIST
       # we're if if @A6 type of vowel_harmony logic for AORIST case
       op_subtype  =  case
-        when @my_table_out.my_verb.stem_end_vowel then nil  # nop
-        when @exceptions[@my_table_out.my_verb.verb_stem.to_sym] then HARMONY_4WAY
-        when @my_table_out.my_verb.stem_syllables == 1 then HARMONY_2WAY
-        when @my_table_out.my_verb.stem_syllables >  1 then HARMONY_4WAY
+        when @my_verb.stem_end_vowel then nil  # nop
+        when @exceptions[@my_verb.verb_stem.to_sym] then HARMONY_4WAY
+        when @my_verb.stem_syllables == 1 then HARMONY_2WAY
+        when @my_verb.stem_syllables >  1 then HARMONY_4WAY
         else
           Environ.log_warn( "impossible A6 subtype encountered" )
           nil
@@ -248,8 +268,8 @@ class CekimiRules
   #  arg: rule  [might be nil in future]
   #  ----------------------------------------------------------------
   def op_drop_stem_vowel( rule )
-    if @my_table_out.my_verb.stem_end_vowel then
-      @my_table_out.last_vowel = @my_table_out.my_verb.last_pure_vowel
+    if @my_verb.stem_end_vowel then
+      @my_table_out.last_vowel = @my_verb.last_pure_vowel
       @my_table_out.stub.chop!   # remove the trailing vowl
     end
   end

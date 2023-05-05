@@ -7,7 +7,7 @@
 # six personal tenses (stored as a 2x3 array)
 #
 # TableOut
-#   @my_verb : Verb Object being conjugated
+#   @verb_infinitive : Verb infinitive being conjugated
 #   @my_rule : CekimiRules object with precedence
 #   @next_table : next table in a stub of conjugated tables; else nil
 #   @stub : the output stub which the parser is currently building
@@ -39,8 +39,8 @@
 
 class TableOut
 
-  attr_accessor  :my_verb, :my_rule, :stub, :my_table, :last_vowel
-  attr_accessor  :cell_width, :empty
+  attr_accessor  :verb_infinitive, :my_rule, :stub, :my_table, :last_vowel
+  attr_accessor  :cell_width, :empty, :my_pair
 
   #  ----------------------------------------------------------------
   #  get_table_index
@@ -54,7 +54,7 @@ class TableOut
   #  new -- creates and initializes a TableOut object
   #  ----------------------------------------------------------------
   def initialize(my_verb,my_rule)
-    @my_verb = my_verb
+    @verb_infinitive = my_verb.verb_infinitive
     @my_rule = my_rule
     @last_vowel = my_verb.last_vowel  # initialize stub's 1st last vwl
 
@@ -87,10 +87,12 @@ class TableOut
 
   #  ----------------------------------------------------------------
   #  show_table  -- displays the conjugation table to console
+  #  args:
+  #    pair_tables -- true if output pair of neg/poz tables
   #  ----------------------------------------------------------------
-  def show_table()
+  def show_table( pair_tables )
 
-    str = sprintf( FORMAT_HEADER, @my_rule.caption_turk, @my_verb.verb_infinitive, @stub.downcase )
+    str = sprintf( FORMAT_HEADER, @my_rule.caption_turk, @verb_infinitive, @stub.downcase )
     puts Environ.wrapGreen str
 
     if !is_empty?
@@ -111,6 +113,17 @@ class TableOut
   #  ----------------------------------------------------------------
   def is_empty?
     return @empty
+  end
+
+  #  ----------------------------------------------------------------
+  #  pair_tables
+  #  arg:
+  #    table_out object to be paired
+  #  NOTE: pairs both tables together
+  #  ----------------------------------------------------------------
+  def pair_tables( paired_table )
+    @my_pair = paired_table
+    paired_table.my_pair = self
   end
 
   #  ----------------------------------------------------------------
