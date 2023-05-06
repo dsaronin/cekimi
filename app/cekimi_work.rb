@@ -10,8 +10,9 @@ class CekimiWork
   require_relative 'verb'
 
   #  ------------------------------------------------------------
-  TRACE_GEN  = false  # to trace verb parameter breakdown
-  NEGPOZ_PAIR = true  # conjugate positive-negative pairs
+  TRACE_GEN       = false # to trace verb parameter breakdown
+  NEGPOZ_PAIR     = true  # conjugate positive-negative pairs
+  CONJUGATE_CHAIN = true  # repeatedly conjugate chain of rules
   #  ------------------------------------------------------------
  
   #  ------------------------------------------------------------
@@ -151,11 +152,16 @@ private
     begin
       verb = Verb.new( list.shift )  # pop next entry; assume its a verb
       puts verb.to_s  if  TRACE_GEN  # trace output if enabled
+      next_key  = "aorist"           # rule key to kick of conjugation
 
   #  ------------------------------------------------------------
       # table_out holds the result
-      (table_out, next_key) = CekimiRules.conjugate_by_key(verb, :aorist, NEGPOZ_PAIR )
-      table_out.show_table NEGPOZ_PAIR 
+      until  next_key.nil?  
+        (table_out, next_key) = CekimiRules.conjugate_by_key(verb, next_key, NEGPOZ_PAIR )
+        table_out.show_table NEGPOZ_PAIR 
+           # end looping if not CONJUGATE_CHAIN OR there isn't a next_key
+        next_key = nil if !CONJUGATE_CHAIN 
+      end
   #  ------------------------------------------------------------
 
     rescue ArgumentError
