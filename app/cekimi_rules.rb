@@ -57,25 +57,72 @@ class CekimiRules
 
   #  ------------------------------------------------------------
   #  ------------------------------------------------------------
+  #  CLASS-LEVEL actions & methods
   #  ------------------------------------------------------------
-
+  #  ------------------------------------------------------------
   # initialize rules here if not already 
+
   @@cekimi_rules ||= YAML.unsafe_load_file( "app/rules.yml" )
+
+  #  -----------------------------------------------------------------
+  #  cekimi_rules_count  -- returns number of rules in hash
+  #  -----------------------------------------------------------------
 
   def CekimiRules.cekimi_rules_count
     return @@cekimi_rules.size
   end
 
+  #  -----------------------------------------------------------------
+  #  cekimi_rules  -- returns hash of all rules
+  #  TODO: needed?
+  #  -----------------------------------------------------------------
+
   def CekimiRules.cekimi_rules
     return @@cekimi_rules
   end
 
+  #  -----------------------------------------------------------------
+  #  get_rule  -- returns the rule associated with a key
+  #  args:
+  #    rule_key -- key for lookup (will always be converted to sym)
+  #  returns:
+  #    rule object
+  #  exception: 
+  #    ArgumentError if rule not found
+  #  -----------------------------------------------------------------
+
   def CekimiRules.get_rule( rule_key )
     Environ.log_debug( "searching for rule: #{rule_key}" )
-    rule = @@cekimi_rules[ rule_key ]
+    rule = @@cekimi_rules[ rule_key.to_sym ]
     return rule unless rule.nil?
     raise ArgumentError, "#{rule_key}: ÇekimiRule not found or undefined." 
   end
+
+  #  -----------------------------------------------------------------
+  #  conjugate_by_key  -- starts conjugation of rule or pair
+  #  args:
+  #    verb:  verb obj for verb to be conjugated
+  #    rule_key:  sym of rule key
+  #    conjugate_pairs:  true if conjugate pairs of rules poz/neg
+  #  returns:
+  #    (table_out, next_key)
+  #  -----------------------------------------------------------------
+
+  def CekimiRules.conjugate_by_key(verb, rule_key, conjugate_pairs)
+    rule = CekimiRules.get_rule( rule_key )
+
+    table_out = rule.prep_and_parse( verb, conjugate_pairs )  # kicks off recursive descent parser
+    Environ.log_debug( "#{rule_key} result: " + table_out.stub )
+      
+    return [table_out, rule.child_conj]
+  end
+
+  #  -----------------------------------------------------------------
+  #  -----------------------------------------------------------------
+  #  INSTANCE METHODS
+  #  -----------------------------------------------------------------
+  #  -----------------------------------------------------------------
+
 
   #  -----------------------------------------------------------------
   # prep_and_parse -- preps for recursive descent parsing

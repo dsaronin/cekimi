@@ -153,13 +153,8 @@ private
       puts verb.to_s  if  TRACE_GEN  # trace output if enabled
 
   #  ------------------------------------------------------------
-      # TODO: dynamically get the rules to be conjugated
-      rule = CekimiRules.get_rule( :aorist )
-
-      table_out = rule.prep_and_parse( verb, NEGPOZ_PAIR )  # kicks off recursive descent parser
-      Environ.log_debug( ":aorist result: " + table_out.stub )
-
       # table_out holds the result
+      (table_out, next_key) = CekimiRules.conjugate_by_key(verb, :aorist, NEGPOZ_PAIR )
       table_out.show_table NEGPOZ_PAIR 
   #  ------------------------------------------------------------
 
