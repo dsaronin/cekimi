@@ -162,15 +162,6 @@ private
       # table_out holds the result
       table_out.show_table NEGPOZ_PAIR 
   #  ------------------------------------------------------------
-      # TODO: dynamically get the rules to be conjugated
-      # rule = CekimiRules.get_rule( :neg_aorist )
-
-      # table_out = rule.prep_and_parse( verb, NEGPOZ_PAIR )  # kicks off recursive descent parser
-      # Environ.log_debug( ":neg_aorist result: " + table_out.stub )
-
-      # table_out holds the result
-      # table_out.show_table  NEGPOZ_PAIR 
-  #  ------------------------------------------------------------
 
     rescue ArgumentError
       Environ.put_and_log_error( ">>  " + $!.message )

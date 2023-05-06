@@ -123,7 +123,7 @@ class TableOut
   #  ----------------------------------------------------------------
 
   PAIRED_FORMAT_HEADER = "\n%s: \t%s  -->  %s\t%s: \t%s  -->  %s"
-  PAIRED_FORMAT_LINE   = "    %-Xs\t%-Xs\t\t%-Zs\t%-Zs"
+  PAIRED_FORMAT_LINE   = "    %-Xs\t%-Xs\t\t    %-Zs\t%-Zs"
 
   #  ----------------------------------------------------------------
   #  show_paired_tables  -- displays a pair of related tables
