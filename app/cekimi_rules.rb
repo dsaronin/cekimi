@@ -107,7 +107,7 @@ class CekimiRules
   def parse_one_rule( my_conj_verb )
     Environ.log_debug( "starting parsing rule: #{@my_key}..." )
     @my_verb = my_conj_verb
-    @my_table_out = TableOut.new( my_conj_verb, self)
+    @my_table_out = TableOut.new( my_conj_verb, @caption_eng, @caption_turk, @grammar_role, @is_neg)
     parse_rule( )   # begins parsing a rule
     return @my_table_out 
   end

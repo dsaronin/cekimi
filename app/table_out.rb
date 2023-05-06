@@ -8,7 +8,6 @@
 #
 # TableOut
 #   @verb_infinitive : Verb infinitive being conjugated
-#   @my_rule : CekimiRules object with precedence
 #   @next_table : next table in a stub of conjugated tables; else nil
 #   @stub : the output stub which the parser is currently building
 #   @my_table : [2][3] array of conjugated strings
@@ -39,8 +38,9 @@
 
 class TableOut
 
-  attr_accessor  :verb_infinitive, :my_rule, :stub, :my_table, :last_vowel
+  attr_accessor  :verb_infinitive, :stub, :my_table, :last_vowel
   attr_accessor  :cell_width, :empty, :my_pair
+  attr_accessor  :caption_eng, :caption_turk, :grammar_role, :is_neg
 
   #  ----------------------------------------------------------------
   #  get_table_index
@@ -52,10 +52,15 @@ class TableOut
 
   #  ----------------------------------------------------------------
   #  new -- creates and initializes a TableOut object
+  #  args:
+  #    caption_eng, caption_turk, grammar_role, is_neg  from rule obj
   #  ----------------------------------------------------------------
-  def initialize(my_verb,my_rule)
+  def initialize(my_verb, caption_eng, caption_turk, grammar_role, is_neg)
     @verb_infinitive = my_verb.verb_infinitive
-    @my_rule = my_rule
+    @caption_eng = caption_eng
+    @caption_turk = caption_turk
+    @grammar_role = grammar_role
+    @is_neg = is_neg
     @last_vowel = my_verb.last_vowel  # initialize stub's 1st last vwl
 
     @stub = ""
@@ -92,20 +97,62 @@ class TableOut
   #  ----------------------------------------------------------------
   def show_table( pair_tables )
 
-    str = sprintf( FORMAT_HEADER, @my_rule.caption_turk, @verb_infinitive, @stub.downcase )
-    puts Environ.wrapGreen str
+    if pair_tables && @my_pair && !@my_pair.is_empty?
+    then
+      show_paired_tables
+    else
+
+      str = sprintf( FORMAT_HEADER, caption_turk, @verb_infinitive, @stub.downcase )
+      puts Environ.wrapCyanBold str
+
+      if !is_empty?
+           # adjust format line to account for max cell of results
+        cellformat = FORMAT_LINE.gsub( /X/, @cell_width.to_s )
+
+           # for each person of each singular/plural, output a row
+        (P1..P3).each do |iy|
+          str = sprintf( cellformat, @my_table[SINGLR][iy].downcase, @my_table[PLURAL][iy].downcase )
+          puts Environ.wrapYellow str
+        end  # each do
+
+      end  # if table not empty
+    end  # paired tables
+  end
+
+  #  ----------------------------------------------------------------
+  #  ----------------------------------------------------------------
+
+  PAIRED_FORMAT_HEADER = "\n%s: \t%s  -->  %s\t%s: \t%s  -->  %s"
+  PAIRED_FORMAT_LINE   = "    %-Xs\t%-Xs\t\t%-Zs\t%-Zs"
+
+  #  ----------------------------------------------------------------
+  #  show_paired_tables  -- displays a pair of related tables
+  #  assumes my_pair not nil and valid table
+  #  ----------------------------------------------------------------
+  def show_paired_tables()
+    str = sprintf( 
+          PAIRED_FORMAT_HEADER, 
+          caption_turk, @verb_infinitive, @stub.downcase,
+          @my_pair.caption_turk, @my_pair.verb_infinitive, @my_pair.stub.downcase,
+    )
+    puts Environ.wrapCyanBold str
 
     if !is_empty?
          # adjust format line to account for max cell of results
-      cellformat = FORMAT_LINE.gsub( /X/, @cell_width.to_s )
+      cellformat = PAIRED_FORMAT_LINE.gsub( /X/, @cell_width.to_s ).gsub( /Z/, @my_pair.cell_width.to_s )
 
          # for each person of each singular/plural, output a row
       (P1..P3).each do |iy|
-        str = sprintf( cellformat, @my_table[SINGLR][iy].downcase, @my_table[PLURAL][iy].downcase )
+        str = sprintf( 
+              cellformat, 
+              @my_table[SINGLR][iy].downcase, @my_table[PLURAL][iy].downcase,
+              @my_pair.my_table[SINGLR][iy].downcase, @my_pair.my_table[PLURAL][iy].downcase 
+        )
         puts Environ.wrapYellow str
       end  # each do
 
     end  # if table not empty
+ 
   end
 
   #  ----------------------------------------------------------------
