@@ -33,12 +33,12 @@ class CekimiRules
   HARMONY_AORIST = "6"  # special case for aorist vowel harmony choices
 
   # inplace_operation REGEX for op switch
-  VOWEL_HARMONY   =  /A/    # 4way/2way vowel harmony op
-  BUFFER_VOWEL    =  /Y/    # add Y buffer for double vowel op
-  DROP_VOWEL      =  /X/    # drop vowel-stem final vowel op
-  CONS_TRANSFORM  =  /K/    # unvoiced > voiced consonent transform op
-  TD_TRANSFORM    =  /D/    # suffix changes depending stub consonant type
-  KG_TRANSFORM    =  /G/    # suffix changes when K before vowel
+  VOWEL_HARMONY   =  /A/i    # 4way/2way vowel harmony op
+  BUFFER_VOWEL    =  /Y/i    # add Y buffer for double vowel op
+  DROP_VOWEL      =  /X/i    # drop vowel-stem final vowel op
+  CONS_TRANSFORM  =  /K/i    # unvoiced > voiced consonent transform op
+  TD_TRANSFORM    =  /D/i    # suffix changes depending stub consonant type
+  KG_TRANSFORM    =  /G/i    # suffix changes when K before vowel
 
   # parse_rule REGEX for token switch
   STEM_RULE_REGEX   = /^~V/   # matches rule requesting verb stem
@@ -46,7 +46,7 @@ class CekimiRules
   INVOKE_RULE_REGEX = /^&(\w+)/  # matches recursive rule parse req
   OUTPUT_RULE_REGEX = /^Ω/  # table_out the result  (DEPRECATED)
   ATOM_TOKEN_REGEX  = /\p{L}+/  # matches any alpha
-  RULE_OP_REGEX     = /^@([AYKXDG])(\d)?/ # matches rule requesting an operation
+  RULE_OP_REGEX     = /^@([AYKXDG])(\d)?/i # matches rule requesting an operation
       # side effect of matching: 
       #   $1 will be the op request
       #   $2 will be the sub-type of the op request
@@ -196,7 +196,7 @@ class CekimiRules
           when INVOKE_RULE_REGEX  then  table_generation( $1 )
           when STEM_RULE_REGEX    then  gen @my_verb.verb_stem
           when TD_STEM_RULE_REGEX then  gen @my_verb.verb_stem_td
-          when RULE_OP_REGEX      then  prep_inplace_op( $1, $2 )  
+          when RULE_OP_REGEX      then  prep_inplace_op( $1, $2 || "" )  
           when ATOM_TOKEN_REGEX   then  gen token
           when OUTPUT_RULE_REGEX  then  true  # nop
           else
@@ -210,9 +210,10 @@ class CekimiRules
   #  prep_inplace_op-- preprocessing for in-place op if @A6
   #  args:
   #    op_type -- string for the type of inplace operation: A,K,X,Y
-  #    op_subtype  -- [optional]: digit to indicate subtype
+  #    op_subtype  -- digit to indicate subtype or blank, never nil!
   #  ----------------------------------------------------------------
   def prep_inplace_op(op_type, op_subtype)
+
     if op_type =~ VOWEL_HARMONY && op_subtype == HARMONY_AORIST
       # we're if if @A6 type of vowel_harmony logic for AORIST case
       op_subtype  =  case
