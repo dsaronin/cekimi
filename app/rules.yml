@@ -95,7 +95,7 @@
     caption_eng: indefinite past tense
     caption_turk: belirli geçmis zaman
     grammar_role: :past_tense
-    lexical_rule: ['~W', '@D', '@A4', '&past_sfx']
+    lexical_rule: ['~V', '@D', '@A4', '&past_sfx']
     parent_conj: future
     child_conj: indef_past
     is_neg: false
