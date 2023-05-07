@@ -11,6 +11,7 @@
   require 'logger'
   require_relative 'ansicolor'
   require 'singleton'
+  require_relative 'flags'
 #----------------------------------------------------------
 
 class Environ
@@ -21,29 +22,8 @@ class Environ
   APP_NAME_HEAD = APP_NAME + ": "
   CEKIMI_VERSION = "0.01"
   CEKIMI_HELP = "list (l), status (s), options (o), help (h), quit (q), exit (x)"
-
   #  ------------------------------------------------------------
-  #  flags default initial settings
-  #
-  TRACE_GEN       = false # to trace the transformation each token
-  TRACE_VERB      = false # to trace verb parameter breakdown
-  NEGPOZ_PAIR     = true  # conjugate positive-negative pairs
-  CONJUGATE_CHAIN = true  # repeatedly conjugate chain of rules
-  FULL_RULE_LIST  = false # true if list ALL cekimi rules
-  LOG_LEVEL_QUIET    = Logger::WARN 
-  LOG_LEVEL_VERBOSE  = Logger::DEBUG 
-
-  #  ------------------------------------------------------------
-  #  flag names (keys into hash)
-  #
-  FLAG_GEN_TRACE         = "g"
-  FLAG_VERB_TRACE        = "v"
-  FLAG_CHAIN_CONJUGATE   = "c"
-  FLAG_PAIR_CONJUGATE    = "p"
-  FLAG_FULL_RULE         = "f"
-  FLAG_LOG_LEVEL         = "z"
-
-  #  ------------------------------------------------------------
+  EXIT_CMD  = "q"  # default CLI exit command used if EOF
   #  ------------------------------------------------------------
  
 # initialize the class-level instance variables
@@ -65,20 +45,29 @@ class Environ
   #  logger setup
   #  ------------------------------------------------------------
   @@logger = Logger.new(STDERR)
-  @@logger.level = LOG_LEVEL_QUIET
+  @@logger.level = Flags::LOG_LEVEL_QUIET
+  
+  #  ------------------------------------------------------------
+  #  Flags setup
+  #  ------------------------------------------------------------
+  @@myflags = Flags.new()
 
   #  ------------------------------------------------------------
-  #  system-wide flags
+  #  change_log_level  -- changes the logger level
+  #  args:
+  #    level -- Logger level: DEBUG, INFO, WARN, ERROR
   #  ------------------------------------------------------------
 
-  @@flags = {
-    FLAG_GEN_TRACE         =>  TRACE_GEN,
-    FLAG_VERB_TRACE        =>  TRACE_VERB,
-    FLAG_CHAIN_CONJUGATE   =>  CONJUGATE_CHAIN,
-    FLAG_PAIR_CONJUGATE    =>  NEGPOZ_PAIR,
-    FLAG_FULL_RULE         =>  FULL_RULE_LIST,
-    FLAG_LOG_LEVEL         =>  LOG_LEVEL_QUIET
-  }
+  def Environ.change_log_level( level )
+    @@logger.level = level
+  end
+
+  #  ------------------------------------------------------------
+  #  flags  -- returns the Environ-wide flags object
+  #  ------------------------------------------------------------
+  def Environ.flags()
+    return @@myflags
+  end
 
   #  ------------------------------------------------------------
   # log_debug -- wraps a logger message in AnsiColor & Cekimi name
@@ -123,7 +112,7 @@ class Environ
   # will then be split into elements using whitespace as delimiter
   # resultant non-nil (but possibly empty) list is returned
   #  ------------------------------------------------------------
-  def Environ.get_input_list( exit_cmd = "q" )
+  def Environ.get_input_list( exit_cmd = EXIT_CMD )
     # check for EOF nil and replace with exit_cmd if was EOF
     return  (gets || exit_cmd ).strip.split
   end

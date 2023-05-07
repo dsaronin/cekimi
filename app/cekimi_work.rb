@@ -119,7 +119,8 @@ private
   #  do_flags  -- display flag states
   #  ------------------------------------------------------------
   def do_flags        
-    Environ.put_info ">>>>>  flags "
+    Environ.put_info Environ.flags.to_help
+    Environ.put_info ">>>>>  flags: " + Environ.flags.to_s
   end
 
   #  ------------------------------------------------------------
