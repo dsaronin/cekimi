@@ -16,7 +16,6 @@ class CekimiRules
   #  CONSTANTS
   #  ------------------------------------------------------------
 
-  TRACE_GEN  = false  # to trace the transformation each token
   LAST_VOWEL_REGEX = /[aeiouıöü][bcçdfgğhjklmnprsştvyz]*$/i
   VOICED_CONSONANTS   = /[bcdgğjlmnrvyz]/i
   UNVOICED_CONSONANTS = /[çfhkpsşt]/i
@@ -178,7 +177,7 @@ class CekimiRules
       @my_table_out.last_vowel = str[idex].downcase   # becomes new last vowel
     end 
  
-    puts "gen: #{@my_table_out.stub}"  if TRACE_GEN
+    puts "gen: #{@my_table_out.stub}"  if Environ.flags.flag_gen_trace
   end
 
   

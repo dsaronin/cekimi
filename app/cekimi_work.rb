@@ -10,9 +10,6 @@ class CekimiWork
   require_relative 'verb'
 
   #  ------------------------------------------------------------
-  TRACE_GEN       = false # to trace verb parameter breakdown
-  NEGPOZ_PAIR     = true  # conjugate positive-negative pairs
-  CONJUGATE_CHAIN = true  # repeatedly conjugate chain of rules
   #  ------------------------------------------------------------
  
   #  ------------------------------------------------------------
@@ -79,7 +76,7 @@ private
       when  "l", "list"      then  do_list      # list rules
       when  "s", "status"    then  do_status    # print status
 
-      when  "f", "flags"     then  do_flags     # print flags
+      when  "f", "flags"     then  do_flags( cmdlist )     # print flags
       when  "h", "help"      then  do_help      # print help
       when  "v", "version"   then  do_version   # print version
       when  "o", "options"   then  do_options   # print options
@@ -110,16 +107,22 @@ private
   def do_status        
     Environ.put_info ">>>>> status #{ CekimiRules.cekimi_rules_count } rules"
     puts CekimiRules.cekimi_rules.keys
-    if TRACE_GEN
+    if Environ.flags.flag_verb_trace
        puts :indef_past.to_s + ":  " + CekimiRules.get_rule( :indef_past ).to_s
     end
   end
 
   #  ------------------------------------------------------------
   #  do_flags  -- display flag states
+  #  args:
+  #    list  -- cli array, with cmd at top
   #  ------------------------------------------------------------
-  def do_flags        
-    Environ.put_info Environ.flags.to_help
+  def do_flags(list)
+    list.shift  # pop first element, the "f" command
+    if ( Environ.flags.parse_flags( list ) )
+      Environ.change_log_level( Environ.flags.flag_log_level )
+    end
+
     Environ.put_info ">>>>>  flags: " + Environ.flags.to_s
   end
 
@@ -128,6 +131,7 @@ private
   #  ------------------------------------------------------------
   def do_help        
     Environ.put_info Environ.cekimi_help
+    Environ.put_info Environ.flags.to_help
   end
 
   #  ------------------------------------------------------------
@@ -152,16 +156,16 @@ private
   def do_conjugate( list )
     begin
       verb = Verb.new( list.shift )  # pop next entry; assume its a verb
-      puts verb.to_s  if  TRACE_GEN  # trace output if enabled
+      puts verb.to_s  if  Environ.flags.flag_verb_trace  # trace output if enabled
       next_key  = "aorist"           # rule key to kick of conjugation
 
   #  ------------------------------------------------------------
       # table_out holds the result
       until  next_key.nil?  
-        (table_out, next_key) = CekimiRules.conjugate_by_key(verb, next_key, NEGPOZ_PAIR )
-        table_out.show_table NEGPOZ_PAIR 
-           # end looping if not CONJUGATE_CHAIN OR there isn't a next_key
-        next_key = nil if !CONJUGATE_CHAIN 
+        (table_out, next_key) = CekimiRules.conjugate_by_key(verb, next_key, Environ.flags.flag_pair_conjugate )
+        table_out.show_table Environ.flags.flag_pair_conjugate
+           # end looping if not conjugate_chain OR there isn't a next_key
+        next_key = nil if !Environ.flags.flag_chain_conjugate
       end
   #  ------------------------------------------------------------
 

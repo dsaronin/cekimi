@@ -57,14 +57,74 @@ class Flags
     return str
   end
 
+  #  ------------------------------------------------------------
+  #  to_help -- creates a help line to explain flags
+  #  ------------------------------------------------------------
   def  to_help
-    return  "" + 
+    return  "flags: " + 
       FLAG_GEN_TRACE + "--gen trace, "  +
       FLAG_VERB_TRACE + "--verb trace, "  +
       FLAG_CHAIN_CONJUGATE + "--conjugate chain, "  +
       FLAG_PAIR_CONJUGATE + "--pair poz/neg conjugate, "  +
       FLAG_FULL_RULE + "--full list of rules, "  +
       FLAG_LOG_LEVEL + "--verbose/quiet logging"
+  end
+
+  #  ------------------------------------------------------------
+  #  parse_flags -- parse a cli flag command
+  #  possbilities: "+g -p z", "-gvc", "- gv cp"
+  #  + makes a flag true (default), - makes it false
+  #  but if the flag is seperated by a space, it's ignored
+  #  returns true if log_level changed
+  #  ------------------------------------------------------------
+  def parse_flags( list )
+    fvalue = true   # default flag value is true
+    was_log_level = @flags[FLAG_LOG_LEVEL]
+
+    list.each do |token|
+      token.split("").each do |flg|
+        case flg
+        when /\+/ then fvalue = true
+        when /\-/ then fvalue = false
+        when /z/i then @flags[FLAG_LOG_LEVEL] = ( fvalue  ?  LOG_LEVEL_QUIET : LOG_LEVEL_VERBOSE )
+        when /[gvcpf]/i then @flags[flg] = fvalue
+        else
+          Environ.log_info( "parse_flags unrecognized flag: #{flg}" )
+          # nop; ignore flag
+        end   # case
+      end   # each flag
+    end  # list of tokens
+
+    return ( was_log_level != @flags[FLAG_LOG_LEVEL] )
+
+  end
+
+  #  ------------------------------------------------------------
+  #  flag_xxx_yyyy  -- getters for each of the flags
+  #  ------------------------------------------------------------
+
+  def flag_gen_trace
+    @flags[FLAG_GEN_TRACE]
+  end
+
+  def flag_verb_trace
+    @flags[FLAG_VERB_TRACE]
+  end
+
+  def flag_chain_conjugate
+    @flags[FLAG_CHAIN_CONJUGATE]
+  end
+
+  def flag_pair_conjugate
+    @flags[FLAG_PAIR_CONJUGATE]
+  end
+
+  def flag_full_rule
+    @flags[FLAG_FULL_RULE]
+  end
+
+  def flag_log_level
+    @flags[FLAG_LOG_LEVEL]
   end
 
   #  ------------------------------------------------------------
