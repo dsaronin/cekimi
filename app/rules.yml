@@ -13,7 +13,7 @@
     caption_eng: general/present tense
     caption_turk: geniş zaman
     grammar_role: :aorist
-    lexical_rule: ['~W', '@A6', 'R', '&pers_sfx']
+    lexical_rule: ['~W', '@A6', 'R', '&_sfx_pers']
     parent_conj: ~
     child_conj: progressive
     is_neg: false
@@ -46,7 +46,7 @@
     caption_eng: general/present tense
     caption_turk: olumsuz geniş zaman
     grammar_role: :aorist
-    lexical_rule: ['~V', 'M', '@A2', '&neg_pers_sfx']
+    lexical_rule: ['~V', 'M', '@A2', '&_sfx_neg_pers']
     parent_conj: ~
     child_conj: neg_progressive
     is_neg: true
@@ -63,7 +63,7 @@
     caption_eng: indefinite past tense
     caption_turk: belirlisiz geçmis zaman
     grammar_role: :past_tense
-    lexical_rule: ['~V', 'M', '@A4', 'Ş', '&pers_sfx']
+    lexical_rule: ['~V', 'M', '@A4', 'Ş', '&_sfx_pers']
     parent_conj: def_past
     child_conj: ~
     is_neg: false
@@ -78,7 +78,7 @@
     caption_eng: neg indefinite past tense
     caption_turk: olumsuz belirlisiz geçmis zaman
     grammar_role: :past_tense
-    lexical_rule: ['~V', 'M', '@A2', 'M', '@A4', 'Ş', '&pers_sfx']
+    lexical_rule: ['~V', 'M', '@A2', 'M', '@A4', 'Ş', '&_sfx_pers']
     parent_conj: neg_def_past
     child_conj: ~
     is_neg: true
@@ -95,7 +95,7 @@
     caption_eng: indefinite past tense
     caption_turk: belirli geçmis zaman
     grammar_role: :past_tense
-    lexical_rule: ['~V', '@D', '@A4', '&past_sfx']
+    lexical_rule: ['~V', '@D', '@A4', '&_sfx_past']
     parent_conj: future
     child_conj: indef_past
     is_neg: false
@@ -110,7 +110,7 @@
     caption_eng: neg definite past tense
     caption_turk: olumsuz belirli geçmis zaman
     grammar_role: :past_tense
-    lexical_rule: ['~V', 'M', '@A2', 'D', '@A4', '&past_sfx']
+    lexical_rule: ['~V', 'M', '@A2', 'D', '@A4', '&_sfx_past']
     parent_conj: neg_future
     child_conj: neg_indef_past
     is_neg: true
@@ -127,7 +127,7 @@
     caption_eng: progressive tense
     caption_turk: şimdi zaman
     grammar_role: :present_tense
-    lexical_rule: ['~W', '@X', '@Y', '@A4', 'YOR', '&pers_sfx']
+    lexical_rule: ['~W', '@X', '@Y', '@A4', 'YOR', '&_sfx_pers']
     parent_conj: aorist
     child_conj: future
     is_neg: false
@@ -141,7 +141,7 @@
     caption_eng: negative progressive tense
     caption_turk: olumsuz şimdi zaman
     grammar_role: :present_tense
-    lexical_rule: ['~V', 'M', '@A4', 'YOR', '&pers_sfx']
+    lexical_rule: ['~V', 'M', '@A4', 'YOR', '&_sfx_pers']
     parent_conj: neg_aorist
     child_conj: neg_future
     is_neg: true
@@ -158,7 +158,7 @@
     caption_eng: future tense
     caption_turk: gelecek zaman
     grammar_role: :future_tense
-    lexical_rule: ['~W', '@Y', '@A2', 'C', '@A2', 'K', '&futr_sfx']
+    lexical_rule: ['~W', '@Y', '@A2', 'C', '@A2', 'K', '&_sfx_futr']
     parent_conj: progressive
     child_conj: def_past
     is_neg: false
@@ -172,7 +172,7 @@
     caption_eng: neg_future tense
     caption_turk: olumsuz gelecek zaman
     grammar_role: :future_tense
-    lexical_rule: ['~V', 'M', '@A2', 'Y', '@A2', 'C', '@A2', 'K', '&futr_sfx']
+    lexical_rule: ['~V', 'M', '@A2', 'Y', '@A2', 'C', '@A2', 'K', '&_sfx_futr']
     parent_conj: neg_progressive
     child_conj: neg_def_past
     is_neg: true
@@ -182,9 +182,9 @@
 
 # -----------------------------------------
 
-:pers_sfx: 
+:_sfx_pers: 
   !ruby/object:CekimiRules
-    my_key: pers_sfx
+    my_key: _sfx_pers
     caption_eng: general personal suffix
     caption_turk: şahıs eki
     grammar_role: :person
@@ -204,9 +204,9 @@
     exceptions: ~
 
 
-:futr_sfx: 
+:_sfx_futr: 
   !ruby/object:CekimiRules
-    my_key: futr_sfx
+    my_key: _sfx_futr
     caption_eng: future personal suffix
     caption_turk: eki
     grammar_role: :person
@@ -226,9 +226,9 @@
     exceptions: ~
 
 
-:neg_pers_sfx: 
+:_sfx_neg_pers: 
   !ruby/object:CekimiRules
-    my_key: neg_pers_sfx
+    my_key: _sfx_neg_pers
     caption_eng: negative aorist personal suffix
     caption_turk: eki
     grammar_role: :person
@@ -248,9 +248,9 @@
     exceptions: ~
 
 
-:past_sfx: 
+:_sfx_past: 
   !ruby/object:CekimiRules
-    my_key: past_sfx
+    my_key: _sfx_past
     caption_eng: past definite personal suffix
     caption_turk: eki
     grammar_role: :person

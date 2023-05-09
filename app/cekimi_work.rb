@@ -11,6 +11,7 @@ class CekimiWork
 
   #  ------------------------------------------------------------
   #  ------------------------------------------------------------
+  STARTING_RULE  = "aorist"   # starting point for conjugations
  
   #  ------------------------------------------------------------
   #  initialize  -- creates a new object
@@ -19,7 +20,7 @@ class CekimiWork
     
     @my_env = Environ.instance
     @my_rules = CekimiRules.new
-
+    @main_rule = STARTING_RULE
   end
 
   #  ------------------------------------------------------------
@@ -73,7 +74,7 @@ private
 
         # parse command
     case ( cmdlist.first || ""  ).chomp
-      when  "l", "list"      then  do_list      # list rules
+      when  "l", "list"      then  do_list( cmdlist )      # list rules
       when  "s", "status"    then  do_status    # print status
 
       when  "f", "flags"     then  do_flags( cmdlist )     # print flags
@@ -95,21 +96,50 @@ private
   end
 
   #  ------------------------------------------------------------
-  #  do_list  -- display rules
+  #  show_rules  -- display all rules in system
   #  ------------------------------------------------------------
-  def do_list        
-    Environ.put_info ">>>>> list rules "
+  def show_rules()
+    Environ.put_info ">>>>> cekimi rules; starting rule: #{@main_rule}"
+    (list_m, list_s) = CekimiRules.list_rules
+    Environ.put_info list_m
+    Environ.put_info list_s  if Environ.flags.flag_full_rule
+
+
+    if Environ.flags.flag_verb_trace
+       puts :indef_past.to_s + ":  " + CekimiRules.get_rule( :indef_past ).to_s
+    end
   end
+
+  #  ------------------------------------------------------------
+  #  do_list  -- handle list cmd: display and change conjugate start
+  #  args:
+  #    list  -- cli array, with cmd at top
+  #  ------------------------------------------------------------
+  def do_list(list)
+
+    list.shift  # pop first element, the "l" command
+    unless list.empty?
+      rule = list.first
+
+      if CekimiRules.has_rule?( rule )
+      then 
+        @main_rule = rule   # replacing starting rule
+      else  
+        Environ.log_warn "#{rule} invalid rule"
+        Environ.put_info "#{rule} invalid rule"
+      end
+      
+    end
+
+    show_rules    # first display all rules
+
+   end
   
   #  ------------------------------------------------------------
   #  do_status  -- display list of all cekimi rules
   #  ------------------------------------------------------------
   def do_status        
     Environ.put_info ">>>>> status #{ CekimiRules.cekimi_rules_count } rules"
-    puts CekimiRules.cekimi_rules.keys
-    if Environ.flags.flag_verb_trace
-       puts :indef_past.to_s + ":  " + CekimiRules.get_rule( :indef_past ).to_s
-    end
   end
 
   #  ------------------------------------------------------------
@@ -157,7 +187,7 @@ private
     begin
       verb = Verb.new( list.shift )  # pop next entry; assume its a verb
       puts verb.to_s  if  Environ.flags.flag_verb_trace  # trace output if enabled
-      next_key  = "aorist"           # rule key to kick of conjugation
+      next_key  = @main_rule           # rule key to kick of conjugation
 
   #  ------------------------------------------------------------
       # table_out holds the result

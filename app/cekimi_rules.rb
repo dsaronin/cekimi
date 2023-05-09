@@ -81,6 +81,13 @@ class CekimiRules
   end
 
   #  -----------------------------------------------------------------
+  #  has_rule?  -- returns true if rule mnemonic is valid
+  #  -----------------------------------------------------------------
+  def CekimiRules.has_rule?( key )
+    return @@cekimi_rules.has_key? key.to_sym
+  end
+
+  #  -----------------------------------------------------------------
   #  get_rule  -- returns the rule associated with a key
   #  args:
   #    rule_key -- key for lookup (will always be converted to sym)
@@ -114,6 +121,27 @@ class CekimiRules
     Environ.log_debug( "#{rule_key} result: " + table_out.stub )
       
     return [table_out, rule.child_conj]
+  end
+
+  #  -----------------------------------------------------------------
+  #  list_rules -- returns two strings of rule mnemonics
+  #  returns: 
+  #    [list_main, list_sub] -- list_main are the main rules, 
+  #    list_sub are the non-main rules
+  #  -----------------------------------------------------------------
+
+  def CekimiRules.list_rules
+    list_main = ""  # result for all primary rules
+    list_sub  = ""  # result for subsidiary rules
+    @@cekimi_rules.each_key do |key|
+      if key  =~ /^_/ 
+      then
+      list_sub <<= key.to_s + ", "
+      else
+        list_main <<= key.to_s + ", "
+      end  # if.then.else
+    end  # do each
+    return [list_main, list_sub]
   end
 
   #  -----------------------------------------------------------------
