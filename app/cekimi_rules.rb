@@ -11,6 +11,7 @@ class CekimiRules
   attr_accessor :caption_eng, :caption_turk, :grammar_role, :lexical_rule
   attr_accessor :parent_conj, :child_conj, :next_list, :rule_info, :exceptions
   attr_accessor :my_key, :my_table_out, :is_neg, :my_pair
+  attr_accessor :out_block
 
   #  ------------------------------------------------------------
   #  CONSTANTS
@@ -38,12 +39,12 @@ class CekimiRules
   CONS_TRANSFORM  =  /K/i    # unvoiced > voiced consonent transform op
   TD_TRANSFORM    =  /D/i    # suffix changes depending stub consonant type
   KG_TRANSFORM    =  /G/i    # suffix changes when K before vowel
-  RE_CONJUGATE    =  /Z/i    # takes stub as inifinitive, conjugates
 
   # parse_rule REGEX for token switch
   STUB_RULE_REGEX     = /^~U/   # rule requesting stub buffer
   STEM_RULE_REGEX     = /^~V/   # rule requesting verb stem
   TD_STEM_RULE_REGEX  = /^~W/   # rule requesting voiced verb stem
+  RE_CONJUGATE_REGEX  = /^~Z/   # takes stub as inifinitive, conjugates
   INVOKE_RULE_REGEX   = /^&(\w+)/  # recursive rule parse req
   ATOM_TOKEN_REGEX    = /\p{L}+/  # matches any alpha
   RULE_OP_REGEX       = /^@([AYKXDGZ])(\d)?/i # matches rule requesting an operation
@@ -108,25 +109,6 @@ class CekimiRules
   end
 
   #  -----------------------------------------------------------------
-  #  conjugate_by_key  -- starts conjugation of rule or pair
-  #  args:
-  #    verb:  verb obj for verb to be conjugated
-  #    rule_key:  sym of rule key
-  #    conjugate_pairs:  true if conjugate pairs of rules poz/neg
-  #  returns:
-  #    (table_out, next_key)
-  #  -----------------------------------------------------------------
-
-  def CekimiRules.conjugate_by_key(verb, rule_key, conjugate_pairs)
-    rule = CekimiRules.get_rule( rule_key )
-
-    table_out = rule.prep_and_parse( verb, conjugate_pairs )  # kicks off recursive descent parser
-    Environ.log_debug( "#{rule_key} result: " + table_out.stub )
-      
-    return [table_out, rule.child_conj]
-  end
-
-  #  -----------------------------------------------------------------
   #  conjugate  -- full conjugate chain, yield output
   #  args:
   #    verb_str  -- string of verb to be processed
@@ -134,21 +116,41 @@ class CekimiRules
   #    block -- yielded for outputting result
   #  -----------------------------------------------------------------
 
-  def CekimiRules.conjugate(verb_str, start_rule)
+  def CekimiRules.conjugate(verb_str, start_rule, &block)
       verb = Verb.new( verb_str )  
       Environ.put_info verb.to_s  if  Environ.flags.flag_verb_trace  # trace output if enabled
       next_key  = start_rule          
 
-  #  ------------------------------------------------------------
       # table_out holds the result
       until  next_key.nil?  
         (table_out, next_key) = CekimiRules.conjugate_by_key(
-          verb, next_key, Environ.flags.flag_pair_conjugate 
+          verb, next_key, Environ.flags.flag_pair_conjugate, block 
         )
         yield table_out
            # end looping if not conjugate_chain OR there isn't a next_key
         next_key = nil if !Environ.flags.flag_chain_conjugate
       end
+  end
+
+  #  -----------------------------------------------------------------
+  #  conjugate_by_key  -- starts conjugation of rule or pair
+  #  args:
+  #    verb:  verb obj for verb to be conjugated
+  #    rule_key:  sym of rule key
+  #    conjugate_pairs:  true if conjugate pairs of rules poz/neg
+  #    block -- yielded for outputting result
+  #  returns:
+  #    (table_out, next_key)
+  #  -----------------------------------------------------------------
+
+  def CekimiRules.conjugate_by_key(verb, rule_key, conjugate_pairs, block)
+    rule = CekimiRules.get_rule( rule_key )
+    rule.out_block = block   # remember any closure block
+
+    table_out = rule.prep_and_parse( verb, conjugate_pairs )  # kicks off recursive descent parser
+    Environ.log_debug( "#{rule_key} result: " + table_out.stub )
+      
+    return [table_out, rule.child_conj]
   end
 
   #  -----------------------------------------------------------------
@@ -253,6 +255,7 @@ class CekimiRules
           when TD_STEM_RULE_REGEX then  gen @my_verb.verb_stem_td
           when RULE_OP_REGEX      then  prep_inplace_op( $1, $2 || "" )  
           when ATOM_TOKEN_REGEX   then  gen token
+          when RE_CONJUGATE_REGEX then  true  # reconjugate w/ new verb
           when OUTPUT_RULE_REGEX  then  true  # nop
           else
             Environ.log_warn( "Rule token not found: #{token}; ignored." )
