@@ -188,12 +188,6 @@
     caption_eng: general personal suffix
     caption_turk: şahıs eki
     grammar_role: :person
-    lexical_rule: ~
-    parent_conj: ~
-    child_conj: ~
-    is_neg: ~
-    my_pair: ~
-    next_list: ~
     rule_info:
       :ben:   ['@Y', '@A4', 'M']
       :sen:   ['S', '@A4', 'N']
@@ -201,8 +195,6 @@
       :biz:   ['@Y', '@A4', 'Z']
       :siz:   ['S', '@A4', 'N', '@A4', 'Z']
       :onlar: ['L', '@A2', 'R']
-    exceptions: ~
-
 
 :_sfx_futr: 
   !ruby/object:CekimiRules
@@ -210,12 +202,6 @@
     caption_eng: future personal suffix
     caption_turk: eki
     grammar_role: :person
-    lexical_rule: ~
-    parent_conj: ~
-    child_conj: ~
-    is_neg: ~
-    my_pair: ~
-    next_list: ~
     rule_info:
       :ben:   ['@G', '@A4', 'M']
       :sen:   ['S', '@A4', 'N']
@@ -223,8 +209,6 @@
       :biz:   ['@G', '@A4', 'Z']
       :siz:   ['S', '@A4', 'N', '@A4', 'Z']
       :onlar: ['L', '@A2', 'R']
-    exceptions: ~
-
 
 :_sfx_neg_pers: 
   !ruby/object:CekimiRules
@@ -232,12 +216,6 @@
     caption_eng: negative aorist personal suffix
     caption_turk: eki
     grammar_role: :person
-    lexical_rule: ~
-    parent_conj: ~
-    child_conj: ~
-    is_neg: ~
-    my_pair: ~
-    next_list: ~
     rule_info:
       :ben:   ['M']
       :sen:   ['ZS', '@A4', 'N']
@@ -245,8 +223,6 @@
       :biz:   ['Y', '@A4', 'Z']
       :siz:   ['ZS', '@A4', 'N', '@A4', 'Z']
       :onlar: ['ZL', '@A2', 'R']
-    exceptions: ~
-
 
 :_sfx_past: 
   !ruby/object:CekimiRules
@@ -254,12 +230,6 @@
     caption_eng: past definite personal suffix
     caption_turk: eki
     grammar_role: :person
-    lexical_rule: ~
-    parent_conj: ~
-    child_conj: ~
-    is_neg: ~
-    my_pair: ~
-    next_list: ~
     rule_info:
       :ben:   ['M']
       :sen:   ['N']
@@ -267,7 +237,64 @@
       :biz:   ['K']
       :siz:   ['N', '@A4', 'Z']
       :onlar: ['L', '@A2', 'R']
-    exceptions: ~
+
+:_sfx_dd_past: 
+  !ruby/object:CekimiRules
+    my_key: _sfx_dd_past
+    caption_eng: doubtful past personal suffix
+    caption_turk: eki
+    grammar_role: :person
+    rule_info:
+      :ben:   ['@A4', 'M']
+      :sen:   ['S', '@A4', 'N']
+      :o:     []
+      :biz:   ['@A4', 'Z']
+      :siz:   ['S', '@A4', 'N', '@A4', 'Z']
+      :onlar: ['L', '@A2', 'R']
+
+
+:_sfx_maywish:
+  !ruby/object:CekimiRules
+    my_key: _sfx_maywish
+    caption_eng: personal suffixes for may wish
+    caption_turk: ne zaman
+    grammar_role: :personal_suffix
+    rule_info:
+       :ben:   ['Y', '@A4', 'M']
+       :sen:   ['S', '@A4', 'N']
+       :o:     []
+       :biz:   ['L', '@A4', 'M']
+       :siz:   ['S', '@A4', 'N', '@A4', 'Z']
+       :onlar: ['L', '@A2', 'R']
+
+:_sfx_if:
+  !ruby/object:CekimiRules
+    my_key: _sfx_if
+    caption_eng: must shall tense
+    caption_turk: ne zaman
+    grammar_role: :personal_suffix
+    rule_info: 
+       :ben:   ['M']
+       :sen:   ['N']
+       :o:     []
+       :biz:   ['K']
+       :siz:   ['N', '@A4', 'Z']
+       :onlar: ['L', '@A2', 'R']
+    
+:_sfx_shall:
+  !ruby/object:CekimiRules
+    my_key: _sfx_shall
+    caption_eng: must shall tense
+    caption_turk: ne zaman
+    grammar_role: :personal_suffix
+    my_pair: :neg_must_shall
+    rule_info: 
+       :ben: ['Y', '@A4', 'M']
+       :sen: []
+       :o:   []
+       :biz: ['L', '@A4', 'M']
+       :siz:  []
+       :onlar: []
 
 # -----------------------------------------
 
@@ -277,12 +304,6 @@
     caption_eng: 4-way vowel harmony
     caption_turk: dörtlü ünlü uyumu
     grammar_role: :harmony
-    lexical_rule: ~
-    parent_conj: ~
-    child_conj: ~
-    is_neg: ~
-    my_pair: ~
-    next_list: ~
     rule_info: 
       :a: ı 
       :ı: ı 
@@ -292,7 +313,6 @@
       :u: u 
       :ö: ü
       :ü: ü
-    exceptions: ~
 
 :_@A2: 
   !ruby/object:CekimiRules
@@ -300,12 +320,6 @@
     caption_eng: 2-way vowel harmony
     caption_turk: iki ünlü uyumu
     grammar_role: :harmony
-    lexical_rule: ~
-    parent_conj: ~
-    child_conj: ~
-    is_neg: ~
-    my_pair: ~
-    next_list: ~
     rule_info: 
       :a: a 
       :ı: a 
@@ -315,7 +329,6 @@
       :i: e
       :ö: e
       :ü: e
-    exceptions: ~
 
 # -----------------------------------------
 
@@ -325,18 +338,11 @@
     caption_eng: consonant-stem transformation
     caption_turk: ünsüz yumuşaması
     grammar_role: :harmony
-    lexical_rule: ~
-    parent_conj: ~
-    child_conj: ~
-    is_neg: ~
-    my_pair: ~
-    next_list: ~
     rule_info:
       :k: ğ
       :p: b
       :t: d
       :ç: c
-    exceptions: ~
 
 # -----------------------------------------
 # following are nop rules; place holders
@@ -350,14 +356,6 @@
     caption_eng: vowel buffer transformation
     caption_turk: sesli harf arabelleği değişikliği 
     grammar_role: :harmony
-    lexical_rule: ~
-    parent_conj: ~
-    child_conj: ~
-    is_neg: ~
-    my_pair: ~
-    next_list: ~
-    rule_info: ~
-    exceptions: ~
 
 # -----------------------------------------
 
@@ -367,14 +365,6 @@
     caption_eng: drop verb stem trailing vowel
     caption_turk: tupu
     grammar_role: :harmony
-    lexical_rule: ~
-    parent_conj: ~
-    child_conj: ~
-    is_neg: ~
-    my_pair: ~
-    next_list: ~
-    rule_info: ~
-    exceptions: ~
 
 # -----------------------------------------
 
@@ -384,14 +374,6 @@
     caption_eng: TD leading suffix consonant transformation
     caption_turk: tupu
     grammar_role: :harmony
-    lexical_rule: ~
-    parent_conj: ~
-    child_conj: ~
-    is_neg: ~
-    my_pair: ~
-    next_list: ~
-    rule_info: ~
-    exceptions: ~
 
 # -----------------------------------------
 
@@ -401,14 +383,169 @@
     caption_eng: KĞ trailing stub consonant transformation
     caption_turk: tupu
     grammar_role: :harmony
-    lexical_rule: ~
-    parent_conj: ~
-    child_conj: ~
-    is_neg: ~
-    my_pair: ~
-    next_list: ~
-    rule_info: ~
-    exceptions: ~
 
 # -----------------------------------------
+
+:must_shall:   
+  !ruby/object:CekimiRules
+    my_key: must_shall
+    caption_eng: must shall tense
+    caption_turk: must shall
+    grammar_role: :must_shall
+    lexical_rule: ['~V',  'M',  '@A2',  'L',  '@A4',  '&_sfx_pers'] 
+    parent_conj: ~
+    child_conj: may_wish
+    is_neg: false
+    my_pair: :neg_must_shall
+
+:neg_must_shall:
+  !ruby/object:CekimiRules
+    my_key: neg_must_shall
+    caption_eng: negative must shall tense
+    caption_turk: ne zaman
+    grammar_role: :must_shall
+    lexical_rule: ['~V',  'M',  '@A2',  'M',  '@A2',  'L',  '@A4',  '&_sfx_pers']
+    parent_conj: ~
+    child_conj: neg_may_wish
+    is_neg: true
+    my_pair: :must_shall
+
+:may_wish:
+  !ruby/object:CekimiRules
+    my_key: may_wish
+    caption_eng: may wish tense
+    caption_turk: may wish
+    grammar_role: :may_wish
+    lexical_rule: ['~W',  '@Y',  '@A2',  '&_sfx_maywish'] 
+    parent_conj: must_shall
+    child_conj: conditional
+    is_neg: false
+    my_pair: :neg_may_wish
+  
+:neg_may_wish:
+  !ruby/object:CekimiRules
+    my_key: neg_may_wish
+    caption_eng: negative may wish
+    caption_turk: neg may wish
+    grammar_role: :may_wish
+    lexical_rule: ['~V',  'M',  '@A2',  'Y',  '@A2',  '&_sfx_maywish'] 
+    parent_conj: neg_must_shall
+    child_conj: neg_conditional
+    is_neg: true
+    my_pair: :may_wish
+  
+
+:conditional:
+  !ruby/object:CekimiRules
+    my_key: conditional
+    caption_eng: conditional tense
+    caption_turk: conditional
+    grammar_role: :conditional
+    lexical_rule: ['~V',  '@Y',  'S',  '@A2',  '&_sfx_if'] 
+    parent_conj: may_wish
+    child_conj: past_perf_narrative
+    is_neg: false
+    my_pair: :neg_conditional
+  
+:neg_conditional:
+  !ruby/object:CekimiRules
+    my_key: neg_conditional
+    caption_eng: conditional tense
+    caption_turk: neg conditional
+    grammar_role: :conditional
+    lexical_rule: ['~V',  'MES',  '@A2',  '&_sfx_if'] 
+    parent_conj: neg_may_wish
+    child_conj: neg_lets_shall
+    is_neg: true
+    my_pair: :conditional
+
+:past_perf_narrative:
+  !ruby/object:CekimiRules
+    my_key: past_perf_narrative
+    caption_eng: past perfect narrative tense
+    caption_turk: past perfect narrative
+    grammar_role: :past_perf_narrative
+    lexical_rule: ['~V',  'M',  '@A4',  'Ş',  'T',  '@A4',  '&_sfx_past'] 
+    parent_conj: conditional
+    child_conj: doubt_farpast
+    is_neg: false
+    my_pair: :neg_past_perf_narrative
+  
+:neg_past_perf_narrative:
+  !ruby/object:CekimiRules
+    my_key: neg_past_perf_narrative
+    caption_eng: past perfect narrative tense
+    caption_turk: neg past perfect narrative
+    grammar_role: :past_perf_narrative
+    lexical_rule: ['~V',  'M',  '@A2', 'M',  '@A4',  'Ş',  'T',  '@A4',  '&_sfx_past'] 
+    parent_conj: neg_conditional
+    child_conj: neg_doubt_farpast
+    is_neg: true
+    my_pair: :past_perf_narrative
+  
+
+:doubt_farpast:
+  !ruby/object:CekimiRules
+    my_key: doubt_farpast
+    caption_eng: doubt_farpast tense
+    caption_turk: doubt far past
+    grammar_role: :doubt_farpast
+    lexical_rule: ['~V',  'M',  '@A4',  'ŞM',  '@A4',  'Ş',  '&_sfx_dd_past'] 
+    parent_conj: past_perf_narrative
+    child_conj: 
+    is_neg: false
+    my_pair: :neg_doubt_farpast
+  
+
+:neg_doubt_farpast:
+  !ruby/object:CekimiRules
+    my_key: neg_doubt_farpast
+    caption_eng: must shall tense
+    caption_turk: neg doubt far past
+    grammar_role: :doubt_farpast
+    lexical_rule: ['~V',  'M',  '@A2',  'M',  '@A4',  'ŞM',  '@A4',  'Ş',  '&_sfx_dd_past'] 
+    parent_conj: neg_perf_narrative
+    child_conj: 
+    is_neg: true
+    my_pair: :doubt_farpast
+  
+# -----------------------------------------
+ 
+:ability:
+  !ruby/object:CekimiRules
+    my_key: ability
+    caption_eng: ability tense
+    caption_turk: ability
+    grammar_role: :ability
+    lexical_rule: ['~W',  '@Y',  '@A2',  'BIL'] 
+    parent_conj: 
+    child_conj: 
+    is_neg: false
+    my_pair: 
+  
+:neg_ability:
+  !ruby/object:CekimiRules
+    my_key: neg_ability
+    caption_eng: ability tense
+    caption_turk: neg ability
+    grammar_role: :ability
+    lexical_rule: ['~W',  '@Y',  '@A2',  'M',  '@A2'] 
+    parent_conj: 
+    child_conj: 
+    is_neg: true
+    my_pair: 
+  
+
+:lets_shall:
+  !ruby/object:CekimiRules
+    my_key: lets_shall
+    caption_eng: lets shall tense
+    caption_turk: lets shall
+    grammar_role: :lets_shall
+    lexical_rule: ['~W',  '@A2', '&_sfx_shall'] 
+    parent_conj: 
+    child_conj: 
+    is_neg: false
+    my_pair: ~
+
 
