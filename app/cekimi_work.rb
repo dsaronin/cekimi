@@ -185,18 +185,10 @@ private
   #  ------------------------------------------------------------
   def do_conjugate( list )
     begin
-      verb = Verb.new( list.shift )  # pop next entry; assume its a verb
-      puts verb.to_s  if  Environ.flags.flag_verb_trace  # trace output if enabled
-      next_key  = @main_rule           # rule key to kick of conjugation
-
-  #  ------------------------------------------------------------
-      # table_out holds the result
-      until  next_key.nil?  
-        (table_out, next_key) = CekimiRules.conjugate_by_key(verb, next_key, Environ.flags.flag_pair_conjugate )
-        table_out.show_table Environ.flags.flag_pair_conjugate
-           # end looping if not conjugate_chain OR there isn't a next_key
-        next_key = nil if !Environ.flags.flag_chain_conjugate
-      end
+      # pop next entry; assume its a verb
+      CekimiRules.conjugate( list.shift, @main_rule ) do | table |
+        table.show_table( Environ.flags.flag_pair_conjugate )
+      end   # do block
   #  ------------------------------------------------------------
 
     rescue ArgumentError

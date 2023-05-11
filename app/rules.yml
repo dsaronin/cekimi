@@ -511,17 +511,27 @@
   
 # -----------------------------------------
  
+:infinitive:
+  !ruby/object:CekimiRules
+    my_key: infinitive
+    caption_eng: infinitive tense
+    caption_turk: infinitive
+    grammar_role: :infinitive
+    lexical_rule: ['~U',  'M',  '@A2',  'K', '@Z'] 
+  
+# -----------------------------------------
+ 
 :ability:
   !ruby/object:CekimiRules
     my_key: ability
     caption_eng: ability tense
     caption_turk: ability
     grammar_role: :ability
-    lexical_rule: ['~W',  '@Y',  '@A2',  'BIL'] 
+    lexical_rule: ['~W',  '@Y',  '@A2',  'BIL', '&infinitive' ] 
     parent_conj: 
     child_conj: 
     is_neg: false
-    my_pair: 
+    my_pair: neg_ability
   
 :neg_ability:
   !ruby/object:CekimiRules
@@ -529,11 +539,11 @@
     caption_eng: ability tense
     caption_turk: neg ability
     grammar_role: :ability
-    lexical_rule: ['~W',  '@Y',  '@A2',  'M',  '@A2'] 
+    lexical_rule: ['~W',  '@Y',  '@A2',  'M',  '@A2', '&infinitive' ] 
     parent_conj: 
     child_conj: 
     is_neg: true
-    my_pair: 
+    my_pair: ability
   
 
 :lets_shall:

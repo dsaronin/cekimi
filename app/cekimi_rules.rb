@@ -38,14 +38,17 @@ class CekimiRules
   CONS_TRANSFORM  =  /K/i    # unvoiced > voiced consonent transform op
   TD_TRANSFORM    =  /D/i    # suffix changes depending stub consonant type
   KG_TRANSFORM    =  /G/i    # suffix changes when K before vowel
+  RE_CONJUGATE    =  /Z/i    # takes stub as inifinitive, conjugates
 
   # parse_rule REGEX for token switch
-  STEM_RULE_REGEX   = /^~V/   # matches rule requesting verb stem
-  TD_STEM_RULE_REGEX   = /^~W/   # matches rule requesting voiced verb stem
-  INVOKE_RULE_REGEX = /^&(\w+)/  # matches recursive rule parse req
-  OUTPUT_RULE_REGEX = /^Ω/  # table_out the result  (DEPRECATED)
-  ATOM_TOKEN_REGEX  = /\p{L}+/  # matches any alpha
-  RULE_OP_REGEX     = /^@([AYKXDG])(\d)?/i # matches rule requesting an operation
+  STUB_RULE_REGEX     = /^~U/   # rule requesting stub buffer
+  STEM_RULE_REGEX     = /^~V/   # rule requesting verb stem
+  TD_STEM_RULE_REGEX  = /^~W/   # rule requesting voiced verb stem
+  INVOKE_RULE_REGEX   = /^&(\w+)/  # recursive rule parse req
+  ATOM_TOKEN_REGEX    = /\p{L}+/  # matches any alpha
+  RULE_OP_REGEX       = /^@([AYKXDGZ])(\d)?/i # matches rule requesting an operation
+
+  OUTPUT_RULE_REGEX   = /^Ω/  # table_out the result  (DEPRECATED)
       # side effect of matching: 
       #   $1 will be the op request
       #   $2 will be the sub-type of the op request
@@ -121,6 +124,31 @@ class CekimiRules
     Environ.log_debug( "#{rule_key} result: " + table_out.stub )
       
     return [table_out, rule.child_conj]
+  end
+
+  #  -----------------------------------------------------------------
+  #  conjugate  -- full conjugate chain, yield output
+  #  args:
+  #    verb_str  -- string of verb to be processed
+  #    start_rule  -- rule key to kick off conjugation chain
+  #    block -- yielded for outputting result
+  #  -----------------------------------------------------------------
+
+  def CekimiRules.conjugate(verb_str, start_rule)
+      verb = Verb.new( verb_str )  
+      Environ.put_info verb.to_s  if  Environ.flags.flag_verb_trace  # trace output if enabled
+      next_key  = start_rule          
+
+  #  ------------------------------------------------------------
+      # table_out holds the result
+      until  next_key.nil?  
+        (table_out, next_key) = CekimiRules.conjugate_by_key(
+          verb, next_key, Environ.flags.flag_pair_conjugate 
+        )
+        yield table_out
+           # end looping if not conjugate_chain OR there isn't a next_key
+        next_key = nil if !Environ.flags.flag_chain_conjugate
+      end
   end
 
   #  -----------------------------------------------------------------
@@ -208,7 +236,6 @@ class CekimiRules
     puts "gen: #{@my_table_out.stub}"  if Environ.flags.flag_gen_trace
   end
 
-  
   #  ----------------------------------------------------------------
   #  parse_rule -- parses a rule & generates conjugation
   #  recursive-descent parser
@@ -222,6 +249,7 @@ class CekimiRules
         case token
           when INVOKE_RULE_REGEX  then  table_generation( $1 )
           when STEM_RULE_REGEX    then  gen @my_verb.verb_stem
+          when STUB_RULE_REGEX    then  true  # nop; stub is valid
           when TD_STEM_RULE_REGEX then  gen @my_verb.verb_stem_td
           when RULE_OP_REGEX      then  prep_inplace_op( $1, $2 || "" )  
           when ATOM_TOKEN_REGEX   then  gen token
@@ -264,14 +292,13 @@ class CekimiRules
   #    op_subtype  -- [optional]: digit to indicate subtype
   #  ----------------------------------------------------------------
   def inplace_operation(op_type, op_subtype)
-    rule =  CekimiRules.get_rule( "_@#{op_type}#{op_subtype}".to_sym )
     case op_type
-      when VOWEL_HARMONY   then  op_vowel_harmony( rule )
-      when BUFFER_VOWEL    then  op_buffer_vowel( rule )
-      when CONS_TRANSFORM  then  op_cons_transform( rule )
-      when TD_TRANSFORM    then  op_td_transform( rule )
-      when KG_TRANSFORM    then  op_kg_transform( rule )
-      when DROP_VOWEL      then  op_drop_stem_vowel( rule )
+      when VOWEL_HARMONY   then  op_vowel_harmony( CekimiRules.get_rule( "_@#{op_type}#{op_subtype}".to_sym ) )
+      when BUFFER_VOWEL    then  op_buffer_vowel
+      when CONS_TRANSFORM  then  op_cons_transform
+      when TD_TRANSFORM    then  op_td_transform
+      when KG_TRANSFORM    then  op_kg_transform
+      when DROP_VOWEL      then  op_drop_stem_vowel
       else
         Environ.log_warn( "in-place operation not found: #{token}; ignored." )
     end   #  case
@@ -295,28 +322,24 @@ class CekimiRules
 
   #  ----------------------------------------------------------------
   #  op_buffer_vowel  -- adds buffer for vowel if last in stub
-  #  arg: rule  [might be nil in future]
   #  ----------------------------------------------------------------
-  def op_buffer_vowel( rule )
+  def op_buffer_vowel
     if @my_table_out.stub[-1] =~ Verb::TURK_VOWEL_REGEX
       gen "Y"   # push buffer to queue
     end
-
   end
 
   #  ----------------------------------------------------------------
   #  op_cons_transform
-  #  arg: rule  [might be nil in future]
   #  ----------------------------------------------------------------
-  def op_cons_transform( rule )
+  def op_cons_transform
 
   end
 
   #  ----------------------------------------------------------------
   #  op_td_transform  -- does the TD suffix transformation
-  #  arg: rule  [might be nil in future]
   #  ----------------------------------------------------------------
-  def op_td_transform( rule )
+  def op_td_transform
     if @my_table_out.stub[-1] =~ D_CONS_REGEX then
       gen D_CONS_SUFFIX
     else
@@ -328,9 +351,8 @@ class CekimiRules
 
   #  ----------------------------------------------------------------
   #  op_kg_transform  -- does the KĞ stem transformation
-  #  arg: rule  [might be nil in future]
   #  ----------------------------------------------------------------
-  def op_kg_transform( rule )
+  def op_kg_transform
     if @my_table_out.stub[-1] =~ K_CONS_REGEX  then
       @my_table_out.stub.chop!   # remove the trailing K
       gen G_CONS_SUFFIX 
@@ -340,9 +362,8 @@ class CekimiRules
 
   #  ----------------------------------------------------------------
   #  op_drop_stem_vowel  -- drops a verb stem vowel
-  #  arg: rule  [might be nil in future]
   #  ----------------------------------------------------------------
-  def op_drop_stem_vowel( rule )
+  def op_drop_stem_vowel
     if @my_verb.stem_end_vowel then
       @my_table_out.last_vowel = @my_verb.last_pure_vowel
       @my_table_out.stub.chop!   # remove the trailing vowl
