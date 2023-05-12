@@ -511,13 +511,13 @@
   
 # -----------------------------------------
  
-:infinitive:
+:_infinitive:
   !ruby/object:CekimiRules
     my_key: infinitive
     caption_eng: infinitive tense
     caption_turk: infinitive
     grammar_role: :infinitive
-    lexical_rule: ['~U',  'M',  '@A2',  'K', '@Z'] 
+    lexical_rule: ['~U',  'M',  '@A2',  'K' ] 
   
 # -----------------------------------------
  
@@ -527,7 +527,7 @@
     caption_eng: ability tense
     caption_turk: ability
     grammar_role: :ability
-    lexical_rule: ['~W',  '@Y',  '@A2',  'BIL', '&infinitive' ] 
+    lexical_rule: ['~W',  '@Y',  '@A2',  'BIL', '~Z' ] 
     parent_conj: 
     child_conj: 
     is_neg: false

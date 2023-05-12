@@ -32,6 +32,20 @@ class CekimiRules
   HARMONY_4WAY   = "4"  # four-way vowel harmony
   HARMONY_AORIST = "6"  # special case for aorist vowel harmony choices
 
+  # preprocessing verb stem for causative, passive etc
+  # these all construct a new infinitive
+  PREPROC_REGEX  = /#(\w+)$/  # matches gitmek#a
+  PP_ABILITY     = /a/i    # ability formation
+  PP_CAUSATIVE   = /c/i    # causitive formation
+  PP_PASSIVE     = /p/i    # passive formation
+  PP_CAUSPASS    = /cp/i   # causitive-passive
+
+  RULE_INFINITIVE =  '_infinitive'   # must match rule mnemonic
+  RULE_ABILITY    =  'ability'   # must match rule mnemonic
+  RULE_CAUSATIVE  =  'causative'   # must match rule mnemonic
+  RULE_PASSIVE    =  'passive'   # must match rule mnemonic
+  RULE_CAUSPASS   =  'causpass'   # must match rule mnemonic
+
   # inplace_operation REGEX for op switch
   VOWEL_HARMONY   =  /A/i    # 4way/2way vowel harmony op
   BUFFER_VOWEL    =  /Y/i    # add Y buffer for double vowel op
@@ -44,12 +58,10 @@ class CekimiRules
   STUB_RULE_REGEX     = /^~U/   # rule requesting stub buffer
   STEM_RULE_REGEX     = /^~V/   # rule requesting verb stem
   TD_STEM_RULE_REGEX  = /^~W/   # rule requesting voiced verb stem
-  RE_CONJUGATE_REGEX  = /^~Z/   # takes stub as inifinitive, conjugates
+  INFINITIVE_REGEX    = /^~Z/   # forms stub into inifinitive
   INVOKE_RULE_REGEX   = /^&(\w+)/  # recursive rule parse req
   ATOM_TOKEN_REGEX    = /\p{L}+/  # matches any alpha
   RULE_OP_REGEX       = /^@([AYKXDGZ])(\d)?/i # matches rule requesting an operation
-
-  OUTPUT_RULE_REGEX   = /^Ω/  # table_out the result  (DEPRECATED)
       # side effect of matching: 
       #   $1 will be the op request
       #   $2 will be the sub-type of the op request
@@ -109,6 +121,63 @@ class CekimiRules
   end
 
   #  -----------------------------------------------------------------
+  #  -----------------------------------------------------------------
+  #  -----------------------------------------------------------------
+  #  -----------------------------------------------------------------
+  #  -----------------------------------------------------------------
+
+  private
+
+  #  -----------------------------------------------------------------
+  #  get_verb_obj  -- returns a verb obj for a given infinitive
+  #     (here to DRY up the code)
+  #  args:
+  #    verb_str  -- string for verb to be processed
+  #  -----------------------------------------------------------------
+  def CekimiRules.get_verb_obj( verb_str )
+    verb = Verb.new( verb_str )  
+    Environ.put_info verb.to_s  if  Environ.flags.flag_verb_trace  # trace output if enabled
+    return verb
+  end
+
+  #  -----------------------------------------------------------------
+  #  preprocess_verb  -- handles requests to remold verb infinitive
+  #  such as for ability, causitive, passive, causitive-passive
+  #  args:
+  #    verb_str  -- cli verb string
+  #  -----------------------------------------------------------------
+  def CekimiRules.preprocess_verb( verb_str )
+    if verb_str =~ PREPROC_REGEX
+    then
+      pp_type = $1
+      verb_str.sub!(PREPROC_REGEX, '')   # remove from verb
+      rule_key = case pp_type
+          when PP_ABILITY   then RULE_ABILITY
+          when PP_CAUSATIVE then RULE_CAUSATIVE
+          when PP_PASSIVE   then RULE_PASSIVE
+          when PP_CAUSPASS  then RULE_CAUSPASS
+      end   # case
+
+      verb = CekimiRules.get_verb_obj( verb_str )
+      CekimiRules.conjugate_by_key(verb, rule_key, false, nil)
+      verb_str = @my_table_out.stub   # this becomes new infinitive
+      puts ">>>>> new infinitive formed: #{verb_str} <<<<<<"
+
+    end  # if preproc verb requested
+
+    return CekimiRules.get_verb_obj( verb_str )
+  end
+
+  public
+
+  #  -----------------------------------------------------------------
+  #  -----------------------------------------------------------------
+  #  -----------------------------------------------------------------
+  #  -----------------------------------------------------------------
+  #  -----------------------------------------------------------------
+
+  #  -----------------------------------------------------------------
+  #  -----------------------------------------------------------------
   #  conjugate  -- full conjugate chain, yield output
   #  args:
   #    verb_str  -- string of verb to be processed
@@ -117,19 +186,19 @@ class CekimiRules
   #  -----------------------------------------------------------------
 
   def CekimiRules.conjugate(verb_str, start_rule, &block)
-      verb = Verb.new( verb_str )  
-      Environ.put_info verb.to_s  if  Environ.flags.flag_verb_trace  # trace output if enabled
-      next_key  = start_rule          
+    verb = CekimiRules.preprocess_verb( verb_str )  
+    Environ.put_info verb.to_s  if  Environ.flags.flag_verb_trace  # trace output if enabled
+    next_key  = start_rule          
 
-      # table_out holds the result
-      until  next_key.nil?  
-        (table_out, next_key) = CekimiRules.conjugate_by_key(
-          verb, next_key, Environ.flags.flag_pair_conjugate, block 
-        )
-        yield table_out
-           # end looping if not conjugate_chain OR there isn't a next_key
-        next_key = nil if !Environ.flags.flag_chain_conjugate
-      end
+    # table_out holds the result
+    until  next_key.nil?  
+      (table_out, next_key) = CekimiRules.conjugate_by_key(
+        verb, next_key, Environ.flags.flag_pair_conjugate, block 
+      )
+      yield table_out
+         # end looping if not conjugate_chain OR there isn't a next_key
+      next_key = nil if !Environ.flags.flag_chain_conjugate
+    end
   end
 
   #  -----------------------------------------------------------------
@@ -255,7 +324,7 @@ class CekimiRules
           when TD_STEM_RULE_REGEX then  gen @my_verb.verb_stem_td
           when RULE_OP_REGEX      then  prep_inplace_op( $1, $2 || "" )  
           when ATOM_TOKEN_REGEX   then  gen token
-          when RE_CONJUGATE_REGEX then  true  # reconjugate w/ new verb
+          when INFINITIVE_REGEX   then  form_infinitive
           when OUTPUT_RULE_REGEX  then  true  # nop
           else
             Environ.log_warn( "Rule token not found: #{token}; ignored." )
@@ -371,6 +440,15 @@ class CekimiRules
       @my_table_out.last_vowel = @my_verb.last_pure_vowel
       @my_table_out.stub.chop!   # remove the trailing vowl
     end
+  end
+
+  #  ----------------------------------------------------------------
+  #  form_infinitive  -- turns stub into infinitive
+  #  ----------------------------------------------------------------
+  def form_infinitive()
+    rule =  CekimiRules.get_rule( RULE_INFINITIVE.to_sym )
+    rule.my_table_out = @my_table_out
+    rule.parse_rule   # parse the infinitive rule
   end
 
   #  ----------------------------------------------------------------
