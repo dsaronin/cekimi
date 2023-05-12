@@ -159,8 +159,8 @@ class CekimiRules
       end   # case
 
       verb = CekimiRules.get_verb_obj( verb_str )
-      CekimiRules.conjugate_by_key(verb, rule_key, false, nil)
-      verb_str = @my_table_out.stub   # this becomes new infinitive
+      (table_out, next_key) = CekimiRules.conjugate_by_key(verb, rule_key, false, nil)
+      verb_str = table_out.stub   # this becomes new infinitive
       puts ">>>>> new infinitive formed: #{verb_str} <<<<<<"
 
     end  # if preproc verb requested
@@ -318,13 +318,13 @@ class CekimiRules
     unless @lexical_rule.nil? then
       @lexical_rule.each  do  |token|
         case token
+          when INFINITIVE_REGEX   then  form_infinitive
           when INVOKE_RULE_REGEX  then  table_generation( $1 )
           when STEM_RULE_REGEX    then  gen @my_verb.verb_stem
           when STUB_RULE_REGEX    then  true  # nop; stub is valid
           when TD_STEM_RULE_REGEX then  gen @my_verb.verb_stem_td
           when RULE_OP_REGEX      then  prep_inplace_op( $1, $2 || "" )  
           when ATOM_TOKEN_REGEX   then  gen token
-          when INFINITIVE_REGEX   then  form_infinitive
           when OUTPUT_RULE_REGEX  then  true  # nop
           else
             Environ.log_warn( "Rule token not found: #{token}; ignored." )
