@@ -9,9 +9,31 @@ class Verb
   attr_accessor  :verb_infinitive, :verb_stem, :last_vowel, :final_cons
   attr_accessor  :a2_sfx, :a4_sfx, :k4_chg, :stem_syllables
   attr_accessor  :is_t_except, :is_e_except, :stem_end_vowel,:last_pure_vowel
-  attr_accessor  :verb_stem_td
+  attr_accessor  :verb_stem_td, :verb_stem_neg
 
-# constants
+  #  -------------------------------------------------------------------
+  #  verb object data structure
+  #  -------------------------------------------------------------------
+  #  verb_inifinitive: infinitive form of verb
+  #  verb_stem: normal verb stem formation
+  #  verb_stem_td:  special case where verb stem formed by t->d transform
+  #  verb_stem_neg: special case for neg stem when ABILITY
+  #  last_vowel: used for initial vowel harmony
+  #  final_cons: used for consonant harmony
+  #  a2_sfx: what the a2 harmony will be (for stem?)
+  #  a4_sfx: what the a4 harmony will be (for stem?):
+  #  k4_chg: (not used)
+  #  stem_syllables: count of syllables in the stem
+  #  is_t_except: is the verb a T/D exception?
+  #  is_e_except: is the verb a trailing E exception?
+  #  stem_end_vowel: end vowel, if present
+  #  last_pure_vowel: previous vowel in last vowel is stem ending vowel
+  #  -------------------------------------------------------------------
+  #  -------------------------------------------------------------------
+  #  -------------------------------------------------------------------
+  #  -------------------------------------------------------------------
+  #  constants
+  #  -------------------------------------------------------------------
   TURK_VOWELS      = "aeiouıöü"
   TURK_VOWEL_REGEX = /[aeiouıöü]/  # all turkish vowels
   TURK_CONSONENT_REGEX = /[^aeiouıöü]/  # all turkish consonents
@@ -25,10 +47,13 @@ class Verb
 
   #  -------------------------------------------------------------------
   #  instantiate by Verb.new( fiil )
+  #  args: 
+  #    verb_stem_neg IFF an ability-altered verb
+  #    default is nil
   #  returns new obj or raises exception if invalid turkish verb
   #
   #  -------------------------------------------------------------------
-  def initialize( fiil )
+  def initialize( fiil, verb_stem_neg = nil )
 
        # preliminary massage to lowercase and remove lead/trailing whitespace
     @verb_infinitive = (fiil || "").strip.downcase
@@ -38,6 +63,7 @@ class Verb
       grammar_exceptions_check
       last_vowel_setup 
       last_consonent_setup 
+      @verb_stem_neg = verb_stem_neg
     else
       raise ArgumentError, "#{fiil}: Türkçe bir fiil değildir."
     end

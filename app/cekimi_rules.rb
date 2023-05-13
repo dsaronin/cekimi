@@ -11,7 +11,6 @@ class CekimiRules
   attr_accessor :caption_eng, :caption_turk, :grammar_role, :lexical_rule
   attr_accessor :parent_conj, :child_conj, :next_list, :rule_info, :exceptions
   attr_accessor :my_key, :my_table_out, :is_neg, :my_pair
-  attr_accessor :out_block
 
   #  ------------------------------------------------------------
   #  CONSTANTS
@@ -133,9 +132,10 @@ class CekimiRules
   #     (here to DRY up the code)
   #  args:
   #    verb_str  -- string for verb to be processed
+  #    verb_stem_neg  -- special stem for ABILITY negative cases
   #  -----------------------------------------------------------------
-  def CekimiRules.get_verb_obj( verb_str )
-    verb = Verb.new( verb_str )  
+  def CekimiRules.get_verb_obj( verb_str, verb_stem_neg=nil )
+    verb = Verb.new( verb_str, verb_stem_neg )  
     Environ.put_info verb.to_s  if  Environ.flags.flag_verb_trace  # trace output if enabled
     return verb
   end
@@ -147,6 +147,8 @@ class CekimiRules
   #    verb_str  -- cli verb string
   #  -----------------------------------------------------------------
   def CekimiRules.preprocess_verb( verb_str )
+    verb_stem_neg = nil   # assume normal case
+
     if verb_str =~ PREPROC_REGEX
     then
       pp_type = $1
@@ -158,14 +160,17 @@ class CekimiRules
           when PP_CAUSPASS  then RULE_CAUSPASS
       end   # case
 
+
       verb = CekimiRules.get_verb_obj( verb_str )
-      (table_out, next_key) = CekimiRules.conjugate_by_key(verb, rule_key, false, nil)
+      (table_out, next_key) = CekimiRules.conjugate_by_key(verb, rule_key, false)
       verb_str = table_out.stub   # this becomes new infinitive
       puts ">>>>> new infinitive formed: #{verb_str} <<<<<<"
 
+      verb_stem_neg = ( pp_type =~ PP_ABILITY  ? verb_str.sub(/bilmek$/i, "") : nil )
+
     end  # if preproc verb requested
 
-    return CekimiRules.get_verb_obj( verb_str )
+    return CekimiRules.get_verb_obj( verb_str, verb_stem_neg )
   end
 
   public
@@ -193,7 +198,7 @@ class CekimiRules
     # table_out holds the result
     until  next_key.nil?  
       (table_out, next_key) = CekimiRules.conjugate_by_key(
-        verb, next_key, Environ.flags.flag_pair_conjugate, block 
+        verb, next_key, Environ.flags.flag_pair_conjugate
       )
       yield table_out
          # end looping if not conjugate_chain OR there isn't a next_key
@@ -207,14 +212,12 @@ class CekimiRules
   #    verb:  verb obj for verb to be conjugated
   #    rule_key:  sym of rule key
   #    conjugate_pairs:  true if conjugate pairs of rules poz/neg
-  #    block -- yielded for outputting result
   #  returns:
   #    (table_out, next_key)
   #  -----------------------------------------------------------------
 
-  def CekimiRules.conjugate_by_key(verb, rule_key, conjugate_pairs, block)
+  def CekimiRules.conjugate_by_key(verb, rule_key, conjugate_pairs)
     rule = CekimiRules.get_rule( rule_key )
-    rule.out_block = block   # remember any closure block
 
     table_out = rule.prep_and_parse( verb, conjugate_pairs )  # kicks off recursive descent parser
     Environ.log_debug( "#{rule_key} result: " + table_out.stub )
