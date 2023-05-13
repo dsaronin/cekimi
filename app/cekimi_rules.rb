@@ -164,9 +164,9 @@ class CekimiRules
       verb = CekimiRules.get_verb_obj( verb_str )
       (table_out, next_key) = CekimiRules.conjugate_by_key(verb, rule_key, false)
       verb_str = table_out.stub   # this becomes new infinitive
-      puts ">>>>> new infinitive formed: #{verb_str} <<<<<<"
 
       verb_stem_neg = ( pp_type =~ PP_ABILITY  ? verb_str.sub(/bilmek$/i, "") : nil )
+      puts ">>>>> new infinitive formed: #{verb_str}, neg_stem: #{verb_stem_neg} <<<<<<"
 
     end  # if preproc verb requested
 
@@ -323,7 +323,7 @@ class CekimiRules
         case token
           when INFINITIVE_REGEX   then  form_infinitive
           when INVOKE_RULE_REGEX  then  table_generation( $1 )
-          when STEM_RULE_REGEX    then  gen @my_verb.verb_stem
+          when STEM_RULE_REGEX    then  choose_and_gen_verb_stem
           when STUB_RULE_REGEX    then  true  # nop; stub is valid
           when TD_STEM_RULE_REGEX then  gen @my_verb.verb_stem_td
           when RULE_OP_REGEX      then  prep_inplace_op( $1, $2 || "" )  
@@ -334,6 +334,18 @@ class CekimiRules
           end  # case
       end  # foreach token
     end  # unless @lexical_rule nil
+  end
+
+  #  ----------------------------------------------------------------
+  #  choose_and_gen_verb_stem  -- special handling to choose stem
+  #  ABILITY-extended verbs choose the verb stem differently for neg case
+  #  ----------------------------------------------------------------
+  def choose_and_gen_verb_stem
+    gen (
+      @is_neg && @my_verb.verb_stem_neg  ?  
+      @my_verb.verb_stem_neg  :  
+      @my_verb.verb_stem 
+    )
   end
 
   #  ----------------------------------------------------------------
