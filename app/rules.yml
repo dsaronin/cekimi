@@ -520,6 +520,9 @@
     lexical_rule: ['~U',  'M',  '@A2',  'K' ] 
   
 # -----------------------------------------
+# ~Z -- formations construct a new infinitive
+# which ends in MAK or MEK, and feeds a new conjugation
+# -----------------------------------------
   
 :lets_shall:
   !ruby/object:CekimiRules
@@ -543,6 +546,10 @@
     is_neg: false
  
 # -----------------------------------------
+# ~S rules function as a switch on the last letter of the stem
+# the switch conditions are in :rule_info
+# each entry is ( regex to match last letter, polysyllable t/f, lexical rule )
+# -----------------------------------------
 
 :causative:
   !ruby/object:CekimiRules
@@ -556,7 +563,7 @@
       - [ '/aeiouıöü/i', false, [ 'T' ] ]
       - [ '/çş/i', false, [ '@A2', 'R' ] ]
       - [ '/rl/i', true, [ 'T' ] ]
-      - [ '/./', false, [ 'D', '@A4', 'R' ] ]   # else match everything else
+      - [ '/./', false, [ 'T', '@A4', 'R' ] ]   # else match everything else
   
 :passive:
   !ruby/object:CekimiRules
