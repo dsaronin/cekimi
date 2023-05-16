@@ -87,7 +87,8 @@ class TableOut
   #  ----------------------------------------------------------------
   #  ----------------------------------------------------------------
 
-  FORMAT_HEADER = "\n%s: %s --> %s"
+  FORMAT_HEADER = "\n%s:"
+  # DEPRECATED: FORMAT_HEADER = "\n%s: %s --> %s"
   FORMAT_LINE   = "    %-Xs\t%-Xs"
 
   #  ----------------------------------------------------------------
@@ -102,7 +103,7 @@ class TableOut
       show_paired_tables
     else
 
-      str = sprintf( FORMAT_HEADER, caption_turk, @verb_infinitive, @stub.downcase )
+      str = sprintf( FORMAT_HEADER, caption_turk )
       puts Environ.wrapCyanBold str
 
       if !is_empty?
@@ -122,7 +123,8 @@ class TableOut
   #  ----------------------------------------------------------------
   #  ----------------------------------------------------------------
 
-  PAIRED_FORMAT_HEADER = "\n%s: %s --> %s\t%s: %s --> %s"
+  PAIRED_FORMAT_HEADER = "\n%s:\t\t\t\t%s:"
+  # DEPRECATED: PAIRED_FORMAT_HEADER = "\n%s: %s --> %s\t%s: %s --> %s"
   PAIRED_FORMAT_LINE   = "    %-Xs\t%-Xs\t\t    %-Zs\t%-Zs"
 
   #  ----------------------------------------------------------------
@@ -130,11 +132,7 @@ class TableOut
   #  assumes my_pair not nil and valid table
   #  ----------------------------------------------------------------
   def show_paired_tables()
-    str = sprintf( 
-          PAIRED_FORMAT_HEADER, 
-          caption_turk, @verb_infinitive, @stub.downcase,
-          @my_pair.caption_turk, @my_pair.verb_infinitive, @my_pair.stub.downcase,
-    )
+    str = sprintf( PAIRED_FORMAT_HEADER, caption_turk, @my_pair.caption_turk )
     puts Environ.wrapCyanBold str
 
     if !is_empty?
