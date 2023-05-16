@@ -55,6 +55,7 @@ class CekimiRules
 
   # parse_rule REGEX for token switch
   STUB_RULE_REGEX     = /^~U/   # rule requesting stub buffer
+  SWITCH_RULE_REGEX   = /^~S/   # rule matches last stub letter with a rule
   STEM_RULE_REGEX     = /^~V/   # rule requesting verb stem
   TD_STEM_RULE_REGEX  = /^~W/   # rule requesting voiced verb stem
   INFINITIVE_REGEX    = /^~Z/   # forms stub into inifinitive
@@ -311,17 +312,28 @@ class CekimiRules
   end
 
   #  ----------------------------------------------------------------
-  #  parse_rule -- parses a rule & generates conjugation
+  #  parse_rule -- parses self's rule & generates conjugation
   #  recursive-descent parser
   #  output of parser is in the table_out.stub field
   #  assumption:
   #    @my_table_out  -- TableOut object for generating the conjugation
   #  ----------------------------------------------------------------
   def parse_rule( )
-    unless @lexical_rule.nil? then
-      @lexical_rule.each  do  |token|
+    parse_a_lexrule( @lexical_rule )  # parse self's lexical rule
+  end
+
+  #  ----------------------------------------------------------------
+  #  parse_a_lexrule  -- parses a particular rule in the current context
+  #  RECURSIVE!
+  #  args: 
+  #    lex_rule  -- a valid cekimi rule formed as an array
+  #  ----------------------------------------------------------------
+  def parse_a_lexrule( lex_rule )
+    unless lex_rule.nil? then
+      lex_rule.each  do  |token|
         case token
           when INFINITIVE_REGEX   then  form_infinitive
+          when SWITCH_RULE_REGEX  then  do_switch_rule
           when INVOKE_RULE_REGEX  then  table_generation( $1 )
           when STEM_RULE_REGEX    then  choose_and_gen_verb_stem
           when STUB_RULE_REGEX    then  true  # nop; stub is valid
@@ -489,6 +501,24 @@ class CekimiRules
 
     end  # do each hash
 
+  end
+
+  #  ----------------------------------------------------------------
+  #  do_switch_rule  -- uses rule_info in a cascading CASE-like
+  #  statement to choose a rule for further processing
+  #  ----------------------------------------------------------------
+  def do_switch_rule()
+    @rule_info.each  do  | (regex, need_poly, lex_rule) |
+      if @my_table_out.stub[-1] =~ regex.to_regex then
+
+        unless need_poly &&  @my_verb.stem_syllables == 1
+
+          parse_a_lexrule( lex_rule )   # recursive here!
+
+        end  # unless polysyllable required but not poly syllable
+
+      end  # matched a rule
+    end  # each rule_info to check
   end
 
   #  ----------------------------------------------------------------

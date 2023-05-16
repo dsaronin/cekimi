@@ -560,9 +560,9 @@
     is_neg: false
     lexical_rule: ['~V',  '~S',  '~Z' ] 
     rule_info:
-      - [ '/aeiouıöü/i', false, [ 'T' ] ]
-      - [ '/çş/i', false, [ '@A2', 'R' ] ]
-      - [ '/rl/i', true, [ 'T' ] ]
+      - [ '/[aeiouıöü]/i', false, [ 'T' ] ]
+      - [ '/[çş]/i', false, [ '@A2', 'R' ] ]
+      - [ '/[rl]/i', true, [ 'T' ] ]
       - [ '/./', false, [ 'T', '@A4', 'R' ] ]   # else match everything else
   
 :passive:
@@ -574,7 +574,7 @@
     is_neg: false
     lexical_rule: ['~V',  '~S',  '~Z' ] 
     rule_info:
-      - [ '/aeiouıöü/i', false, [ 'N' ] ]
+      - [ '/[aeiouıöü]/i', false, [ 'N' ] ]
       - [ '/l/i', false, [ '@A4', 'N' ] ]
       - [ '/./', false, [ '@A4', 'L' ] ]   # else match everything else
  
