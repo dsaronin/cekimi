@@ -520,18 +520,6 @@
     lexical_rule: ['~U',  'M',  '@A2',  'K' ] 
   
 # -----------------------------------------
- 
-:ability:
-  !ruby/object:CekimiRules
-    my_key: ability
-    caption_eng: ability tense
-    caption_turk: ability
-    grammar_role: :ability
-    lexical_rule: ['~W',  '@Y',  '@A2',  'BIL', '~Z' ] 
-    parent_conj: 
-    child_conj: 
-    is_neg: false
-    my_pair: neg_ability
   
 :lets_shall:
   !ruby/object:CekimiRules
@@ -545,4 +533,18 @@
     is_neg: false
     my_pair: ~
 
+:ability:
+  !ruby/object:CekimiRules
+    my_key: ability
+    caption_eng: ability tense
+    caption_turk: ability
+    grammar_role: :ability
+    lexical_rule: ['~W',  '@Y',  '@A2',  'BIL', '~Z' ] 
+    parent_conj: 
+    child_conj: 
+    is_neg: false
+    my_pair: neg_ability
+ 
+# -----------------------------------------
+ 
 
