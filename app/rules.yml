@@ -536,15 +536,38 @@
 :ability:
   !ruby/object:CekimiRules
     my_key: ability
-    caption_eng: ability tense
+    caption_eng: ability formation
     caption_turk: ability
     grammar_role: :ability
     lexical_rule: ['~W',  '@Y',  '@A2',  'BIL', '~Z' ] 
-    parent_conj: 
-    child_conj: 
     is_neg: false
-    my_pair: neg_ability
  
 # -----------------------------------------
- 
 
+:causative:
+  !ruby/object:CekimiRules
+    my_key: causative
+    caption_eng: causative formation
+    caption_turk: causative
+    grammar_role: :causative
+    is_neg: false
+    lexical_rule: ['~V',  '~S',  '~Z' ] 
+    rule_info:
+      - [ '/aeiouıöü/i', false, [ 'T' ] ]
+      - [ '/çş/i', false, [ '@A2', 'R' ] ]
+      - [ '/rl/i', true, [ 'T' ] ]
+      - [ '/./', false, [ 'D', '@A4', 'R' ] ]   # else match everything else
+  
+:passive:
+  !ruby/object:CekimiRules
+    my_key: passive
+    caption_eng: passive formation
+    caption_turk: passive
+    grammar_role: :passive
+    is_neg: false
+    lexical_rule: ['~V',  '~S',  '~Z' ] 
+    rule_info:
+      - [ '/aeiouıöü/i', false, [ 'N' ] ]
+      - [ '/l/i', false, [ '@A4', 'N' ] ]
+      - [ '/./', false, [ '@A4', 'L' ] ]   # else match everything else
+ 
