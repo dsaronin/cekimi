@@ -533,19 +533,6 @@
     is_neg: false
     my_pair: neg_ability
   
-:neg_ability:
-  !ruby/object:CekimiRules
-    my_key: neg_ability
-    caption_eng: ability tense
-    caption_turk: neg ability
-    grammar_role: :ability
-    lexical_rule: ['~W',  '@Y',  '@A2',  'M',  '@A2', '&infinitive' ] 
-    parent_conj: 
-    child_conj: 
-    is_neg: true
-    my_pair: ability
-  
-
 :lets_shall:
   !ruby/object:CekimiRules
     my_key: lets_shall
