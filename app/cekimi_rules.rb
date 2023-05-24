@@ -298,17 +298,32 @@ class CekimiRules
   end
 
   #  ----------------------------------------------------------------
-  #  gen  -- append a suffix to the stub
+  #  post_gen  -- post gen common handling
   #  ----------------------------------------------------------------
-  def gen( str )
-    @my_table_out.stub << str   # append to stub
-
+  def post_gen( str )
     # check for the last vowel and remember it
     if( idex = str.index LAST_VOWEL_REGEX ) then
       @my_table_out.last_vowel = str[idex].downcase   # becomes new last vowel
     end 
  
     puts "gen: #{@my_table_out.stub}"  if Environ.flags.flag_gen_trace
+  end
+
+  #  ----------------------------------------------------------------
+  #  regen  -- replace the stub
+  #  ----------------------------------------------------------------
+  def regen( str )
+    @my_table_out.stub = String.new( str )   # replace stub
+    post_gen( str )
+  end
+
+ 
+  #  ----------------------------------------------------------------
+  #  gen  -- append a suffix to the stub
+  #  ----------------------------------------------------------------
+  def gen( str )
+    @my_table_out.stub << str   # append to stub
+    post_gen( str )
   end
 
   #  ----------------------------------------------------------------
@@ -346,6 +361,36 @@ class CekimiRules
           end  # case
       end  # foreach token
     end  # unless @lexical_rule nil
+  end
+
+  #  ----------------------------------------------------------------
+  #  do_switch_rule  -- uses rule_info in a cascading CASE-like
+  #  statement to choose a rule for further processing
+  #  ----------------------------------------------------------------
+  def do_switch_rule()
+    @rule_info.each  do  | (regex, need_poly, lex_rule) |
+
+         # handle any exceptions first
+      if @exceptions && (newstem = @exceptions[@my_verb.verb_stem.to_sym])
+        regen( newstem )     # replace with exception
+        break  # found matching rule; ignore remaining
+      end
+
+        # or handle in a regular manner
+      #
+      if @my_table_out.stub[-1] =~ Regexp.new( regex, Regexp::IGNORECASE ) then
+
+        unless need_poly &&  @my_verb.stem_syllables == 1
+
+          parse_a_lexrule( lex_rule )   # recursive here!
+          break  # found matching rule; ignore remaining
+
+        end  # unless polysyllable required but not poly syllable
+
+      end  # matched a rule
+
+    end  # outer loop:  each rule_info to check
+
   end
 
   #  ----------------------------------------------------------------
@@ -501,24 +546,6 @@ class CekimiRules
 
     end  # do each hash
 
-  end
-
-  #  ----------------------------------------------------------------
-  #  do_switch_rule  -- uses rule_info in a cascading CASE-like
-  #  statement to choose a rule for further processing
-  #  ----------------------------------------------------------------
-  def do_switch_rule()
-    @rule_info.each  do  | (regex, need_poly, lex_rule) |
-      if @my_table_out.stub[-1] =~ regex.to_regex then
-
-        unless need_poly &&  @my_verb.stem_syllables == 1
-
-          parse_a_lexrule( lex_rule )   # recursive here!
-
-        end  # unless polysyllable required but not poly syllable
-
-      end  # matched a rule
-    end  # each rule_info to check
   end
 
   #  ----------------------------------------------------------------

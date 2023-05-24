@@ -560,10 +560,27 @@
     is_neg: false
     lexical_rule: ['~V',  '~S',  '~Z' ] 
     rule_info:
-      - [ '/[aeiouıöü]/i', false, [ 'T' ] ]
-      - [ '/[çş]/i', false, [ '@A2', 'R' ] ]
-      - [ '/[rl]/i', true, [ 'T' ] ]
-      - [ '/./', false, [ 'T', '@A4', 'R' ] ]   # else match everything else
+      - [ '[aeiouıöü]', false, [ 'T' ] ]
+      - [ '[çş]', false, [ '@A4', 'R' ] ]
+      - [ '[rl]', true, [ 'T' ] ]
+      - [ '.', false, [ '@D', '@A4', 'R' ] ]   # else match everything else
+    exceptions:
+      :gör: göster
+      :art: artır
+      :bat: batır
+      :bit: bitir
+      :doğ: doğur
+      :doy: doyur
+      :ak:  akut
+      :sark: sarkıt
+      :ürk: ürküt
+      :kork: korkut
+      :koş: koştur
+      :çık: çıkar
+      :on: onar
+      :git: gider
+      :et: eder
+
   
 :passive:
   !ruby/object:CekimiRules
@@ -574,7 +591,7 @@
     is_neg: false
     lexical_rule: ['~V',  '~S',  '~Z' ] 
     rule_info:
-      - [ '/[aeiouıöü]/i', false, [ 'N' ] ]
-      - [ '/l/i', false, [ '@A4', 'N' ] ]
-      - [ '/./', false, [ '@A4', 'L' ] ]   # else match everything else
+      - [ '[aeiouıöü]', false, [ 'N' ] ]
+      - [ 'l', false, [ '@A4', 'N' ] ]
+      - [ '.', false, [ '@A4', 'L' ] ]   # else match everything else
  
