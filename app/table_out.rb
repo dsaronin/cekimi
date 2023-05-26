@@ -120,6 +120,15 @@ class TableOut
 
       end  # if table not empty
     end  # paired tables
+
+    pdf_output
+  end
+
+  def pdf_output()
+    r = GenPdf.new( @verb_infinitive )
+    r.heading()
+    r.show_left_table()
+    r.fileout()
   end
 
   #  ----------------------------------------------------------------
