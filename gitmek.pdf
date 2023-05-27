@@ -36,7 +36,7 @@ Q
 
 BT
 41.66929 617.7083 Td
-/F1.0 11 Tf
+/F2.0 11 Tf
 [<67656e6973207a616d616e>] TJ
 ET
 
@@ -90,7 +90,7 @@ Q
 
 BT
 325.13386 617.7083 Td
-/F1.0 11 Tf
+/F2.0 11 Tf
 [<6f6c756d73757a2067656e6973207a616d616e>] TJ
 ET
 
@@ -151,7 +151,6 @@ endobj
 /Contents 4 0 R
 /Resources << /ProcSet [/PDF /Text /ImageB /ImageC /ImageI]
 /Font << /F2.0 6 0 R
-/F1.0 8 0 R
 >>
 /ExtGState << /Tr1 7 0 R
 >>
@@ -167,33 +166,25 @@ endobj
 endobj
 7 0 obj
 << /Type /ExtGState
-/CA 0.3
-/ca 0.3
->>
-endobj
-8 0 obj
-<< /Type /Font
-/Subtype /Type1
-/BaseFont /Helvetica
-/Encoding /WinAnsiEncoding
+/CA 0.2
+/ca 0.2
 >>
 endobj
 xref
-0 9
+0 8
 0000000000 65535 f 
 0000000015 00000 n 
 0000000109 00000 n 
 0000000158 00000 n 
 0000000215 00000 n 
 0000001426 00000 n 
-0000001732 00000 n 
-0000001829 00000 n 
-0000001883 00000 n 
+0000001720 00000 n 
+0000001817 00000 n 
 trailer
-<< /Size 9
+<< /Size 8
 /Root 2 0 R
 /Info 1 0 R
 >>
 startxref
-1980
+1871
 %%EOF

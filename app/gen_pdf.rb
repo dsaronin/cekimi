@@ -27,6 +27,8 @@ class GenPdf
   BOX_WIDTH  = 9.cm
   BOX_GAP_HORIZONTAL = 1.cm
   BOX_GAP_VERTICAL = 1.cm
+  
+  BOX_TRANSPARENCY = 0.2
 
   INNER_INDENT = 10.mm
   INNER_WIDTH  = 4.cm
@@ -99,7 +101,8 @@ class GenPdf
       width: BOX_WIDTH,
       height: BOX_HEIGHT
     ) do
-      @pdf.transparent( 0.3 ) { @pdf.stroke_bounds }
+      @pdf.transparent( BOX_TRANSPARENCY ) { @pdf.stroke_bounds }
+  
       @pdf.font_size BOX_TITLE_FONT_SIZE 
       @pdf.pad( BOX_TITLE_PADDING ) {
         @pdf.text( "genis zaman", indent_paragraphs: BOX_TITLE_PADDING )
@@ -145,7 +148,7 @@ class GenPdf
       width: BOX_WIDTH,
       height: BOX_HEIGHT
     ) do
-      @pdf.transparent( 0.3 ) { @pdf.stroke_bounds }
+      @pdf.transparent( BOX_TRANSPARENCY ) { @pdf.stroke_bounds }
       @pdf.font_size BOX_TITLE_FONT_SIZE 
       @pdf.pad( BOX_TITLE_PADDING ) {
         @pdf.text( "olumsuz genis zaman", indent_paragraphs: BOX_TITLE_PADDING )
