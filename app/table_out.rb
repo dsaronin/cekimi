@@ -126,9 +126,9 @@ class TableOut
 
   def pdf_output()
     r = GenPdf.new( @verb_infinitive )
-    r.heading()
-    top_edge = r.show_left_table()
-    top_edge = r.show_right_table( top_edge )
+    r.heading(@verb_infinitive.capitalize)
+    top_edge = r.show_left_table("geniş zaman", "giderim\ngidersin\ngider", "gideriz\ngidersiniz\ngiderler")
+    top_edge = r.show_right_table( top_edge, "olumsuz genis zaman", "giderim\ngidersin\ngider", "gideriz\ngidersiniz\ngiderler" )
     r.fileout()
   end
 

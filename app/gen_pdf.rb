@@ -20,9 +20,9 @@ class GenPdf
 
   DEF_FONT_SIZE = 14
 
-  BOX_TITLE_FONT_SIZE = 11
+  BOX_TITLE_FONT_SIZE = 10
   BOX_FONT_SIZE = 16
-  BOX_TITLE_PADDING = 2.mm
+  BOX_TITLE_PADDING = 1.mm
   BOX_HEIGHT = 32.mm
   BOX_WIDTH  = 9.cm
   BOX_GAP_HORIZONTAL = 1.cm
@@ -38,7 +38,22 @@ class GenPdf
   HEADING_HEIGHT = 3.cm
   HEADING_WIDTH = 19.cm
   HEADING_PADDING = 5.mm
-  HEADING_FONT_SIZE = 76
+  HEADING_FONT_SIZE = 64
+
+  FONT_PALATINO = "$HOME/.local/share/fonts/Linotype\ GmbH/TrueType/Palatino\ Linotype"
+  FONT_TAHOMA   = "$HOME/.local/share/fonts/Microsoft\ Corporation/TrueType/Tahoma"
+  FONT_ARIAL    = "$HOME/.local/share/fonts/Monotype\ Imaging/TrueType/Arial"
+  FONT_VERDANA  = "$HOME/.local/share/fonts/Unknown\ Vendor/TrueType/Verdana"
+
+  FONT_ROBOTO_FAMILY   = "/home/daudi/Android/Sdk/platforms/android-28/data/fonts/"
+
+  ROBOTO_NORMAL   = "Roboto-Regular.ttf"
+  ROBOTO_BOLD     = "Roboto-Bold.ttf"
+  ROBOTO_BLACK    = "Roboto-Black.ttf"
+  ROBOTO_ITALIC   = "Roboto-Italic.ttf"
+  ROBOTO_LIGHT    = "Roboto-Light.ttf"
+  ROBOTO_MEDIUM   = "Roboto-Medium.ttf"
+  ROBOTO_LTITALIC = "Roboto-LightItalic.ttf"
 
   #  ------------------------------------------------------------
   #  ------------------------------------------------------------
@@ -48,12 +63,27 @@ class GenPdf
   def initialize(verb)
     @pdf = Prawn::Document.new
     
-    #  @pdf.stroke_axis
+    # @pdf.stroke_axis
 
-    @verb = verb.capitalize
     @filename = verb.downcase + PDF_EXT
+    GenPdf.register_fonts( @pdf )
   end
 
+  def GenPdf.register_fonts( p )
+    p.font_families.update(
+      'Roboto' => {
+        :normal   => FONT_ROBOTO_FAMILY+ROBOTO_NORMAL,
+        :italic   => FONT_ROBOTO_FAMILY+ROBOTO_ITALIC,
+        :bold     => FONT_ROBOTO_FAMILY+ROBOTO_BOLD,
+        :black    => FONT_ROBOTO_FAMILY+ROBOTO_BLACK,
+        :light    => FONT_ROBOTO_FAMILY+ROBOTO_LIGHT,
+        :medium   => FONT_ROBOTO_FAMILY+ROBOTO_MEDIUM,
+        :lt_italic   => FONT_ROBOTO_FAMILY+ROBOTO_LTITALIC
+      }
+    )
+    p.fallback_fonts(["Roboto"])
+  end
+   
   #  -----------------------------------------------------------------
   #  -----------------------------------------------------------------
   #  -----------------------------------------------------------------
@@ -72,7 +102,7 @@ class GenPdf
   #  heading -- renders the heading with verb and possible definition
   #  verb,definition
   #  -----------------------------------------------------------------
-  def heading()
+  def heading( str )
     @pdf.bounding_box( 
         HEADING_POSITION, 
         height: HEADING_HEIGHT,
@@ -80,7 +110,7 @@ class GenPdf
     ) do
       @pdf.font_size HEADING_FONT_SIZE 
       @pdf.pad( HEADING_PADDING ) {
-        @pdf.text( @verb, style: 'bold' )
+        @pdf.text( str, style: :bold )
       }
       #  @pdf.transparent( 0.4 ) { @pdf.stroke_bounds }
     end  # bounding box block
@@ -89,13 +119,15 @@ class GenPdf
   #  -----------------------------------------------------------------
   #  show_left_table  -- renders a left-hand table
   #  always moves down and starts at left
-  #  title, left_col, right_col
+  #  
   #  -----------------------------------------------------------------
-  def show_left_table()
+  def show_left_table(title, left_col, right_col)
+    @pdf.font "Roboto"
     @pdf.move_down BOX_GAP_VERTICAL
 
     outer_top = @pdf.cursor
 
+    @pdf.font 'Roboto'
     @pdf.bounding_box(
       [0, outer_top],
       width: BOX_WIDTH,
@@ -105,7 +137,7 @@ class GenPdf
   
       @pdf.font_size BOX_TITLE_FONT_SIZE 
       @pdf.pad( BOX_TITLE_PADDING ) {
-        @pdf.text( "genis zaman", indent_paragraphs: BOX_TITLE_PADDING )
+        @pdf.text( title, style: :italic , indent_paragraphs: BOX_TITLE_PADDING )
       }
 
       inner_top = @pdf.cursor  # remember inner columns top pt
@@ -117,7 +149,7 @@ class GenPdf
           height: INNER_HEIGHT 
       ) do
         @pdf.font_size BOX_FONT_SIZE
-        @pdf.text("giderim\ngidersin\ngider", style: 'bold')
+        @pdf.text(left_col, style: :bold)
       end
 
       # right column
@@ -127,7 +159,7 @@ class GenPdf
           height: INNER_HEIGHT 
       ) do
         @pdf.font_size BOX_FONT_SIZE
-        @pdf.text("gideriz\ngidersiniz\ngiderler", style: 'bold')
+        @pdf.text(right_col, style: :bold)
       end
 
 
@@ -139,9 +171,10 @@ class GenPdf
   #  -----------------------------------------------------------------
   #  show_right_table  -- renders a right-hand table
   #  always moves bounding box to right, leaping over left table
-  #  title, left_col, right_col
+  #  
   #  -----------------------------------------------------------------
-  def show_right_table( top_edge )
+  def show_right_table( top_edge, title, left_col, right_col )
+    @pdf.font "Roboto"
 
     @pdf.bounding_box(
       [BOX_WIDTH + BOX_GAP_HORIZONTAL, top_edge ],
@@ -151,7 +184,7 @@ class GenPdf
       @pdf.transparent( BOX_TRANSPARENCY ) { @pdf.stroke_bounds }
       @pdf.font_size BOX_TITLE_FONT_SIZE 
       @pdf.pad( BOX_TITLE_PADDING ) {
-        @pdf.text( "olumsuz genis zaman", indent_paragraphs: BOX_TITLE_PADDING )
+        @pdf.text( title, style: :italic , indent_paragraphs: BOX_TITLE_PADDING )
       }
 
       inner_top = @pdf.cursor  # remember inner columns top pt
@@ -163,7 +196,7 @@ class GenPdf
           height: INNER_HEIGHT 
       ) do
         @pdf.font_size BOX_FONT_SIZE
-        @pdf.text("giderim\ngidersin\ngider", style: 'bold')
+        @pdf.text(left_col, style: :bold)
       end
 
       # right column
@@ -173,7 +206,7 @@ class GenPdf
           height: INNER_HEIGHT 
       ) do
         @pdf.font_size BOX_FONT_SIZE
-        @pdf.text("gideriz\ngidersiniz\ngiderler", style: 'bold')
+        @pdf.text(right_col, style: :bold)
       end
 
 
