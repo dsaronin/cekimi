@@ -127,7 +127,8 @@ class TableOut
   def pdf_output()
     r = GenPdf.new( @verb_infinitive )
     r.heading()
-    r.show_left_table()
+    top_edge = r.show_left_table()
+    top_edge = r.show_right_table( top_edge )
     r.fileout()
   end
 
