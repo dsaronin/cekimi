@@ -62,6 +62,7 @@ class GenPdf
   #  ------------------------------------------------------------
   def initialize(verb)
     @pdf = Prawn::Document.new
+    @done_heading = false
     
     # @pdf.stroke_axis
 
@@ -103,17 +104,20 @@ class GenPdf
   #  verb,definition
   #  -----------------------------------------------------------------
   def heading( str )
-    @pdf.bounding_box( 
-        HEADING_POSITION, 
-        height: HEADING_HEIGHT,
-        width: HEADING_WIDTH
-    ) do
-      @pdf.font_size HEADING_FONT_SIZE 
-      @pdf.pad( HEADING_PADDING ) {
-        @pdf.text( str, style: :bold )
-      }
-      #  @pdf.transparent( 0.4 ) { @pdf.stroke_bounds }
-    end  # bounding box block
+    unless @done_heading
+      @done_heading = true
+      @pdf.bounding_box( 
+          HEADING_POSITION, 
+          height: HEADING_HEIGHT,
+          width: HEADING_WIDTH
+      ) do
+        @pdf.font_size HEADING_FONT_SIZE 
+        @pdf.pad( HEADING_PADDING ) {
+          @pdf.text( str, style: :bold )
+        }
+        #  @pdf.transparent( 0.4 ) { @pdf.stroke_bounds }
+      end  # bounding box block
+    end
   end
 
   #  -----------------------------------------------------------------

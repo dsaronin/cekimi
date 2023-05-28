@@ -168,6 +168,7 @@ class CekimiRules
 
       verb_stem_neg = ( pp_type =~ PP_ABILITY  ? verb_str.sub(/bilmek$/i, "") : nil )
       puts ">>>>> new infinitive formed: #{verb_str}, neg_stem: #{verb_stem_neg} <<<<<<"
+      table_out.verb_infinitive = verb_str.downcase  # replace infinitive
 
     end  # if preproc verb requested
 
@@ -201,7 +202,7 @@ class CekimiRules
       (table_out, next_key) = CekimiRules.conjugate_by_key(
         verb, next_key, Environ.flags.flag_pair_conjugate
       )
-      yield table_out
+      yield table_out  # trigger table_out.show_table
          # end looping if not conjugate_chain OR there isn't a next_key
       next_key = nil if !Environ.flags.flag_chain_conjugate
     end

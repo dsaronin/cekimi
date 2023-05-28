@@ -70,6 +70,7 @@ class TableOut
 
     @my_table = Array.new(2){ Array.new(3) }
     @empty = true    # will be false if table has anything in it
+    @pdf = GenPdf.new( @verb_infinitive )
   end
 
   #  ----------------------------------------------------------------
@@ -99,6 +100,7 @@ class TableOut
   #    pair_tables -- true if output pair of neg/poz tables
   #  ----------------------------------------------------------------
   def show_table( pair_tables )
+    @pdf.heading(@verb_infinitive.capitalize)
 
     if pair_tables && @my_pair && !@my_pair.is_empty?
     then
@@ -109,24 +111,51 @@ class TableOut
       puts Environ.wrapCyanBold str
 
       if !is_empty?
+        t1_left_col  = ""
+        t1_right_col = ""
+
            # adjust format line to account for max cell of results
         cellformat = FORMAT_LINE.gsub( /X/, @cell_width.to_s )
 
            # for each person of each singular/plural, output a row
         (P1..P3).each do |iy|
-          str = sprintf( cellformat, @my_table[SINGLR][iy].downcase, @my_table[PLURAL][iy].downcase )
+
+          t1_left   = @my_table[SINGLR][iy].downcase
+          t1_right  = @my_table[PLURAL][iy].downcase
+          t1_left_col   << t1_left  + "\n"
+          t1_right_col  << t1_right + "\n"
+
+          str = sprintf( cellformat, t1_left, t1_right )
+
           puts Environ.wrapYellow str
         end  # each do
+
+        t1_left_col.chop   # remove trailing new lines
+        t1_right_col.chop
+
+          # PDF: show_left_table
+        @pdf.show_left_table( caption_turk, t1_left_col, t1_right_col ) 
 
       end  # if table not empty
     end  # paired tables
 
-    pdf_output
+    # DEPRECATED (design purpose only): pdf_design_output
   end
 
-  def pdf_output()
+     
+
+  #  ----------------------------------------------------------------
+  #  pdf_design_output  -- non-dynamic invocation of pdf rendering
+  #  used to test & design the pdf rendering template
+  #  DEPRECATED for general usage
+  #  ----------------------------------------------------------------
+  def pdf_design_output()
     r = GenPdf.new( @verb_infinitive )
     r.heading(@verb_infinitive.capitalize)
+    top_edge = r.show_left_table("geniş zaman", "giderim\ngidersin\ngider", "gideriz\ngidersiniz\ngiderler")
+    top_edge = r.show_right_table( top_edge, "olumsuz genis zaman", "giderim\ngidersin\ngider", "gideriz\ngidersiniz\ngiderler" )
+    top_edge = r.show_left_table("geniş zaman", "giderim\ngidersin\ngider", "gideriz\ngidersiniz\ngiderler")
+    top_edge = r.show_right_table( top_edge, "olumsuz genis zaman", "giderim\ngidersin\ngider", "gideriz\ngidersiniz\ngiderler" )
     top_edge = r.show_left_table("geniş zaman", "giderim\ngidersin\ngider", "gideriz\ngidersiniz\ngiderler")
     top_edge = r.show_right_table( top_edge, "olumsuz genis zaman", "giderim\ngidersin\ngider", "gideriz\ngidersiniz\ngiderler" )
     r.fileout()
@@ -145,21 +174,50 @@ class TableOut
   #  ----------------------------------------------------------------
   def show_paired_tables()
     str = sprintf( PAIRED_FORMAT_HEADER, caption_turk, @my_pair.caption_turk )
+
+    caption_left  = caption_turk
+    caption_right = @my_pair.caption_turk
+
     puts Environ.wrapCyanBold str
 
     if !is_empty?
+         # initialize column accumulators for pdf
+      t1_left_col  = ""
+      t1_right_col = ""
+      t2_left_col  = ""
+      t2_right_col = ""
+
          # adjust format line to account for max cell of results
       cellformat = PAIRED_FORMAT_LINE.gsub( /X/, @cell_width.to_s ).gsub( /Z/, @my_pair.cell_width.to_s )
 
          # for each person of each singular/plural, output a row
       (P1..P3).each do |iy|
-        str = sprintf( 
-              cellformat, 
-              @my_table[SINGLR][iy].downcase, @my_table[PLURAL][iy].downcase,
-              @my_pair.my_table[SINGLR][iy].downcase, @my_pair.my_table[PLURAL][iy].downcase 
-        )
+           
+        t1_left   = @my_table[SINGLR][iy].downcase
+        t1_right  = @my_table[PLURAL][iy].downcase
+        t2_left   = @my_pair.my_table[SINGLR][iy].downcase
+        t2_right  = @my_pair.my_table[PLURAL][iy].downcase
+ 
+        str = sprintf( cellformat, t1_left,t1_right, t2_left, t2_right )
+
         puts Environ.wrapYellow str
+
+        t1_left_col   << t1_left  + "\n"
+        t1_right_col  << t1_right + "\n"
+        t2_left_col   << t2_left  + "\n"
+        t2_right_col  << t2_right + "\n"
+
       end  # each do
+
+      t1_left_col.chop   # remove trailing new lines
+      t1_right_col.chop
+      t2_left_col.chop
+      t2_right_col.chop
+
+        # PDF: show_left_table
+        # PDF: show_right_table
+      top_edge = @pdf.show_left_table( caption_left, t1_left_col, t1_right_col ) 
+      @pdf.show_right_table( top_edge, caption_right, t2_left_col, t2_right_col ) 
 
     end  # if table not empty
  
