@@ -15,8 +15,6 @@
 #               [S2][P2]   2nd person sing | plural
 #               [S3][P3]   3rd person sing | plural
 
-  require_relative "gen_pdf"
-
   #  ----------------------------------------------------------------
   #  CONSTANTS
   #  ----------------------------------------------------------------
@@ -56,8 +54,9 @@ class TableOut
   #  new -- creates and initializes a TableOut object
   #  args:
   #    caption_eng, caption_turk, grammar_role, is_neg  from rule obj
+  #    pdf  -- GenPdf obj for rendering output
   #  ----------------------------------------------------------------
-  def initialize(my_verb, caption_eng, caption_turk, grammar_role, is_neg)
+  def initialize(my_verb, caption_eng, caption_turk, grammar_role, is_neg, pdf)
     @verb_infinitive = my_verb.verb_infinitive
     @caption_eng = caption_eng
     @caption_turk = caption_turk
@@ -70,7 +69,7 @@ class TableOut
 
     @my_table = Array.new(2){ Array.new(3) }
     @empty = true    # will be false if table has anything in it
-    @pdf = GenPdf.new( @verb_infinitive )
+    @pdf = pdf
   end
 
   #  ----------------------------------------------------------------
@@ -139,28 +138,9 @@ class TableOut
       end  # if table not empty
     end  # paired tables
 
-    # DEPRECATED (design purpose only): pdf_design_output
   end
 
      
-
-  #  ----------------------------------------------------------------
-  #  pdf_design_output  -- non-dynamic invocation of pdf rendering
-  #  used to test & design the pdf rendering template
-  #  DEPRECATED for general usage
-  #  ----------------------------------------------------------------
-  def pdf_design_output()
-    r = GenPdf.new( @verb_infinitive )
-    r.heading(@verb_infinitive.capitalize)
-    top_edge = r.show_left_table("geniş zaman", "giderim\ngidersin\ngider", "gideriz\ngidersiniz\ngiderler")
-    top_edge = r.show_right_table( top_edge, "olumsuz genis zaman", "giderim\ngidersin\ngider", "gideriz\ngidersiniz\ngiderler" )
-    top_edge = r.show_left_table("geniş zaman", "giderim\ngidersin\ngider", "gideriz\ngidersiniz\ngiderler")
-    top_edge = r.show_right_table( top_edge, "olumsuz genis zaman", "giderim\ngidersin\ngider", "gideriz\ngidersiniz\ngiderler" )
-    top_edge = r.show_left_table("geniş zaman", "giderim\ngidersin\ngider", "gideriz\ngidersiniz\ngiderler")
-    top_edge = r.show_right_table( top_edge, "olumsuz genis zaman", "giderim\ngidersin\ngider", "gideriz\ngidersiniz\ngiderler" )
-    r.fileout()
-  end
-
   #  ----------------------------------------------------------------
   #  ----------------------------------------------------------------
 

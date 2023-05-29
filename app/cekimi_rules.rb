@@ -146,8 +146,9 @@ class CekimiRules
   #  such as for ability, causitive, passive, causitive-passive
   #  args:
   #    verb_str  -- cli verb string
+  #    pdf  -- GenPdf obj for rendering
   #  -----------------------------------------------------------------
-  def CekimiRules.preprocess_verb( verb_str )
+  def CekimiRules.preprocess_verb( verb_str, pdf )
     verb_stem_neg = nil   # assume normal case
 
     if verb_str =~ PREPROC_REGEX
@@ -163,7 +164,7 @@ class CekimiRules
 
 
       verb = CekimiRules.get_verb_obj( verb_str )
-      (table_out, next_key) = CekimiRules.conjugate_by_key(verb, rule_key, false)
+      (table_out, next_key) = CekimiRules.conjugate_by_key(verb, rule_key, false, pdf)
       verb_str = table_out.stub   # this becomes new infinitive
 
       verb_stem_neg = ( pp_type =~ PP_ABILITY  ? verb_str.sub(/bilmek$/i, "") : nil )
@@ -189,18 +190,19 @@ class CekimiRules
   #  args:
   #    verb_str  -- string of verb to be processed
   #    start_rule  -- rule key to kick off conjugation chain
+  #    pdf  -- a GenPdf object for rendering output
   #    block -- yielded for outputting result
   #  -----------------------------------------------------------------
 
-  def CekimiRules.conjugate(verb_str, start_rule, &block)
-    verb = CekimiRules.preprocess_verb( verb_str )  
+  def CekimiRules.conjugate(verb_str, start_rule, pdf, &block)
+    verb = CekimiRules.preprocess_verb( verb_str, pdf )  
     Environ.put_info verb.to_s  if  Environ.flags.flag_verb_trace  # trace output if enabled
     next_key  = start_rule          
 
     # table_out holds the result
     until  next_key.nil?  
       (table_out, next_key) = CekimiRules.conjugate_by_key(
-        verb, next_key, Environ.flags.flag_pair_conjugate
+        verb, next_key, Environ.flags.flag_pair_conjugate, pdf
       )
       yield table_out  # trigger table_out.show_table
          # end looping if not conjugate_chain OR there isn't a next_key
@@ -214,14 +216,15 @@ class CekimiRules
   #    verb:  verb obj for verb to be conjugated
   #    rule_key:  sym of rule key
   #    conjugate_pairs:  true if conjugate pairs of rules poz/neg
+  #    pdf  -- GenPdf obj for rendering output
   #  returns:
   #    (table_out, next_key)
   #  -----------------------------------------------------------------
 
-  def CekimiRules.conjugate_by_key(verb, rule_key, conjugate_pairs)
+  def CekimiRules.conjugate_by_key(verb, rule_key, conjugate_pairs, pdf)
     rule = CekimiRules.get_rule( rule_key )
 
-    table_out = rule.prep_and_parse( verb, conjugate_pairs )  # kicks off recursive descent parser
+    table_out = rule.prep_and_parse( verb, conjugate_pairs, pdf )  # kicks off recursive descent parser
     Environ.log_debug( "#{rule_key} result: " + table_out.stub )
       
     return [table_out, rule.child_conj]
@@ -260,17 +263,18 @@ class CekimiRules
   # args: 
   #   my_conj_verb -- verb being conjugated
   #   conjugate_pairs  -- true if conjugate the negative/positive pairs
+  #   pdf  -- GenPdf obj for rendering output
   # returns:
   #   @my_table_out: formed result for output
   #  -----------------------------------------------------------------
-  def prep_and_parse( my_conj_verb, conjugate_pairs )
-    parse_one_rule( my_conj_verb )
+  def prep_and_parse( my_conj_verb, conjugate_pairs, pdf )
+    parse_one_rule( my_conj_verb, pdf )
       # if need conjugate pairs and a pair-rule exists
     if conjugate_pairs  && 
        @my_pair  &&
        (rule = CekimiRules.get_rule( @my_pair.to_sym ))
     then  # conjugate the paired rule
-      paired_table_out = rule.parse_one_rule( my_conj_verb )
+      paired_table_out = rule.parse_one_rule( my_conj_verb, pdf )
           # and link the tables for output
       @my_table_out.pair_tables( paired_table_out )
     end
@@ -281,11 +285,12 @@ class CekimiRules
   #  parse_one_rule  -- setup for recursive descent parsing
   #  args: 
   #    my_conj_verb -- verb being conjugated
+  #    pdf  -- GenPdf obj for rendering output
   #  -----------------------------------------------------------------
-  def parse_one_rule( my_conj_verb )
+  def parse_one_rule( my_conj_verb, pdf )
     Environ.log_debug( "starting parsing rule: #{@my_key}..." )
     @my_verb = my_conj_verb
-    @my_table_out = TableOut.new( my_conj_verb, @caption_eng, @caption_turk, @grammar_role, @is_neg)
+    @my_table_out = TableOut.new( my_conj_verb, @caption_eng, @caption_turk, @grammar_role, @is_neg, pdf)
     parse_rule( )   # begins parsing a rule
     return @my_table_out 
   end

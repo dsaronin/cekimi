@@ -8,6 +8,8 @@ class CekimiWork
   require_relative 'environ'
   require_relative 'cekimi_rules'
   require_relative 'verb'
+  require_relative "gen_pdf"
+
 
   #  ------------------------------------------------------------
   #  ------------------------------------------------------------
@@ -185,10 +187,14 @@ private
   #  ------------------------------------------------------------
   def do_conjugate( list )
     begin
+      p = GenPdf.new
+      my_infinitive = nil
       # pop next entry; assume its a verb
-      CekimiRules.conjugate( list.shift, @main_rule ) do | table |
+      CekimiRules.conjugate( list.shift, @main_rule, p ) do | table |
+        my_infinitive ||= table.verb_infinitive.downcase   # latch infinitive
         table.show_table( Environ.flags.flag_pair_conjugate )
       end   # do block
+      p.fileout( my_infinitive )
   #  ------------------------------------------------------------
 
     rescue ArgumentError
@@ -196,6 +202,25 @@ private
     end  # exception handling
 
   end
+
+  # DEPRECATED (design purpose only): pdf_design_output
+  #  ----------------------------------------------------------------
+  #  pdf_design_output  -- non-dynamic invocation of pdf rendering
+  #  used to test & design the pdf rendering template
+  #  DEPRECATED for general usage
+  #  ----------------------------------------------------------------
+  def pdf_design_output()
+    r = GenPdf.new(  )
+    r.heading("Gitmek")
+    top_edge = r.show_left_table("geniş zaman", "giderim\ngidersin\ngider", "gideriz\ngidersiniz\ngiderler")
+    top_edge = r.show_right_table( top_edge, "olumsuz genis zaman", "giderim\ngidersin\ngider", "gideriz\ngidersiniz\ngiderler" )
+    top_edge = r.show_left_table("geniş zaman", "giderim\ngidersin\ngider", "gideriz\ngidersiniz\ngiderler")
+    top_edge = r.show_right_table( top_edge, "olumsuz genis zaman", "giderim\ngidersin\ngider", "gideriz\ngidersiniz\ngiderler" )
+    top_edge = r.show_left_table("geniş zaman", "giderim\ngidersin\ngider", "gideriz\ngidersiniz\ngiderler")
+    top_edge = r.show_right_table( top_edge, "olumsuz genis zaman", "giderim\ngidersin\ngider", "gideriz\ngidersiniz\ngiderler" )
+    r.fileout("gitmek")
+  end
+
 
   #  ------------------------------------------------------------
   #  ------------------------------------------------------------

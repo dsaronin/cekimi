@@ -85,4 +85,4 @@ config/database.yml
 *.dump
 .bashrc
 .foreman
-
+*.pdf

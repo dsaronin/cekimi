@@ -10,8 +10,6 @@
 class GenPdf
   #  include Prawn::View
 
-  attr_accessor  :pdf
-
   #  ------------------------------------------------------------
   #  CONSTANTS
   #  ------------------------------------------------------------
@@ -21,17 +19,17 @@ class GenPdf
   DEF_FONT_SIZE = 14
 
   BOX_TITLE_FONT_SIZE = 10
-  BOX_FONT_SIZE = 16
+  BOX_FONT_SIZE = 14
   BOX_TITLE_PADDING = 1.mm
-  BOX_HEIGHT = 32.mm
-  BOX_WIDTH  = 9.cm
+  BOX_HEIGHT = 35.mm
+  BOX_WIDTH  = 92.mm
   BOX_GAP_HORIZONTAL = 1.cm
-  BOX_GAP_VERTICAL = 1.cm
+  BOX_GAP_VERTICAL = 5.mm
   
   BOX_TRANSPARENCY = 0.2
 
-  INNER_INDENT = 10.mm
-  INNER_WIDTH  = 4.cm
+  INNER_INDENT = 5.mm
+  INNER_WIDTH  = 43.mm
   INNER_HEIGHT = 25.mm
 
   HEADING_POSITION = [0,25.cm]
@@ -45,7 +43,8 @@ class GenPdf
   FONT_ARIAL    = "$HOME/.local/share/fonts/Monotype\ Imaging/TrueType/Arial"
   FONT_VERDANA  = "$HOME/.local/share/fonts/Unknown\ Vendor/TrueType/Verdana"
 
-  FONT_ROBOTO_FAMILY   = "/home/daudi/Android/Sdk/platforms/android-28/data/fonts/"
+  # FONT_ROBOTO_FAMILY   = "/home/daudi/Android/Sdk/platforms/android-30/data/fonts/"
+  FONT_ROBOTO_FAMILY   = "/usr/share/fonts/truetype/roboto/unhinted/RobotoTTF/"
 
   ROBOTO_NORMAL   = "Roboto-Regular.ttf"
   ROBOTO_BOLD     = "Roboto-Bold.ttf"
@@ -60,16 +59,21 @@ class GenPdf
   #  CLASS-LEVEL actions & methods
   #  ------------------------------------------------------------
   #  ------------------------------------------------------------
-  def initialize(verb)
+  def initialize( stroke = false)
     @pdf = Prawn::Document.new
     @done_heading = false
     
-    # @pdf.stroke_axis
+    if stroke 
+      @pdf.stroke_axis
+    end
 
-    @filename = verb.downcase + PDF_EXT
     GenPdf.register_fonts( @pdf )
   end
 
+  #  ------------------------------------------------------------
+    #  register_fonts  -- register a new font family
+    #  Roboto
+  #  ------------------------------------------------------------
   def GenPdf.register_fonts( p )
     p.font_families.update(
       'Roboto' => {
@@ -117,7 +121,7 @@ class GenPdf
         }
         #  @pdf.transparent( 0.4 ) { @pdf.stroke_bounds }
       end  # bounding box block
-    end
+    end   # unless
   end
 
   #  -----------------------------------------------------------------
@@ -222,8 +226,8 @@ class GenPdf
   #  -----------------------------------------------------------------
   #  fileout  -- outputs the pdf file
   #  -----------------------------------------------------------------
-  def fileout()
-    @pdf.render_file( @filename )
+  def fileout(verb)
+    @pdf.render_file( verb.downcase + PDF_EXT )
   end
  
 end  # class GenPdf
