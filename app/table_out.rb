@@ -99,7 +99,7 @@ class TableOut
   #    pair_tables -- true if output pair of neg/poz tables
   #  ----------------------------------------------------------------
   def show_table( pair_tables )
-    @pdf.heading(@verb_infinitive.capitalize)
+    @pdf.heading(@verb_infinitive)
 
     if pair_tables && @my_pair && !@my_pair.is_empty?
     then

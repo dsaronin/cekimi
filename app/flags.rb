@@ -14,6 +14,7 @@ class Flags
   NEGPOZ_PAIR     = true  # conjugate positive-negative pairs
   CONJUGATE_CHAIN = true  # repeatedly conjugate chain of rules
   FULL_RULE_LIST  = false # true if list ALL cekimi rules
+  RENDER_PDF      = false # true if render as pdf
   LOG_LEVEL_QUIET    = Logger::WARN 
   LOG_LEVEL_VERBOSE  = Logger::DEBUG 
 
@@ -26,6 +27,7 @@ class Flags
   FLAG_PAIR_CONJUGATE    = "p"
   FLAG_FULL_RULE         = "f"
   FLAG_LOG_LEVEL         = "z"
+  FLAG_RENDER_PDF        = "r"
 
   #  ------------------------------------------------------------
   #  ------------------------------------------------------------
@@ -42,7 +44,8 @@ class Flags
       FLAG_CHAIN_CONJUGATE   =>  CONJUGATE_CHAIN,
       FLAG_PAIR_CONJUGATE    =>  NEGPOZ_PAIR,
       FLAG_FULL_RULE         =>  FULL_RULE_LIST,
-      FLAG_LOG_LEVEL         =>  LOG_LEVEL_QUIET
+      FLAG_LOG_LEVEL         =>  LOG_LEVEL_QUIET,
+      FLAG_RENDER_PDF        =>  RENDER_PDF
     }
   end
 
@@ -67,7 +70,8 @@ class Flags
       FLAG_CHAIN_CONJUGATE + "--conjugate chain, "  +
       FLAG_PAIR_CONJUGATE + "--pair poz/neg conjugate, "  +
       FLAG_FULL_RULE + "--full list of rules, "  +
-      FLAG_LOG_LEVEL + "--verbose/quiet logging"
+      FLAG_LOG_LEVEL + "--verbose/quiet logging, "  +
+      FLAG_RENDER_PDF + "--render pdf"
   end
 
   #  ------------------------------------------------------------
@@ -87,7 +91,7 @@ class Flags
         when /\+/ then fvalue = true
         when /\-/ then fvalue = false
         when /z/i then @flags[FLAG_LOG_LEVEL] = ( fvalue  ?  LOG_LEVEL_QUIET : LOG_LEVEL_VERBOSE )
-        when /[gvcpf]/i then @flags[flg] = fvalue
+        when /[gvcpfr]/i then @flags[flg] = fvalue
         else
           Environ.log_info( "parse_flags unrecognized flag: #{flg}" )
           # nop; ignore flag
@@ -125,6 +129,10 @@ class Flags
 
   def flag_log_level
     @flags[FLAG_LOG_LEVEL]
+  end
+
+  def flag_render_pdf
+    @flags[FLAG_RENDER_PDF]
   end
 
   #  ------------------------------------------------------------

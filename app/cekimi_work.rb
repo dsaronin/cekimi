@@ -194,7 +194,7 @@ private
         my_infinitive ||= table.verb_infinitive.downcase   # latch infinitive
         table.show_table( Environ.flags.flag_pair_conjugate )
       end   # do block
-      p.fileout( my_infinitive )
+      p.fileout( my_infinitive ) if Environ.flags.flag_render_pdf
   #  ------------------------------------------------------------
 
     rescue ArgumentError

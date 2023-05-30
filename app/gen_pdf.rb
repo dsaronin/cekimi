@@ -34,7 +34,7 @@ class GenPdf
   INNER_HEIGHT = 25.mm
 
   HEADING_POSITION = [0,25.cm]
-  HEADING_HEIGHT = 3.cm
+  HEADING_HEIGHT = 35.mm
   HEADING_WIDTH = 19.cm
   HEADING_PADDING = 5.mm
   HEADING_FONT_SIZE = 64
@@ -103,10 +103,25 @@ class GenPdf
   #  -----------------------------------------------------------------
   #  -----------------------------------------------------------------
 
+  #  -----------------------------------------------------------------
+  #  turk_cap  -- special handling for capitalizing a turkish word
+  #  returns
+  #    new string with first letter capitalized
+  #  -----------------------------------------------------------------
+  def turk_cap( str )
+    s = str.capitalize
+    s[0] = case str[0]
+           when /i/i  then  "İ"
+           when /ı/i  then  "I"
+           else
+             str[0]
+           end   # case
+    return s          
+  end
 
   #  -----------------------------------------------------------------
   #  heading -- renders the heading with verb and possible definition
-  #  verb,definition
+  #  verb
   #  -----------------------------------------------------------------
   def heading( str )
     unless @done_heading
@@ -118,7 +133,7 @@ class GenPdf
       ) do
         @pdf.font_size HEADING_FONT_SIZE 
         @pdf.pad( HEADING_PADDING ) {
-          @pdf.text( str, style: :bold )
+          @pdf.text( turk_cap(str), style: :bold )
         }
         #  @pdf.transparent( 0.4 ) { @pdf.stroke_bounds }
       end  # bounding box block
