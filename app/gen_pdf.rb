@@ -20,6 +20,7 @@ class GenPdf
 
   BOX_TITLE_FONT_SIZE = 10
   BOX_FONT_SIZE = 14
+  BOX_MIN_FONT  =  8
   BOX_TITLE_PADDING = 1.mm
   BOX_HEIGHT = 35.mm
   BOX_WIDTH  = 92.mm
@@ -43,7 +44,7 @@ class GenPdf
   FONT_ARIAL    = "$HOME/.local/share/fonts/Monotype\ Imaging/TrueType/Arial"
   FONT_VERDANA  = "$HOME/.local/share/fonts/Unknown\ Vendor/TrueType/Verdana"
 
-  FONT_ROBOTO_FAMILY   = "/home/daudi/Android/Sdk/platforms/android-30/data/fonts/"
+  FONT_ROBOTO_FAMILY   = "/home/daudi/Android/Sdk/platforms/android-29/data/fonts/"
   # FONT_ROBOTO_FAMILY   = "/usr/share/fonts/truetype/roboto/unhinted/RobotoTTF/"
 
   ROBOTO_NORMAL   = "Roboto-Regular.ttf"
@@ -150,25 +151,28 @@ class GenPdf
 
       inner_top = @pdf.cursor  # remember inner columns top pt
 
-      # left column
-      @pdf.bounding_box( 
-          [INNER_INDENT,inner_top], 
-          width: INNER_WIDTH, 
-          height: INNER_HEIGHT 
-      ) do
         @pdf.font_size BOX_FONT_SIZE
-        @pdf.text(left_col, style: :bold)
-      end
+      # left column
+      @pdf.text_box( 
+          left_col,
+          at: [INNER_INDENT,inner_top], 
+          width: INNER_WIDTH, 
+          height: INNER_HEIGHT,
+          overflow: :shrink_to_fit,
+          min_font_size: BOX_MIN_FONT,
+          style: :bold
+      ) 
 
       # right column
-      @pdf.bounding_box( 
-          [INNER_INDENT+INNER_WIDTH,inner_top], 
+      @pdf.text_box( 
+          right_col,
+          at: [INNER_INDENT+INNER_WIDTH,inner_top], 
           width: INNER_WIDTH, 
-          height: INNER_HEIGHT 
-      ) do
-        @pdf.font_size BOX_FONT_SIZE
-        @pdf.text(right_col, style: :bold)
-      end
+          height: INNER_HEIGHT,
+          overflow: :shrink_to_fit,
+          min_font_size: BOX_MIN_FONT,
+          style: :bold
+      )
 
 
     end  # table bounding box
@@ -198,24 +202,28 @@ class GenPdf
       inner_top = @pdf.cursor  # remember inner columns top pt
 
       # left column
-      @pdf.bounding_box( 
-          [INNER_INDENT,inner_top], 
+      @pdf.font_size BOX_FONT_SIZE
+      @pdf.text_box( 
+          left_col,
+          at: [INNER_INDENT,inner_top], 
           width: INNER_WIDTH, 
-          height: INNER_HEIGHT 
-      ) do
-        @pdf.font_size BOX_FONT_SIZE
-        @pdf.text(left_col, style: :bold)
-      end
+          height: INNER_HEIGHT,
+          overflow: :shrink_to_fit,
+          min_font_size: BOX_MIN_FONT,
+          style: :bold
+      )
 
       # right column
-      @pdf.bounding_box( 
-          [INNER_INDENT+INNER_WIDTH,inner_top], 
+      @pdf.font_size BOX_FONT_SIZE
+      @pdf.text_box( 
+          right_col,
+          at: [INNER_INDENT+INNER_WIDTH,inner_top], 
           width: INNER_WIDTH, 
-          height: INNER_HEIGHT 
-      ) do
-        @pdf.font_size BOX_FONT_SIZE
-        @pdf.text(right_col, style: :bold)
-      end
+          height: INNER_HEIGHT,
+          overflow: :shrink_to_fit,
+          min_font_size: BOX_MIN_FONT,
+          style: :bold
+      )
 
 
     end  # table bounding box
