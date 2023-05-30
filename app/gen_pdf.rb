@@ -43,8 +43,8 @@ class GenPdf
   FONT_ARIAL    = "$HOME/.local/share/fonts/Monotype\ Imaging/TrueType/Arial"
   FONT_VERDANA  = "$HOME/.local/share/fonts/Unknown\ Vendor/TrueType/Verdana"
 
-  # FONT_ROBOTO_FAMILY   = "/home/daudi/Android/Sdk/platforms/android-30/data/fonts/"
-  FONT_ROBOTO_FAMILY   = "/usr/share/fonts/truetype/roboto/unhinted/RobotoTTF/"
+  FONT_ROBOTO_FAMILY   = "/home/daudi/Android/Sdk/platforms/android-30/data/fonts/"
+  # FONT_ROBOTO_FAMILY   = "/usr/share/fonts/truetype/roboto/unhinted/RobotoTTF/"
 
   ROBOTO_NORMAL   = "Roboto-Regular.ttf"
   ROBOTO_BOLD     = "Roboto-Bold.ttf"
