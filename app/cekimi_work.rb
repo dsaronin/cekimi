@@ -26,7 +26,8 @@ class CekimiWork
   end
 
   #  ------------------------------------------------------------
-  #  initialize  -- creates a new cekimi system work object
+  #  cekimi  -- creates a new cekimi system work object
+  #  CLI entry point
   #  ------------------------------------------------------------
   def cekimi()
     setup_work()
@@ -36,20 +37,21 @@ class CekimiWork
     return 1
   end
 
-private
+  # private -- can't be private when accessing from sinatra.rb
 
   #  ------------------------------------------------------------
   #  setup_work  -- handles initializing cekimi system
   #  ------------------------------------------------------------
   def setup_work()
     Environ.log_info( "starting..." )
-    Environ.put_message "\n\t#{ Environ.app_name }: otomatik fiil çekimi yazılımı; İstemde bir fiil girin.\n"
   end
 
   #  ------------------------------------------------------------
   #  do_work  -- handles primary cekimi stuff
+  #  CLI usage only
   #  ------------------------------------------------------------
   def do_work()
+    Environ.put_message "\n\t#{ Environ.app_name }: otomatik fiil çekimi yazılımı; İstemde bir fiil girin.\n"
       # loop for command prompt & user input
     begin
       Environ.put_prompt("\n#{ Environ.app_name } > ")  
@@ -66,6 +68,7 @@ private
 
   #  ------------------------------------------------------------
   #  parse_commands -- parses the command string and executes commands
+  #  CLI usage only
   #  ------------------------------------------------------------
   #  args:
   #   cmdlist: array of syntatical elements
