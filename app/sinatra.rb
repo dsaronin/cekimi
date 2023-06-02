@@ -6,6 +6,7 @@
 #
 
   require_relative 'cekimi_work'
+  require 'sinatra'
 
   cw = CekimiWork.new
   cw.setup_work()    # initialization of everything
