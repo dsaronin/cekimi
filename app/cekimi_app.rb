@@ -9,12 +9,40 @@
 
 class CekimiApp < Sinatra::Application
   set :root, File.dirname(__FILE__)
+
   #  ------------------------------------------------------------
   #  ------------------------------------------------------------
 
   get '/' do
     "Selam dünya! Çekimi: otomatik fiil çekimi yazılımı" 
   end
+
+  get '/list' do
+    "cekimi list"
+  end
+
+  get '/status' do
+    "cekimi status"
+  end
+
+# http://localhost:3000/conj/f=+abc
+  get '/flags/:f' do
+    "cekimi flags #{params[:f]}"
+  end
+
+  get '/help' do
+    "cekimi help"
+  end
+
+  get '/version' do
+    "cekimi version"
+  end
+
+# http://localhost:3000/conj/v=gitmek
+  get '/conj/:v' do
+    "conjugate #{params[:v]}"
+  end
+
  
   #  ------------------------------------------------------------
   #  ------------------------------------------------------------
