@@ -8,7 +8,8 @@
   require "prawn/measurement_extensions"
 
 class GenPdf
-  #  include Prawn::View
+
+  attr_accessor  :accum
 
   #  ------------------------------------------------------------
   #  CONSTANTS
@@ -63,6 +64,7 @@ class GenPdf
   def initialize( stroke = false)
     @pdf = Prawn::Document.new
     @done_heading = false
+    @accum = []    # used to accumulate an entire array of conjugated tables
     
     if stroke 
       @pdf.stroke_axis

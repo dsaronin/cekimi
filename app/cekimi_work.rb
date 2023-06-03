@@ -211,6 +211,7 @@ class CekimiWork
         table.show_table( Environ.flags.flag_pair_conjugate )
       end   # do block
       p.fileout( my_infinitive ) if Environ.flags.flag_render_pdf
+      return p.accum    # returns the accumulated array of table arrays
   #  ------------------------------------------------------------
 
     rescue ArgumentError

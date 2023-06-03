@@ -134,6 +134,7 @@ class TableOut
 
           # PDF: show_left_table
         @pdf.show_left_table( caption_turk, t1_left_col, t1_right_col ) 
+        @pdf.accum << [ [ caption_turk, t1_left_col, t1_right_col], [] ]
 
       end  # if table not empty
     end  # paired tables
@@ -198,6 +199,8 @@ class TableOut
         # PDF: show_right_table
       top_edge = @pdf.show_left_table( caption_left, t1_left_col, t1_right_col ) 
       @pdf.show_right_table( top_edge, caption_right, t2_left_col, t2_right_col ) 
+
+      @pdf.accum << [ [ caption_left, t1_left_col, t1_right_col], [ caption_right, t2_left_col, t2_right_col] ]
 
     end  # if table not empty
  

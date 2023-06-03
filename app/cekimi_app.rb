@@ -25,7 +25,7 @@ class CekimiApp < Sinatra::Application
     CEKIMI.do_status
   end
 
-# http://localhost:3000/conj/f=+abc
+# http://localhost:3000/conj/+abc
   get '/flags/:f' do
     "cekimi flags #{params[:f]}"
     CEKIMI.do_flags( ['flags', params[:f]] )
@@ -39,10 +39,16 @@ class CekimiApp < Sinatra::Application
     CEKIMI.do_version
   end
 
-# http://localhost:3000/conj/v=gitmek
+# http://localhost:3000/conj/gitmek
   get '/conj/:v' do
-    "conjugate #{params[:v]}"
-  end
+    tables = CEKIMI.do_conjugate([params[:v]])
+    str = ""
+    tables.each do |left,right|
+      str << "#{left[0]}: #{left[1].gsub(/\n/,", ")} -- #{left[2].gsub(/\n/,", ")}" +
+      "\t#{right[0]}: #{right[1].gsub(/\n/,", ")} -- #{right[2].gsub(/\n/,", ")}\n" 
+    end   # table output do block
+    "conjugate #{params[:v]}\n#{str}"
+  end   # outer do block
 
  
   #  ------------------------------------------------------------
