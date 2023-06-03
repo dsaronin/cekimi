@@ -149,6 +149,7 @@ class CekimiWork
   def do_status
     sts = ">>>>> status:  #{ CekimiRules.cekimi_rules_count } rules"
     Environ.put_info sts
+    Environ.log_warn "Status Checked"
     return sts
   end
 
