@@ -17,26 +17,26 @@ class CekimiApp < Sinatra::Application
     "Selam dünya! Çekimi: otomatik fiil çekimi yazılımı" 
   end
 
-  get '/list' do
-    "cekimi list"
+  get '/list/:l' do
+    CEKIMI.do_list( ['list'] )
   end
 
   get '/status' do
-    "cekimi status"
+    CEKIMI.do_status
   end
 
 # http://localhost:3000/conj/f=+abc
   get '/flags/:f' do
     "cekimi flags #{params[:f]}"
+    CEKIMI.do_flags( ['flags', params[:f]] )
   end
 
   get '/help' do
-    "cekimi help"
     CEKIMI.do_help
   end
 
   get '/version' do
-    "cekimi version"
+    CEKIMI.do_version
   end
 
 # http://localhost:3000/conj/v=gitmek

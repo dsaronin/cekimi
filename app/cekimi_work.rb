@@ -104,15 +104,18 @@ class CekimiWork
   #  show_rules  -- display all rules in system
   #  ------------------------------------------------------------
   def show_rules()
-    Environ.put_info ">>>>> cekimi rules; starting rule: #{@main_rule}"
+    sts = ">>>>> cekimi rules; starting rule: #{@main_rule}"
+    Environ.put_info sts 
+
     (list_m, list_s) = CekimiRules.list_rules
     Environ.put_info list_m
     Environ.put_info list_s  if Environ.flags.flag_full_rule
 
-
     if Environ.flags.flag_verb_trace
        puts :indef_past.to_s + ":  " + CekimiRules.get_rule( :indef_past ).to_s
     end
+
+    return sts + "\n" + list_m + "\n" + list_s
   end
 
   #  ------------------------------------------------------------
@@ -143,8 +146,10 @@ class CekimiWork
   #  ------------------------------------------------------------
   #  do_status  -- display list of all cekimi rules
   #  ------------------------------------------------------------
-  def do_status        
-    Environ.put_info ">>>>> status #{ CekimiRules.cekimi_rules_count } rules"
+  def do_status
+    sts = ">>>>> status:  #{ CekimiRules.cekimi_rules_count } rules"
+    Environ.put_info sts
+    return sts
   end
 
   #  ------------------------------------------------------------
@@ -158,29 +163,36 @@ class CekimiWork
       Environ.change_log_level( Environ.flags.flag_log_level )
     end
 
-    Environ.put_info ">>>>>  flags: " + Environ.flags.to_s
+    sts = ">>>>>  flags: " + Environ.flags.to_s
+    Environ.put_info sts
+    return sts
   end
 
   #  ------------------------------------------------------------
   #  do_help  -- display help line
   #  ------------------------------------------------------------
-  def do_help        
-    Environ.put_info Environ.cekimi_help
-    Environ.put_info Environ.flags.to_help
+  def do_help
+    sts = Environ.cekimi_help + "\n" + Environ.flags.to_help 
+    Environ.put_info sts
+    return sts
   end
 
   #  ------------------------------------------------------------
   #  do_version  -- display cekimi version
   #  ------------------------------------------------------------
   def do_version        
-    Environ.put_info Environ.app_name + " v" + Environ.cekimi_version
+    sts = Environ.app_name + " v" + Environ.cekimi_version
+    Environ.put_info sts  
+    return sts
   end
 
   #  ------------------------------------------------------------
   #  do_options  -- display any options
   #  ------------------------------------------------------------
   def do_options        
-    Environ.put_info( ">>>>> options ")
+    sts = ">>>>> options "
+    Environ.put_info  sts  
+    return sts
   end
 
   #  ------------------------------------------------------------
