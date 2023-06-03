@@ -4,6 +4,7 @@ GEM
     daemons (1.4.1)
     eventmachine (1.2.7)
     logger (1.5.3)
+    matrix (0.4.2)
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
     pdf-core (0.9.0)
@@ -40,6 +41,7 @@ PLATFORMS
 
 DEPENDENCIES
   logger
+  matrix (~> 0.4)
   pp
   prawn
   rack

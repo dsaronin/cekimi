@@ -15,6 +15,6 @@ run CekimiApp
 # notes
 # thin -R config.ru -a 127.0.0.1 -p 8080 start
 #
-# http://localhost:4567/
+# http://localhost:3000/
 # curl http://localhost:4567/ -H "My-header: my data"
 
