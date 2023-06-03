@@ -2,16 +2,13 @@
 # Çekimi: Türkçe Fiil Çekimi
 # Copyright (c) 2023 David S Anderson, All Rights Reserved
 #
-# sinatra.rb  -- starting point for sinatra web app
+# cekimi_app.rb  -- starting point for sinatra web app
 #
 
-  require_relative 'cekimi_work'
   require 'sinatra'
 
-  cw = CekimiWork.new
-  cw.setup_work()    # initialization of everything
-
-
+class CekimiApp < Sinatra::Application
+  set :root, File.dirname(__FILE__)
   #  ------------------------------------------------------------
   #  ------------------------------------------------------------
 
@@ -21,4 +18,4 @@
  
   #  ------------------------------------------------------------
   #  ------------------------------------------------------------
- 
+end  # CekimiApp 
