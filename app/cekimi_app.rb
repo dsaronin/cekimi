@@ -32,6 +32,7 @@ class CekimiApp < Sinatra::Application
 
   get '/help' do
     "cekimi help"
+    CEKIMI.do_help
   end
 
   get '/version' do
