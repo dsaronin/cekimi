@@ -20,7 +20,7 @@ class Environ
 # constants ... #TODO replace with config file?
   APP_NAME = "Çekimi"
   APP_NAME_HEAD = APP_NAME + ": "
-  CEKIMI_VERSION = "0.01"
+  CEKIMI_VERSION = "1.01"
   CEKIMI_HELP = "list (l), status (s), options (o), help (h), quit (q), exit (x)"
   #  ------------------------------------------------------------
   EXIT_CMD  = "q"  # default CLI exit command used if EOF

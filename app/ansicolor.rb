@@ -104,7 +104,7 @@ module AnsiColor
 
 # helper methods to print warnings, information, prompts, and errors to STDOUT
     def put_warn(s)   puts wrapGreenBold(s) end
-    def put_info(s)   puts wrapCyan(s)      end
+    def put_info(s)   puts wrapCyan(s) if Environ.flags.flag_cli_output  end
     def put_error(s)  puts wrapRedBold(s)   end
 
     def put_prompt(s) print wrapYellow(s)    end
