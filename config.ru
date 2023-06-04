@@ -5,8 +5,15 @@ require_relative './app/cekimi_work'
 require_relative './app/cekimi_app'
 
 configure do
+
   CEKIMI = CekimiWork.new 
   CEKIMI.setup_work()    # initialization of everything
+
+  PUBLIC_DIR = File.join(File.dirname(__FILE__), 'public')
+  set :public_folder, PUBLIC_DIR
+  puts "PUBLIC_DIR: #{PUBLIC_DIR}"
+  # set :root, File.dirname(__FILE__)
+
 end  # configure
 
 run CekimiApp
