@@ -14,29 +14,34 @@ class CekimiApp < Sinatra::Application
   #  ------------------------------------------------------------
 
   get '/' do
-    "Selam dünya! Çekimi: otomatik fiil çekimi yazılımı" 
+    @greeting = "Selam dünya! Çekimi: otomatik fiil çekimi yazılımı" 
+    haml :index
   end
 
   get '/list/:l' do
-    CEKIMI.do_list( ['list'] )
+    @list = CEKIMI.do_list( ['list'] ).split(/\n/)
+    haml :list
   end
 
   get '/status' do
-    CEKIMI.do_status
+    @status = CEKIMI.do_status
+    haml :status
   end
 
 # http://localhost:3000/conj/+abc
   get '/flags/:f' do
-    "cekimi flags #{params[:f]}"
-    CEKIMI.do_flags( ['flags', params[:f]] )
+    @flags = CEKIMI.do_flags( ['flags', params[:f]] ).split /, /
+    haml :flags
   end
 
   get '/help' do
-    CEKIMI.do_help
+    @help = CEKIMI.do_help
+    haml :help
   end
 
   get '/version' do
-    CEKIMI.do_version
+    @version = CEKIMI.do_version
+    haml :version
   end
 
 # http://localhost:3000/conj/gitmek
@@ -47,7 +52,9 @@ class CekimiApp < Sinatra::Application
       str << "#{left[0]}: #{left[1].gsub(/\n/,", ")} -- #{left[2].gsub(/\n/,", ")}" +
       "\t#{right[0]}: #{right[1].gsub(/\n/,", ")} -- #{right[2].gsub(/\n/,", ")}\n" 
     end   # table output do block
-    "conjugate #{params[:v]}\n#{str}"
+    @verb = params[:v]
+    @table_array = str.split(/\n/)
+    haml  :conjugate
   end   # outer do block
 
  
