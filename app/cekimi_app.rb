@@ -25,7 +25,7 @@ class CekimiApp < Sinatra::Application
 
   get '/status' do
     @status = CEKIMI.do_status
-    haml :status
+    haml :status, :escape_html => false
   end
 
 # http://localhost:3000/conj/+abc

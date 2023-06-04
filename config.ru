@@ -14,6 +14,8 @@ configure do
   puts "PUBLIC_DIR: #{PUBLIC_DIR}"
   # set :root, File.dirname(__FILE__)
 
+  set :haml, { escape_html: false }
+
 end  # configure
 
 run CekimiApp
