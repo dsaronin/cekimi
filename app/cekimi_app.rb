@@ -50,7 +50,7 @@ class CekimiApp < Sinatra::Application
     str = ""
     tables.each do |left,right|
       str << "#{left[0]}: #{left[1].gsub(/\n/,", ")} -- #{left[2].gsub(/\n/,", ")}" +
-      "\t#{right[0]}: #{right[1].gsub(/\n/,", ")} -- #{right[2].gsub(/\n/,", ")}\n" 
+      "<br>#{right[0]}: #{right[1].gsub(/\n/,", ")} -- #{right[2].gsub(/\n/,", ")}\n" 
     end   # table output do block
     @verb = params[:v]
     @table_array = str.split(/\n/)

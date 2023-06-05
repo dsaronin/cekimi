@@ -147,9 +147,8 @@ class CekimiWork
   #  do_status  -- display list of all cekimi rules
   #  ------------------------------------------------------------
   def do_status
-    sts = ">>>>> status:  #{ CekimiRules.cekimi_rules_count } rules"
-    Environ.put_info sts
-    Environ.log_warn "Status Checked"
+    sts = "#{ CekimiRules.cekimi_rules_count } rules"
+    Environ.put_info ">>>>> status:  " + sts
     return sts
   end
 
@@ -164,8 +163,8 @@ class CekimiWork
       Environ.change_log_level( Environ.flags.flag_log_level )
     end
 
-    sts = ">>>>>  flags: " + Environ.flags.to_s
-    Environ.put_info sts
+    sts = Environ.flags.to_s
+    Environ.put_info ">>>>>  flags: " + sts
     return sts
   end
 
