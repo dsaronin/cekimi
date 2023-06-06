@@ -725,7 +725,7 @@ img.app_button {
 
 .inner-block-work-areas {
   color: #0f1d23;
-  background-color: #f6f0e0;
+  background-color: #fbfbf8;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
@@ -776,6 +776,8 @@ img.icon-middle {
 }
 
 img.logo {
+  margin-left: 1em;
+  margin-top: 2px;
   float: left;
 }
 

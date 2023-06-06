@@ -14,7 +14,7 @@ class CekimiApp < Sinatra::Application
   #  ------------------------------------------------------------
 
   get '/' do
-    @greeting = "Selam dünya! Çekimi: otomatik fiil çekimi yazılımı" 
+    @greeting = "Merhaba, kolay gelsin. Buyurun istemde bir fiil girin." 
     haml :index
   end
 
