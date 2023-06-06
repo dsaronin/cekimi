@@ -45,8 +45,20 @@ class GenPdf
   FONT_ARIAL    = "$HOME/.local/share/fonts/Monotype\ Imaging/TrueType/Arial"
   FONT_VERDANA  = "$HOME/.local/share/fonts/Unknown\ Vendor/TrueType/Verdana"
 
-  FONT_ROBOTO_FAMILY   = "/home/daudi/Android/Sdk/platforms/android-29/data/fonts/"
-  # FONT_ROBOTO_FAMILY   = "/usr/share/fonts/truetype/roboto/unhinted/RobotoTTF/"
+
+  JABARI_ROBOTO_FAMILY   = "/home/daudi/Android/Sdk/platforms/android-29/data/fonts/"
+  AKILI_ROBOTO_FAMILY   = "/usr/share/fonts/truetype/roboto/unhinted/RobotoTTF/"
+
+  SYS_NAME = `uname -n`
+  USE_FONT = ( SYS_NAME =~ /(jabari)|(akili)/ ?  "Roboto" : "Helvetica" )
+
+  FONT_ROBOTO_FAMILY =  case  SYS_NAME
+                        when /jabari/ then JABARI_ROBOTO_FAMILY
+                        when /akili/  then AKILI_ROBOTO_FAMILY
+                        else
+                          nil
+                        end
+
 
   ROBOTO_NORMAL   = "Roboto-Regular.ttf"
   ROBOTO_BOLD     = "Roboto-Bold.ttf"
@@ -78,18 +90,22 @@ class GenPdf
     #  Roboto
   #  ------------------------------------------------------------
   def GenPdf.register_fonts( p )
-    p.font_families.update(
-      'Roboto' => {
-        :normal   => FONT_ROBOTO_FAMILY+ROBOTO_NORMAL,
-        :italic   => FONT_ROBOTO_FAMILY+ROBOTO_ITALIC,
-        :bold     => FONT_ROBOTO_FAMILY+ROBOTO_BOLD,
-        :black    => FONT_ROBOTO_FAMILY+ROBOTO_BLACK,
-        :light    => FONT_ROBOTO_FAMILY+ROBOTO_LIGHT,
-        :medium   => FONT_ROBOTO_FAMILY+ROBOTO_MEDIUM,
-        :lt_italic   => FONT_ROBOTO_FAMILY+ROBOTO_LTITALIC
-      }
-    )
-    p.fallback_fonts(["Roboto"])
+
+    unless FONT_ROBOTO_FAMILY.nil?
+      p.font_families.update(
+        'Roboto' => {
+          :normal   => FONT_ROBOTO_FAMILY+ROBOTO_NORMAL,
+          :italic   => FONT_ROBOTO_FAMILY+ROBOTO_ITALIC,
+          :bold     => FONT_ROBOTO_FAMILY+ROBOTO_BOLD,
+          :black    => FONT_ROBOTO_FAMILY+ROBOTO_BLACK,
+          :light    => FONT_ROBOTO_FAMILY+ROBOTO_LIGHT,
+          :medium   => FONT_ROBOTO_FAMILY+ROBOTO_MEDIUM,
+          :lt_italic   => FONT_ROBOTO_FAMILY+ROBOTO_LTITALIC
+        }
+      )
+      p.fallback_fonts([USE_FONT])
+    end
+
   end
    
   #  -----------------------------------------------------------------
@@ -148,12 +164,12 @@ class GenPdf
   #  
   #  -----------------------------------------------------------------
   def show_left_table(title, left_col, right_col)
-    @pdf.font "Roboto"
+    @pdf.font USE_FONT
     @pdf.move_down BOX_GAP_VERTICAL
 
     outer_top = @pdf.cursor
 
-    @pdf.font 'Roboto'
+    @pdf.font USE_FONT
     @pdf.bounding_box(
       [0, outer_top],
       width: BOX_WIDTH,
@@ -203,7 +219,7 @@ class GenPdf
   #  
   #  -----------------------------------------------------------------
   def show_right_table( top_edge, title, left_col, right_col )
-    @pdf.font "Roboto"
+    @pdf.font USE_FONT
 
     @pdf.bounding_box(
       [BOX_WIDTH + BOX_GAP_HORIZONTAL, top_edge ],
