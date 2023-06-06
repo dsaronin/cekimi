@@ -5,12 +5,13 @@
 // ---------------------------------------------------------------------
 $BASIC_FG: black
 $BASIC_BG: white
+$TURKIYE_RED: #E30A17
 
 $FG_ERROR: #c6130a
 $FG_ERROR_SHADOW: #620d10
 
 $BG_HEADER: $BASIC_FG
-$FG_HEADER: #8daeae
+$FG_HEADER: $TURKIYE_RED  // #8daeae
 $HV_HEADER: $BASIC_BG
 
 $BG_FOOTER: $BG_HEADER
@@ -51,7 +52,7 @@ $FG_ASIDEBOX_H1: #414141
 $FG_ASIDEBOX_H2: #989898
 $FG_ASIDEBOX_H3: $BG_INFORMATIONBOX
 
-$BG_WORK: $BASIC_BG
+$BG_WORK: #f6f0e0
 $BG_WORK_HIGHLIGHT: #eaedee
 $FG_WORK_H1: #1a262c
 $FG_WORK_H1_FADE: #858585
@@ -72,7 +73,7 @@ $BG_WORK_APP_BUTTON: #152429
 $BG_WORK_APP_BUTTON_2: #777c81
 $FG_WORK_APP_BUTTON: #daddde
 
-$TABLE_HEADER_BKGD_LT: $FG_WORK_HR + #101010   // #eaedee
+$TABLE_HEADER_BKGD_LT: #c8c8c8  // $FG_WORK_HR + #101010 
 $TABLE_HEADER_BKGD_DK: #f0f0f0
 
 $FG_ACTION_BUTTON: #daddde
@@ -107,8 +108,9 @@ $HERO_PLAN_FG3: #6caeff  // from pricing
 
 $CENTRAL_WIDTH: 740px
 $ASIDE_WIDTH: 215px
-$HORIZONTAL_MARGIN: 7px
-$CONTAINER_WIDTH: $CENTRAL_WIDTH + $ASIDE_WIDTH + $HORIZONTAL_MARGIN
+$HORIZONTAL_MARGIN: 10px
+// $CONTAINER_WIDTH: $CENTRAL_WIDTH + $ASIDE_WIDTH + $HORIZONTAL_MARGIN
+$CONTAINER_WIDTH: $CENTRAL_WIDTH + $HORIZONTAL_MARGIN
 $CONTAINER_WIDTH_PDF: 185mm
 $PAGE_HEIGHT: 225mm
 
@@ -188,7 +190,7 @@ $SUBTAB_SPACING: 5px
 
 
 =ACTION_COMMON
-  border: solid 2px $BG_ACTION_BAR_BUTTON_DK - #202020
+  border: solid 2px #78DB78  // $BG_ACTION_BAR_BUTTON_DK - #202020
   text-transform: lowercase
   text-decoration: none
   font-weight: bold
@@ -231,9 +233,9 @@ a
   font-size: small
 
 select
-  color: $FG_INFORMATIONBOX - #484848
+  color: #6161A1  // $FG_INFORMATIONBOX - #484848
   background: $TABLE_HEADER_BKGD_DK
-  border-color: $FG_INFORMATIONBOX + #383838
+  border-color: #E1E1F1  // $FG_INFORMATIONBOX + #383838
   cursor: pointer
   font-weight: bold
   // padding: 2px 3px 2px 3px
@@ -280,6 +282,12 @@ body
 #header
   background-color: $BG_HEADER
   height: $HEADER_HEIGHT
+  
+  p
+    color: $FG_HEADER
+    padding: 8px 2px
+    font-size: medium
+    font-weight: bold
 
 #nav
   padding: 5px 10px
@@ -741,7 +749,7 @@ img.app_button
 
 .inner-block-work-areas
   color: $BG_CENTRALBOX
-  background-color: $BASIC_BG
+  background-color: $BG_WORK
   +BEVEL_CORNER(3px)
   border: unquote("1px solid #{$FG_CENTRALBOX_BORDER}")
 
@@ -929,9 +937,9 @@ fieldset
     padding: 0.5em
     margin-bottom: 10px
     border: unquote("1px solid #{$FG_INPUTBOX}")
-    background: $BG_INPUTFORM - #080808
+    background: #DAE9F4  // $BG_INPUTFORM - #080808
   &.teamarea
-    background: $BG_INPUTFORM - #202020
+    background: #C2D1DC  // $BG_INPUTFORM - #202020
   &.wizard-fieldset
     margin: 0.5em 0
     border: none
@@ -1820,7 +1828,7 @@ input.paypal-button
     text-decoration: none
 
     &:hover, &:focus
-      border-color: $FG_INFORMATIONBOX - #202020
+      border-color: #8989A9  // $FG_INFORMATIONBOX - #202020
       background: $FG_INFORMATIONBOX
       color: white
 

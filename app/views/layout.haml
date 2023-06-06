@@ -1,21 +1,34 @@
+-# (c) 2023 David Anderson / Cekimi, All rights reserved; 
+-# modifications, from whatever source, become IP of David Anderson
+-# 
+
 !!! 1.1
-%html(xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en")
+%html(xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en") 
   %head
     %meta(http-equiv="content-type" content="text/html;charset=UTF-8")
     %meta(http-equiv="X-UA-Compatible" content="chrome=1")
+    %link(rel="stylesheet" href="/css/baseline_reset.css")
     %link(rel="stylesheet" href="/css/stylesheet.css")
+    %link(rel="icon" sizes="192x192" href="/favicon.ico" type="image/x-icon")
+
+    -# %meta(name="google-site-verification" content="GabS43D6h2OysVqJsuKsq1pE7VJwaY9tMuC_fdehgRM")
 
     %title Çekimi
 
   %body
-    #wrapper
-      #header
-        %h1 Çekimi: otomatik fiil çekimi yazılımı
-      #content
-        != yield
-      #footer
+    #header
+      .main-container
+        %img{ :src => "/logo-180.png", :class => 'logo', :alt => 'çekimi logo' }
+        %p Çekimi: otomatik fiil çekimi yazılımı
+    
+    .main-container.clearfix2{ :id => 'work-section' }
+      .columnLeft
+        #inner-workLeft.inner-block-work-areas
+          != yield
+    
+    #footer
+      .main-container{ :class => 'main-central-positioning' }
         %p
           &copy;&nbsp;
           Copyright 2023 David S. Anderson, All rights reserved 
           &emsp;&bull;&emsp;v 1.01 &ensp;
-          
