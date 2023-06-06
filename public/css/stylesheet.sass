@@ -1,0 +1,1855 @@
+// ASSUMPTION: baseline_reset.css resets whatever browsers css settings
+
+// ---------------------------------------------------------------------
+// standard color & other variables
+// ---------------------------------------------------------------------
+$BASIC_FG: black
+$BASIC_BG: white
+
+$FG_ERROR: #c6130a
+$FG_ERROR_SHADOW: #620d10
+
+$BG_HEADER: $BASIC_FG
+$FG_HEADER: #8daeae
+$HV_HEADER: $BASIC_BG
+
+$BG_FOOTER: $BG_HEADER
+$FG_FOOTER: #49466d
+
+$BG_CENTRALBOX: #0f1d23
+$FG_CENTRALBOX: #f7f8f8
+$FG_CENTRALBOX_BORDER: #9f9f9f
+
+$BG_MAINPAGE: #adadec
+$FG_MAINPAGE: $BG_CENTRALBOX
+
+$BG_AUTO_MARGIN: #7D7DBC  //  #C8C8F2
+
+$BG_ALERTBOX: #d9d9f9
+$FG_ALERTBOX: $BG_CENTRALBOX
+$HV_ALERTBOX: #cccccc
+
+$BG_CALL2ACTION: #62151d
+$BG_CALL2ACTION_2: #df2048
+$FG_CALL2ACTION: $BASIC_BG
+$HV_CALL2ACTION: #faffbd
+
+$BG_INFORMATIONBOX: #1d282d
+$FG_INFORMATIONBOX: #a9a9e9
+$FG_INFORMATIONBOX2: #7979b9
+
+$BG_MODAL_INFORMATIONBOX: #d2e1ec
+$FG_MODAL_INFORMATIONBOX: #1d282d
+
+$BG_BIGBUTTON: #1d282d
+$BG_BIGBUTTON_2: #393b3d
+$FG_BIGBUTTON: $FG_INFORMATIONBOX
+$HV_BIGBUTTON: $BASIC_BG
+
+$BG_ASIDEBOX: #eef0f0
+$FG_ASIDEBOX_H1: #414141
+$FG_ASIDEBOX_H2: #989898
+$FG_ASIDEBOX_H3: $BG_INFORMATIONBOX
+
+$BG_WORK: $BASIC_BG
+$BG_WORK_HIGHLIGHT: #eaedee
+$FG_WORK_H1: #1a262c
+$FG_WORK_H1_FADE: #858585
+$FG_WORK_H2: #99a296
+$FG_WORK_H2_A: #399763
+$FG_WORK_H3: $BG_INFORMATIONBOX
+$FG_WORK_H3_TITLE: #cd6283
+$FG_WORK_H3_FADE: #a5a5a5
+$FG_WORK_HR: #b8b8b8
+$FG_WORK_H4: #44484c
+$FG_WORK_H4_BOLD: #4c5b52
+$FG_WORK_H4_FADE: #5f91ec
+$FG_WORK_P: $BG_CENTRALBOX
+$FG_WORK_H3_SUBTTL: #4c5b52
+$FG_ACTION_GROUP: #5f91ec
+
+$BG_WORK_APP_BUTTON: #152429
+$BG_WORK_APP_BUTTON_2: #777c81
+$FG_WORK_APP_BUTTON: #daddde
+
+$TABLE_HEADER_BKGD_LT: $FG_WORK_HR + #101010   // #eaedee
+$TABLE_HEADER_BKGD_DK: #f0f0f0
+
+$FG_ACTION_BUTTON: #daddde
+$BG_ACTION_BUTTON: $BG_INFORMATIONBOX
+$BG_ACTION_BUTTON_SELECTED: #0c7f40
+
+$FG_SUBTAB_BUTTON: $BASIC_BG
+$HV_SUBTAB_BUTTON: #daddde
+$BG_SUBTAB_BUTTON: #989898
+$BG_SUBTAB_BUTTON_SELECTED: #7f7f7f
+
+$FG_ACTION_BAR_BUTTON: #42494a
+$HV_ACTION_BAR_BUTTON: #888888
+$BG_ACTION_BAR_BUTTON_LT: #cbefcb
+$BG_ACTION_BAR_BUTTON_DK: #98fb98
+
+$FG_FORMCAPTION: #040707
+$BG_INPUTFORM: #e2f1fc
+$FG_INPUTLABEL: #687771
+$FG_INPUTBOX: #d2d6d3
+$BG_INPUTBOX: $BASIC_BG
+$FG_SUBMIT: #21363d
+$FG_BASICFORM_P: #4c5b52
+
+$BG_FORM_SUBMIT: #661315
+$FG_FORM_SUBMIT: $BASIC_BG
+
+$FG_INPUTLABEL_DARK: #485751
+$HERO_PLAN_FG3: #6caeff  // from pricing
+
+// DIMENSIONS
+
+$CENTRAL_WIDTH: 740px
+$ASIDE_WIDTH: 215px
+$HORIZONTAL_MARGIN: 7px
+$CONTAINER_WIDTH: $CENTRAL_WIDTH + $ASIDE_WIDTH + $HORIZONTAL_MARGIN
+$CONTAINER_WIDTH_PDF: 185mm
+$PAGE_HEIGHT: 225mm
+
+$CENTRAL_HEIGHT: 335px
+$CENTRAL_WORK_HEIGHT: 450px
+
+$SPLASH_HEIGHT: $CENTRAL_WORK_HEIGHT - 20
+$SPLASH_WIDTH: $CENTRAL_WIDTH - 30
+
+$HEADER_HEIGHT: 35px
+
+$INNER_MEDIUM_HEIGHT: 208px
+$BUTTON_BLOCK_HEIGHT: 72px
+$INNER_FOOTER_RIGHT_HEIGHT: $INNER_MEDIUM_HEIGHT + $BUTTON_BLOCK_HEIGHT + 2
+$ALERT_HEIGHT: 150px
+
+$BUTTON_HEIGHT_XLARGE: 92px
+$BUTTON_HEIGHT_LARGE: 50px
+$BUTTON_HEIGHT_MEDIUM_PLUS: 35px
+$BUTTON_HEIGHT_MEDIUM: 30px
+$BUTTON_HEIGHT_SMALL: 20px
+
+$CENTRAL_MARGIN_TOP: 20px
+$CENTRAL_MARGIN_BTM: 20px
+$CENTRAL_MARGIN_RIGHT: 5px
+$CENTRAL_MARGIN_LEFT: 0px
+
+$CENTRAL_WORK_MARGIN_TOP: 10px
+$CENTRAL_WORK_MARGIN_BTM: 10px
+$CENTRAL_WORK_MARGIN_RIGHT: $CENTRAL_MARGIN_RIGHT
+$CENTRAL_WORK_MARGIN_LEFT: $CENTRAL_MARGIN_LEFT
+
+$ASIDE_INDEX_MARGIN_TOP: $CENTRAL_MARGIN_TOP
+$ASIDE_INDEX_MARGIN_BTM: 0px
+$ASIDE_INDEX_MARGIN_LEFT: 10px
+$ASIDE_INDEX_MARGIN_RIGHT: 0px
+
+$FOOTER_INNER_MARGIN_TOP: 12px
+
+$SUBTAB_WIDTH: 100px
+$SUBTAB_HEIGHT: 20px
+$SUBTAB_SPACING: 5px
+
+// MIX-INS
+
+=SHADOW_BOX($SHADOW, $T, $R, $B, $L)
+  -moz-box-shadow: $SHADOW $T $R $B $L
+  -webkit-box-shadow: $SHADOW $T $R $B $L
+  box-shadow: $SHADOW $T $R $B $L
+  filter: unquote("progid:DXImageTransform.Microsoft.Shadow(color='#{$SHADOW}', Direction=145, Strength=3)")
+
+=BEVEL_CORNER($RADIUS)
+  -moz-border-radius: $RADIUS
+  -webkit-border-radius: $RADIUS
+  border-radius: $RADIUS
+
+=GRADIENT_BOX($LIGHT, $DARK)
+  background-image: unquote("-moz-linear-gradient(bottom, #{$LIGHT}, #{$DARK}, #{$LIGHT} )")
+  background-image: unquote("-webkit-gradient(linear,left bottom, left top, color-stop(0, #{$LIGHT}), color-stop(0.4, #{$DARK}), color-stop(1, #{$LIGHT})  )")
+  filter: unquote("progid:DXImageTransform.Microsoft.gradient(GradientType='0',startColorstr='#{$LIGHT}', endColorstr='#{$DARK}')") /* IE6 & IE7 */
+  -ms-filter: unquote("progid:DXImageTransform.Microsoft.gradient(GradientType='0',startColorstr='#{$LIGHT}', endColorstr='#{$DARK}')") /* IE8 */
+  background-image: unquote("-ms-linear-gradient(bottom, #{$LIGHT}, #{$DARK} )")   /* IE10 */
+
+=GRADIENT_SIMPLE($LIGHT, $DARK)
+  background-image: unquote("-moz-linear-gradient(bottom, #{$LIGHT}, #{$DARK} )")
+  background-image: unquote("-webkit-gradient(linear,left bottom, left top, color-stop(0, #{$LIGHT}), color-stop(1, #{$DARK}) )")
+  // filter: unquote("progid:DXImageTransform.Microsoft.gradient(GradientType='0',startColorstr='#{$LIGHT}', endColorstr='#{$DARK}')") /* IE6 & IE7 */
+  // -ms-filter: unquote("progid:DXImageTransform.Microsoft.gradient(GradientType='0',startColorstr='#{$LIGHT}', endColorstr='#{$DARK}')") /* IE8 */
+  background-image: unquote("-ms-linear-gradient(bottom, #{$LIGHT}, #{$DARK} )")   /* IE10 */
+
+=GRADIENT_SPREAD($LIGHT, $DARK)
+  background-image: unquote("-moz-linear-gradient(bottom, #{$DARK}, #{$LIGHT} )")
+  background-image: unquote("-webkit-gradient(linear,left bottom, left top, color-stop(0, #{$DARK}), color-stop(0.9, #{$LIGHT})  )")
+  // filter: unquote("progid:DXImageTransform.Microsoft.gradient(GradientType='0',startColorstr='#{$LIGHT}', endColorstr='#{$DARK}')") /* IE6 & IE7 */
+  // -ms-filter: unquote("progid:DXImageTransform.Microsoft.gradient(GradientType='0',startColorstr='#{$LIGHT}', endColorstr='#{$DARK}')") /* IE8 */
+  background-image: unquote("-ms-linear-gradient(bottom, #{$LIGHT}, #{$DARK} )")   /* IE10 */
+
+
+=ACTION_COMMON
+  border: solid 2px $BG_ACTION_BAR_BUTTON_DK - #202020
+  text-transform: lowercase
+  text-decoration: none
+  font-weight: bold
+  font-size: small
+  line-height: 1.3em
+  cursor: pointer
+  color: $FG_ACTION_BAR_BUTTON
+  &:hover
+    color: $HV_ACTION_BAR_BUTTON
+
+=ACTION_BAR_BOX
+  +GRADIENT_BOX($BG_ACTION_BAR_BUTTON_LT, $BG_ACTION_BAR_BUTTON_DK)
+  +BEVEL_CORNER(4px)
+  +ACTION_COMMON
+
+// ---------------------------------------------------------------------
+
+html
+  color: $BASIC_FG
+  background-color: $BG_MAINPAGE
+  font-family: "Myriad Web", "Myriad Pro", Helvetica, Verdana, Arial, Tahoma, Sans-Serif
+  &.pdf
+    background: none
+    border: none
+
+strong
+  font-weight: bold
+
+
+em
+  font-style: italic
+
+a, p, li
+  font-style: normal
+  font-weight: normal
+
+a
+  cursor: pointer
+  color: $FG_INFORMATIONBOX
+  font-size: small
+
+select
+  color: $FG_INFORMATIONBOX - #484848
+  background: $TABLE_HEADER_BKGD_DK
+  border-color: $FG_INFORMATIONBOX + #383838
+  cursor: pointer
+  font-weight: bold
+  // padding: 2px 3px 2px 3px
+  &:hover
+    color: $FG_ASIDEBOX_H1
+    background: $TABLE_HEADER_BKGD_LT
+
+body
+  color: $BG_CENTRALBOX
+  +GRADIENT_SPREAD( $BASIC_BG, $BG_AUTO_MARGIN )
+
+  &.modal
+    background: $BASIC_BG
+  &.pdf
+    background: none
+    page-size: portrait
+    border: none
+
+.modal
+  background: $BASIC_BG
+  padding: 10px
+
+.clearfix2:after
+  content: "&nbsp"
+  margin-bottom: 0px
+  display: block
+  height: 0
+  clear: both
+  visibility: hidden
+
+.clearfix:after
+  content: ". "
+  display: block
+  height: 0
+  clear: both
+  visibility: hidden
+
+*
+  html .clearfix
+    height: 1%
+  &:first-child+html .clearfix
+    min-height: 1px
+
+#header
+  background-color: $BG_HEADER
+  height: $HEADER_HEIGHT
+
+#nav
+  padding: 5px 10px
+
+#section
+  margin-top: $CENTRAL_MARGIN_TOP
+  margin-bottom: $CENTRAL_MARGIN_BTM
+
+#work-section
+  margin-top: $CENTRAL_WORK_MARGIN_TOP
+  margin-bottom: $CENTRAL_WORK_MARGIN_BTM
+
+.aside
+  width: $ASIDE_WIDTH
+  float: right
+  overflow: hidden
+
+#footer
+  clear: both
+  background-color: $BG_HEADER
+
+.main-container
+  margin: 0 auto
+  width: $CONTAINER_WIDTH
+
+.pdf-main-container
+  margin: 0 auto
+  width: $CONTAINER_WIDTH_PDF
+
+.main-central-positioning
+  margin-top: $CENTRAL_MARGIN_TOP
+  margin-bottom: $CENTRAL_MARGIN_BTM
+
+.columnLeft
+  float: left
+  width: $CENTRAL_WIDTH
+
+#inner-columnLeft
+  min-height: $CENTRAL_HEIGHT
+
+#inner-workLeft
+  min-height: $CENTRAL_WORK_HEIGHT
+
+#inner-columnRight-index
+  margin-left: $ASIDE_INDEX_MARGIN_LEFT
+
+#inner-columnRight
+  margin-left: $ASIDE_INDEX_MARGIN_LEFT
+  // height: $INNER_MEDIUM_HEIGHT - 2
+
+#modal-main
+  margin: 0
+  padding: 0
+
+#modal-info
+  margin: 0
+  padding: 0
+  p
+    font-size: small
+    padding: 1em
+    strong
+      color: $BG_INPUTFORM
+
+#footer-innerLeft
+  margin: unquote("#{$CENTRAL_MARGIN_TOP} 0px 0 0")
+
+#footer-innerworkLeft
+  margin: unquote("#{$CENTRAL_WORK_MARGIN_TOP} 0px 0 0")
+
+.footer-inner
+  height: $INNER_MEDIUM_HEIGHT
+  p
+    font-size: 18px
+    padding: 0.3em 1em
+    strong
+      color: $BG_INPUTFORM
+  h2
+    font-size: 22px
+    font-weight: bold
+    padding: 1em
+    color: $BG_INPUTFORM
+
+#footer-innerRight
+  padding: 1em 0 1em 0.5em
+  margin-left: $ASIDE_INDEX_MARGIN_LEFT
+  margin-top: $FOOTER_INNER_MARGIN_TOP
+  height: $INNER_FOOTER_RIGHT_HEIGHT
+  p
+    font-size: small
+  a
+    font-size: small
+    color: $FG_INFORMATIONBOX
+    text-decoration: none
+    cursor: pointer
+    &:hover
+      color: $HV_HEADER
+  ul
+    padding: 0 20px
+    li
+      list-style-type: disc
+      list-style-position: outside
+      font-size: 12px
+
+#footer-workRight
+  margin-left: $ASIDE_INDEX_MARGIN_LEFT
+  margin-top: $FOOTER_INNER_MARGIN_TOP
+  height: $INNER_MEDIUM_HEIGHT
+
+#footer-button-block
+  height: 87px
+  margin-top: $FOOTER_INNER_MARGIN_TOP
+  padding: 0
+
+#main-button-block
+  padding-bottom: 10px
+
+#app-button-block
+  margin-left: $ASIDE_INDEX_MARGIN_LEFT
+  width: auto
+  background: none
+
+#alert_box
+  margin-left: $ASIDE_INDEX_MARGIN_LEFT
+  margin-bottom: 9px
+  height: $ALERT_HEIGHT
+  +BEVEL_CORNER(7px)
+  background: $BG_ALERTBOX
+  color: $FG_ALERTBOX
+  img
+    display: block
+    float: left
+    overflow: hidden
+    padding-right: 5px
+    padding-bottom: 5px
+  p
+    padding: 1em
+    color: $FG_ALERTBOX
+    font-size: x-small
+    font-weight: bold
+    text-transform: uppercase
+  a
+    color: $FG_ALERTBOX
+    font-weight: bold
+    font-size: small
+    text-decoration: none
+    border-bottom: 0px none
+    &:hover
+      background-color: $HV_ALERTBOX
+    &:active
+      background-color: $HV_ALERTBOX
+  a.login-action
+    padding-left: 0.5em
+    // margin-right: 18px
+    color: $FG_INPUTLABEL
+    display: in-line
+    font-size: 12px
+    font-weight: normal
+    text-decoration: underline
+    text-align: left
+    &:hover
+      color: $FG_ASIDEBOX_H2
+
+#flash-message
+  margin: 0
+  padding: 0
+
+.block_button
+  float: left
+  width: 170px
+  height: $BUTTON_HEIGHT_XLARGE
+  margin-right: 18px
+  background: #{$BG_BIGBUTTON} image-url("block_button.png") repeat-x
+  &:last-child
+    margin: 0
+  a
+    padding: 24px 0
+    display: block
+    font-size: 20px
+    font-weight: normal
+    text-align: center
+    text-transform: uppercase
+    text-decoration: none
+    color: $FG_BIGBUTTON
+    &:hover
+      color: $HV_HEADER
+  img
+    margin-bottom: -18px
+    margin-right: 10px
+
+#call_to_action_button
+  margin-left: 10px
+  background: #{$BG_CALL2ACTION} image-url("call_to_action.png") repeat-x
+  +BEVEL_CORNER(8px)
+  a
+    display: block
+    text-align: center
+    text-transform: uppercase
+    text-decoration: none
+    font-size: 20px
+    font-weight: bold
+    line-height: 2em
+    color: $BASIC_BG
+    &:hover
+      color: $HV_CALL2ACTION
+  img
+    margin-bottom: -9px
+    margin-left: 5px
+
+.c2a-large
+  height: $BUTTON_HEIGHT_LARGE
+  margin: -18px 0 0 0
+  a
+    padding: 6px 0 0 15px
+    font-size: 26px
+
+.c2a-medium
+  height: $BUTTON_HEIGHT_MEDIUM
+  margin: 5px
+  a
+    padding: 3px 0 0 5px
+    font-size: 18px
+
+.c2a-small, input.c2a-small, a.c2a-small
+  height: $BUTTON_HEIGHT_SMALL
+  margin: 5px
+  background: #{$BG_CALL2ACTION} image-url("call_to_action.png") repeat-x
+  +BEVEL_CORNER(5px)
+  text-align: center
+  text-transform: uppercase
+  border: none
+  text-decoration: none
+  font-size: small
+  font-weight: bold
+  line-height: 1em
+  color: $BASIC_BG
+  &:hover
+    color: $HV_CALL2ACTION
+
+input.btn
+  +ACTION_BAR_BOX
+
+* html input.btn
+  padding: 0.1em 1em
+  font-size: 0.7em
+
+*:first-child+html input.btn
+  padding: 0.1em 1em
+  font-size: 0.7em
+
+input.raquo-btn
+  font-size: medium
+
+.action_button
+  float: left
+  width: 138px
+  height: $BUTTON_HEIGHT_MEDIUM
+  margin-right: 12px
+  background: $BG_WORK_APP_BUTTON
+  +BEVEL_CORNER(5px)
+  &:last-child
+    margin: 0
+
+img.action_button
+  position: relative
+  left: 6px
+  top: 1px
+  width: 23px
+  height: 23px
+
+.action_button a
+  display: block
+  padding-top: 3px
+  padding-right: 10px
+  font-size: 12px
+  line-height: 27px
+  font-weight: bold
+  text-align: center
+  text-decoration: none
+  text-transform: uppercase
+  color: $FG_ACTION_BUTTON
+  &:hover
+    color: $HV_HEADER
+
+// selected-action will override default action-button background
+.selected-action
+  background: #{$BG_ACTION_BUTTON_SELECTED} image-url("selected_action_bkgd.png") repeat-x
+  img
+    background-color: $BG_ACTION_BUTTON_SELECTED
+
+#selected-pointer
+  position: absolute
+  top: 71px
+  left: 50%
+  margin-left: -470px
+  z-index: 2
+  background: image-url("selected_pointer.png") no-repeat
+
+#subtab-button-block
+  position: absolute
+  top: 235px
+  left: 50%
+  margin-left: -642px
+  z-index: 2
+  -webkit-transform: rotate(-90deg)
+  -moz-transform: rotate(-90deg)
+  -ms-transform: rotate(-90deg)
+  -o-transform: rotate(-90deg)
+  transform: rotate(-90deg)
+  /* Should be unset in IE9+ I think. */
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=4)
+
+.subtab_button
+  float: left
+  width: $SUBTAB_WIDTH
+  height: $SUBTAB_HEIGHT
+  margin-right: $SUBTAB_SPACING
+  +GRADIENT_BOX(#b0bbbe, #6a6e8c)
+  +BEVEL_CORNER(5px)
+  &:last-child
+    margin: 0
+  a
+    display: block
+    font-size: 12px
+    line-height: $SUBTAB_HEIGHT
+    font-weight: bold
+    text-align: center
+    text-decoration: none
+    text-transform: uppercase
+    color: $FG_SUBTAB_BUTTON
+    &:hover
+      color: $HV_SUBTAB_BUTTON
+
+// selected-subtab will override default subtab-button background
+.selected-subtab
+  +GRADIENT_BOX(#b0bbbe, #152429)
+  height: 22px
+
+.button-toggle
+  float: right
+  margin-right: 1em
+
+#action_bar
+  position: relative
+  top: 0
+  padding-bottom: 3px
+
+  .icon-id-group
+    display: block 
+    float: left
+
+  figure
+    display: block 
+    position: relative 
+    overflow: hidden 
+    float: left
+    margin: 0
+
+  figcaption 
+    margin-top: -3px
+    text-align: center
+    color: $FG_SUBMIT
+    font-size: 8px
+
+  img
+    height: 32px
+    width: 32px
+    margin: 0 5px
+    border: 1px solid white
+
+    &:hover
+      border: 1px solid $TABLE_HEADER_BKGD_LT
+      background: $FG_INFORMATIONBOX
+
+.view-control, .filter-control
+  text-align: right
+  display: block 
+
+  select
+    position: relative 
+    top: 0
+    right:  0
+    font-size: small
+
+.filter-control
+  select
+    font-size: 12px
+
+.button-to .add_button
+  padding: 3px 5px
+  +ACTION_BAR_BOX
+
+.add_button
+  float: left
+  margin-top: 2px
+  margin-bottom: 1px
+  margin-right: 5px
+  a
+    display: block
+    padding: 3px 5px
+    +ACTION_BAR_BOX
+
+img.add_button
+  position: relative
+  top: -2px
+  left: 0px
+  width: 15px
+  height: 15px
+
+.app_button
+  float: left
+  margin-top: 6px
+  width: 100%
+  height: $BUTTON_HEIGHT_MEDIUM_PLUS
+  background: #{$BG_WORK_APP_BUTTON} image-url("app_bkgnd.png") repeat-x
+  +BEVEL_CORNER(5px)
+  &:first-child
+    margin-top: -1px
+  &:last-child
+    margin-bottom: 10px
+
+img.app_button
+  margin: 0 10px
+  width: 23px
+  height: 23px
+
+.app_button a
+  display: block
+  padding-top: 6px
+  padding-right: 10px
+  font-size: small
+  line-height: 2em
+  font-weight: bold
+  text-align: left
+  text-decoration: none
+  text-transform: uppercase
+  color: $FG_WORK_APP_BUTTON
+  &:hover
+    color: $HV_HEADER
+
+.inner-block-areas
+  color: $FG_INFORMATIONBOX
+  background-color: $BG_INFORMATIONBOX
+  +BEVEL_CORNER(5px)
+
+.inner-block2-areas
+  color: $FG_INFORMATIONBOX2
+  background-color: $BG_INFORMATIONBOX
+  +BEVEL_CORNER(5px)
+
+.inner-block-modal-areas
+  color: $FG_MODAL_INFORMATIONBOX
+  background-color: $BG_MODAL_INFORMATIONBOX
+  +BEVEL_CORNER(5px)
+
+.inner-block-main-areas
+  color: $FG_CENTRALBOX
+  background-color: $BG_CENTRALBOX
+  +BEVEL_CORNER(3px)
+
+.inner-block-work-areas
+  color: $BG_CENTRALBOX
+  background-color: $BASIC_BG
+  +BEVEL_CORNER(3px)
+  border: unquote("1px solid #{$FG_CENTRALBOX_BORDER}")
+
+.inner-block-sub-areas
+  color: $FG_ASIDEBOX_H1
+  background-color: $BG_ASIDEBOX
+  +BEVEL_CORNER(3px)
+
+.inner-block-dialog-areas
+  color: $FG_ASIDEBOX_H1
+  background-color: $BASIC_BG
+  +BEVEL_CORNER(3px)
+
+.inner-block-subtab-areas
+  color: $FG_SUBTAB_BUTTON
+  background-color: $BG_SUBTAB_BUTTON
+  +BEVEL_CORNER(3px)
+
+#inner-columnRight
+  img
+    height: 160px
+
+#footer > .main-container > p
+  color: $FG_FOOTER
+  clear: both
+  padding: 4px
+  font-size: x-small
+  text-align: center
+  font-weight: bold
+  text-transform: uppercase
+
+img.icon-middle
+  vertical-align: middle
+  padding-right: 0.5em
+
+img.logo
+  float: left
+
+.page-help
+  p
+    padding: 1em
+  h1,h2,h3,h4,h5
+    font-weight: bold
+    padding: 0 1em
+  h1
+    font-size: 28px
+  h2
+    font-size: 24px
+  h3
+    font-size: 20px
+  h4
+    font-size: 16px
+
+// nav-path is the top-most 'bread crumb' nav path
+
+#nav-path
+  a
+    font-size: 10px
+    line-height: 10px
+    text-transform: uppercase
+    text-decoration: underline
+    text-align: left
+    font-weight: normal
+    color: $FG_HEADER
+    &:hover
+      color: $BG_HEADER
+
+#nav
+  ul
+    margin: 0.6em 0
+    text-align: right
+    text-transform: uppercase
+    font-size: small
+    font-weight: bold
+    color: $FG_HEADER
+  li
+    display: inline
+    border-left: unquote("2px solid #{$FG_HEADER}")
+    padding: 0 10px
+    &:first-child
+      border-left: none
+  a
+    text-decoration: none
+    text-align: right
+    font-weight: bold
+    color: $FG_HEADER
+    &:hover
+      color: $HV_HEADER
+
+form.login-form
+  padding: 0.5em
+  float: none
+  display: block
+
+.login-form
+  label
+    color: $FG_HEADER
+    font-size: x-small
+    font-weight: bold
+    text-transform: uppercase
+    display: block
+    cursor: help
+  br
+    display: none
+  input
+    display: block
+    margin-bottom: 0.5em
+    width: 170px
+    border: unquote("solid 1px #{$FG_WORK_H2}")
+    font-size: small
+    font-weight: normal
+    color: $BG_INFORMATIONBOX
+    &:hover
+      color: $FG_ASIDEBOX_H2
+
+input.icon-submit
+  color: $FG_FORM_SUBMIT
+  display: block
+  cursor: pointer
+  text-align: center
+  font-weight: bold
+  text-transform: uppercase
+  width: auto
+  margin: 0
+  margin-left: 112px
+  // margin-right: 0px
+  margin-top: -15px
+  padding: 2px 3px 2px 3px
+  background: #{$BG_FORM_SUBMIT} image-url("call_to_action.png") repeat-x 0px -13px
+  +BEVEL_CORNER(5px)
+  &:hover
+    color: $FG_ASIDEBOX_H2
+
+.fieldWithErrors
+  padding: 2px
+  display: table
+  +GRADIENT_BOX(#cc5522, #f09984)
+
+#errorExplanation
+  border: unquote("2px solid #{$FG_ERROR}")
+  padding: 0.5em
+  color: black
+  background: #cccccc
+  h2,h3
+    text-align: left
+    font-weight: bold
+    padding: 0.5em
+    padding-bottom: 1em
+    margin: -7px
+  p
+    // display: none  // auto-gen message seems redundant
+    float: none
+    text-decoration: none  // underline
+    font-weight: bold
+    margin-bottom: 0
+    padding: 5px 0
+  ul li
+    font-size: medium
+    font-style: italic
+    list-style: disc
+    list-style-position: outside
+    margin-left: 1.5em
+
+#page_title, #section_header
+  margin: 0
+  padding: 0
+
+#page_title h2
+  margin: 0
+  text-align: center
+  line-height: 1.5em
+  font-size: large
+  color: $FG_WORK_H2
+
+#section_header h3
+  margin: 0
+  text-align: center
+  line-height: 1.5em
+  font-size: medium
+  text-transform: uppercase
+  color: $FG_WORK_H3
+
+fieldset
+  &.modal-fieldset
+    padding: 0.5em
+    margin-bottom: 10px
+    border: unquote("1px solid #{$FG_INPUTBOX}")
+    background: $BG_INPUTFORM - #080808
+  &.teamarea
+    background: $BG_INPUTFORM - #202020
+  &.wizard-fieldset
+    margin: 0.5em 0
+    border: none
+    background: $BG_INPUTBOX
+  h3
+    font-weight: normal
+    font-size: 18px
+    color: $FG_FORMCAPTION
+    text-transform: uppercase
+
+.basic-form
+  form
+    margin: 0
+    padding: 0
+    float: none
+    display: block
+  label
+    color: $FG_INPUTLABEL
+    font-size: 12px
+    font-weight: bold
+    text-transform: uppercase
+    display: block
+    &:hover
+      background: $FG_INPUTBOX
+      cursor: help
+  br
+    display: none
+  input,textarea
+    margin: 0px 0 0.5em 0
+    display: block
+    line-height: 1.5em
+    width: 98%
+    border: unquote("solid 1px #{$FG_INPUTBOX}")
+    font-size: medium
+    font-weight: normal
+    color: $FG_FORMCAPTION
+  input:hover
+    background: $HV_CALL2ACTION
+  p
+    padding: 0
+    margin-right: 0.5em
+    font-style: italic
+    font-size: small
+    float: right
+    color: $FG_BASICFORM_P
+
+    &.left-just
+      float: left
+      text-align: left
+
+  a
+    display: inline
+    font-size: small
+
+    &.big-link
+      font-size: medium
+      font-weight: bold
+
+.modal-form
+  overflow: auto
+  max-height: 500px
+  a
+    padding: 0
+  h3
+    line-height: 2em
+  select
+    font-size: 11px
+    margin-left: 0
+    margin-right: 0
+
+.nonmodal-form
+  a
+    padding: 0
+  h3
+    line-height: 2em
+
+.form-fields
+  input
+    font-size: 12px
+    line-height: 1em
+  i
+    color: $FG_INPUTLABEL
+
+.form-lines
+  label
+    display: inline-block
+    width: 20em
+    padding-right: 1em
+  input
+    display: inline
+    font-size: 12px
+    line-height: 1em
+    width: auto
+  br
+    display: block
+
+.no-width
+  label
+    width: auto
+
+.wizard-form a
+  padding-left: 3em
+
+input
+  &.submit, &.submit-nohide
+    display: block
+    cursor: pointer
+    text-align: center
+    font-weight: bold
+    font-size: small
+    text-transform: uppercase
+    width: auto
+  &.modal-submit
+    margin-left: 80px
+    margin-top: 10px
+    padding: 5px 15px
+    color: $FG_SUBMIT
+    background: $BG_INPUTBOX
+    border: unquote("2px solid  #{$FG_INPUTBOX}")
+    +BEVEL_CORNER(20px)
+  &.submit-rightmost
+    margin-left: auto
+    margin-right: 0px
+  &.c2a-submit
+    float: right
+    margin: 10px 0
+    padding: 5px 10px
+    color: $FG_FORM_SUBMIT
+    background: #{$BG_CALL2ACTION} image-url("call_to_action.png") repeat-x
+    border: none
+    +BEVEL_CORNER(8px)
+  &.submit:hover, &.submit-nohide:hover
+    color: $HV_CALL2ACTION
+    background: $FG_INPUTLABEL
+
+input[type = "hidden"]
+  display: none
+
+#lefthand-fields
+  width: 48%
+  float: left
+
+#righthand-fields
+  width: 48%
+  float: right
+
+#main-work-box
+  margin: 0 15px
+  min-height: $SPLASH_HEIGHT
+
+#scroll-box
+  margin: 0
+  padding: 0
+  height: $CENTRAL_WORK_HEIGHT
+  overflow: auto
+
+img.icon-sized
+  width: 64px
+  height: 64px
+#main-title-box
+  margin: 0
+  padding: 10px 0 12px 0
+  border-bottom: unquote("5px solid #{$FG_WORK_HR}")
+  img
+    padding-right: 5px
+    vertical-align: baseline
+    float: left
+    
+.main-title-box-stacked
+  margin: 0
+  padding: 5px 0 10px 0
+  border-bottom: unquote("5px solid #{$FG_WORK_HR}")
+  vertical-align: middle !important
+  img
+    padding-right: 5px
+    vertical-align: baseline
+    float: left
+
+#main-title
+  margin: 0
+  padding: 0
+  float: left
+  h1
+    display: inline
+    font-size: 28px
+    letter-spacing: 0px
+    line-height: 1em
+    text-transform: uppercase
+    &.thin
+      color: $FG_ASIDEBOX_H1
+      font-weight: 100
+      font-family: "Myriad Pro Light", "Myriad Web", "Myriad Pro", Helvetica, Verdana, Arial, Tahoma, Sans-Serif
+    &.thick
+      color: $BASIC_FG
+      font-weight: bold
+      font-family: "Myriad Web", "Myriad Pro", Helvetica, Verdana, Arial, Tahoma, Sans-Serif
+
+#main-title-right
+  margin-top: 20px
+  padding: 0
+  text-align: right
+  font-size: small
+  h1
+    display: inline
+    font-size: 20px
+    letter-spacing: 0px
+    line-height: 1em
+    text-transform: uppercase
+    text-align: right
+    color: $FG_WORK_H3_FADE
+    &.thin
+      font-weight: 100
+      font-family: "Myriad Pro Light", "Myriad Web", "Myriad Pro", Helvetica, Verdana, Arial, Tahoma, Sans-Serif
+    &.thick
+      font-weight: bold
+      font-family: "Myriad Web", "Myriad Pro", Helvetica, Verdana, Arial, Tahoma, Sans-Serif
+  h4
+    margin: 0
+    padding: 0
+    display: inline
+    font-size: small
+    font-weight: bold
+    text-transform: uppercase
+    text-align: right
+    color: $FG_WORK_H4_BOLD
+
+    &.fade
+      color: $FG_WORK_H4_FADE
+    a
+      color: $FG_WORK_H4_FADE
+      font-weight: bold
+      text-decoration: none
+
+      &:hover
+        background-color: $FG_WORK_APP_BUTTON
+        text-decoration: underline
+
+  img
+    float: right
+    margin-right: 15px
+    margin-top: 3px
+
+.name-title-right
+  margin-left: 56%
+
+.work-title-right
+  margin-left: 80%
+
+.wizard-title-right
+  margin-left: 55%
+
+.sub-title-box
+  clear: both
+  margin-top: 15px
+  padding: 10px 0 20px 0
+  border-bottom: unquote("1px solid #{$FG_WORK_H4_FADE}")
+
+.sub-title-box-stacked
+  clear: both
+  padding: 5px 0 2px 0
+  border-bottom: unquote("1px solid #{$FG_WORK_H4_FADE}")
+
+.top-border
+  border-top: unquote("1px solid #{$FG_WORK_H4_FADE}")
+
+.bottom-border
+  border-bottom: unquote("1px solid #{$FG_WORK_H4_FADE}")
+  margin-bottom: 3px
+
+.sub-title-box-list
+  clear: both
+  padding: 5px 0 2px 0
+
+.sub-title-box-indent
+  clear: both
+  margin-left: 20px
+
+.sub-title
+  margin: 0
+  padding: 0
+  float: left
+  width: 50%
+  h3
+    display: inline
+    font-size: medium
+    font-weight: bold
+    text-transform: uppercase
+    color: $FG_WORK_H3_SUBTTL
+    &.title
+      color: $FG_WORK_H3_TITLE
+
+.shade-highlight
+  background-color: $BG_WORK_HIGHLIGHT
+
+.wider_detail
+  width: 58%
+
+.sub-title-listname
+  padding-left: 5px
+  min-height: 55px
+  h2, a
+    font-size: 18px
+    color: $FG_WORK_H1
+    font-weight: bold
+    text-transform: uppercase
+    text-decoration: none
+  h2 a:hover
+    background-color: $HV_ALERTBOX
+  a.sub-title-listname-action
+    color: $FG_WORK_H2_A
+    text-decoration: underline
+
+.wizard-title
+  width: 45%
+  h1
+    line-height: 2em !important
+
+.work-title
+  width: 70%
+
+.name-title
+  width: 55%
+
+.full-title
+  width: 80%
+
+.full-title-width
+  width: 87%
+
+.full-width
+  width: 100%
+
+.sub-title-right
+  text-align: right
+  margin-left: 60%
+  width: 270px
+  h4
+    display: inline
+    font-size: small
+    font-weight: bold
+    text-transform: uppercase
+    color: $FG_WORK_H4
+    text-align: right
+  h3
+    display: inline
+    font-size: 16px
+    font-weight: normal
+    text-transform: uppercase
+    color: $FG_WORK_H4_FADE
+
+.detail_group
+  float: left
+  width: 100%
+  h3
+    float: left
+    display: block
+  h4
+    display: block
+    font-size: 12px
+    font-weight: normal
+    text-transform: none
+    line-height: 1em
+    text-align: left
+    &.address-block
+      padding: 0 1em
+  img
+    width: 16px
+    height: 16px
+    vertical-align: text-top
+    float: right
+    &.icon_inline
+      height: 16px
+      float: none
+
+.listing-box
+  clear: both
+  // padding: 0.5em 0.5em
+  font-size: 14px
+  img.icon_inline
+    height: 13px
+    &:hover
+      background-color: $HV_ALERTBOX
+  a
+    text-decoration: none
+    border: none
+    font-weight: bold
+    &:hover
+      background-color: $HV_ALERTBOX
+  table
+    table-layout: fixed
+  tr.pdflist
+    line-height: 1.2em
+    font-family: Verdana
+  td
+    vertical-align: middle
+
+  td.name-click
+    a
+      text-decoration: none
+      font-weight: normal
+      color: $FG_WORK_P
+      &:hover
+        background-color: $HV_ALERTBOX
+ 
+  td.top
+    vertical-align: top
+  tr.even
+    background-color: #e0e0ea
+  td.plot-label
+    text-align: right
+    font-size: 10px
+  td.plot
+    font-family: "Andale Mono", "Courier New", monospace
+    font-size: 15px
+    line-height: 0.8em
+    background: #{$BASIC_BG} image-url("plot-bkgnd.png") repeat-x
+  td.plot.members
+    font-size: 8px
+
+.pdf-font
+  font-size: 18px !important
+
+.nav_scroll_box
+  margin-top: -15px
+  margin-left: auto
+  margin-right: 0px
+  width: 98px
+  img
+    width: 48px
+    height: 48px
+
+.nav_expand_box
+  margin-left: auto
+  margin-right: 0px
+  img
+    width: 16px
+    height: 16px
+
+$CAPTION_ICON_HEIGHT: 62px
+$CAPTION_ICON_WIDTH: 67px
+
+table.captioned_headline
+  height: $CAPTION_ICON_HEIGHT
+  td
+    vertical-align: middle
+
+.captioned_pic
+  margin-top: 0px
+  float: left
+  overflow: hidden
+  img.icon_image
+    height: $CAPTION_ICON_HEIGHT
+    width: $CAPTION_ICON_WIDTH
+
+.caption_text
+  width: $CAPTION_ICON_WIDTH
+  p
+    padding: 0px
+    margin-top: -5px
+    font-size: 12px
+    font-weight: normal
+    color: $FG_WORK_H1
+  br
+    display: none
+
+.action_group
+  display: block
+  a
+    font-size: 12px
+    line-height: 0.9em
+    text-decoration: underline
+    font-weight: normal
+    border: none
+    color: $FG_ACTION_GROUP
+    &.strong
+      font-weight: bold
+
+  a:hover
+    background-color: $FG_WORK_APP_BUTTON
+
+.block-date
+  color: $FG_WORK_H3_FADE
+  float: right
+  position: relative
+  padding: 35px 15px 0px
+  margin-left: 0px
+  .month
+    text-transform: uppercase
+    font-size: 25px
+  .day
+    font-size: 43px
+    line-height: 43px
+    font-weight: bold
+    position: absolute
+    letter-spacing: -0.1em
+    left: 5px
+    top: 0px
+  .year
+    display: block
+    position: absolute
+    right: 0px
+    top: 12px
+    -webkit-transform: rotate(-90deg)
+    -moz-transform: rotate(-90deg)
+    -ms-transform: rotate(-90deg)
+    -o-transform: rotate(-90deg)
+    transform: rotate(-90deg)
+
+.subtab_button
+  float: left
+  width: $SUBTAB_WIDTH
+  height: $SUBTAB_HEIGHT
+  margin-right: $SUBTAB_SPACING
+  +GRADIENT_BOX(#b0bbbe, #6a6e8c)
+  +BEVEL_CORNER(5px)
+  &:last-child
+    margin: 0
+  a
+    display: block
+    font-size: 12px
+    line-height: $SUBTAB_HEIGHT
+    font-weight: bold
+    text-align: center
+    text-decoration: none
+    text-transform: uppercase
+    color: $FG_SUBTAB_BUTTON
+    &:hover
+      color: $HV_SUBTAB_BUTTON
+
+// selected-subtab will override default subtab-button background
+.selected-subtab
+  +GRADIENT_BOX(#b0bbbe, #152429)
+  height: 22px
+
+.button-toggle
+  float: right
+  margin-right: 1em
+
+#action_bar
+  position: relative
+  top: 0
+  padding-bottom: 3px
+
+  .icon-id-group
+    display: block 
+    float: left
+
+  figure
+    display: block 
+    position: relative 
+    overflow: hidden 
+    float: left
+    margin: 0
+
+  figcaption 
+    margin: 0
+
+.heading-row
+  +GRADIENT_SIMPLE($TABLE_HEADER_BKGD_DK, $TABLE_HEADER_BKGD_LT)
+  th
+    font-size: x-small
+    font-weight: bold
+    text-transform: uppercase
+    text-align: center
+    line-height: 1.5em
+    color: $FG_ASIDEBOX_H1
+    padding: 1px 0 4px 0
+
+
+// text-area where lots of text used to communicate
+.text-area
+  padding: 0.5em
+  h1,h2,h3,h4
+    padding: 0.5em 0 0.25em 0
+    font-weight: bold
+  h1
+    font-size: 20px
+  h2
+    font-size: 18px
+  h3
+    font-size: 16px
+  h4
+    font-size: 14px
+  p
+    padding-bottom: 0.25em
+    font-size: medium
+    cursor: default
+    strong
+      font-weight: bold
+      color: $BASIC_FG
+  ul
+    padding: 0 20px
+    li
+      list-style-type: disc
+      list-style-position: outside
+      font-size: 14px
+  dl
+    padding: 0 0.5em 0.5em 0.5em
+    font-size: 12px
+    font-weight: normal
+  dt
+    font-size: 12px
+    font-weight: bold
+    padding: 0.25em 0
+  dd
+    font-weight: lighter
+
+.centered
+  th,td
+    text-align: center
+
+td.centered
+  text-align: center
+
+td.right-just
+  text-align: right
+
+th.right-just
+  text-align: right
+
+tr.asset-row
+  font-size: 0.9em
+  line-height: 0.9em
+  font-family: Verdana
+
+.red
+  color: red
+
+p.flash-error
+  color: $FG_ERROR !important
+  font-weight: bold !important
+
+textarea.legal
+  font-size: 11px
+  line-height: 1em
+  font-family: Sans-Serif
+  color: $FG_INPUTLABEL
+  width: 98%
+  height: 75px
+
+.legal
+  margin: 0
+  padding: 0
+  float: none
+  clear: both
+  height: 100px
+  width: 550px
+
+.results-list
+  padding: 0.5em
+  p
+    font-size: small
+    font-weight: bold
+    text-transform: uppercase
+  ul
+    padding: 0.5em 25px
+    li
+      list-style-position: outside
+      font-size: 14px
+      list-style-image: image-url("checkmark-lt-blue16.png")
+      list-style-type: disc
+    ul
+      li
+        list-style-image: none
+
+span.verb
+  text-transform: uppercase
+  font-weight: bold
+
+.thumbnails
+  dl
+    float: left
+    text-align: center
+    font-size: small
+  dt, dd
+    width: 110px
+    float: left
+  dt
+    margin-bottom: 4em
+    // vertical space between the images
+  dd
+    text-align: center
+    margin: 105px 0 0 -110px
+  img
+    vertical-align: bottom
+    border: 0
+
+.thumbnails-team
+  dl
+    float: left
+    text-align: center
+    font-size: 11px
+
+  dt, dd
+    width: 96px
+    float: left
+    color: #333
+    
+  a
+    font-size: 11px
+    color: #333
+  dt
+    margin-bottom: 5em
+    // vertical space between the images
+  dd
+    text-align: center
+    line-height: 1.2em
+    margin: 69px 0 0 -110px
+  img
+    vertical-align: bottom
+    border: 0
+    width: 66px
+
+.documents
+  dl
+    float: left
+    text-align: center
+    font-size: small
+  dt, dd
+    width: 110px
+    float: left
+  dt
+    margin-bottom: 4em
+    // vertical space between the images
+  dd
+    text-align: center
+    margin: 65px 0 0 -110px
+  img.icon_image
+    height: $CAPTION_ICON_HEIGHT
+    width: $CAPTION_ICON_WIDTH
+    vertical-align: bottom
+    margin-left: 20px
+    border: 0
+
+input.paypal-button
+  display: inline
+  border: none
+  vertical-align: middle
+  line-height: 1em
+  font-size: small
+
+#event_role_tabs
+    
+  li.tab_name
+    font-size: 18px
+    padding-top: 1em
+    font-weight: bold
+    float: none
+    clear: both
+    
+  ul li ul li
+    float: left
+    line-height: 0.9em
+    a
+      font-size: small
+      font-weight: bold
+    a:after
+      content: ", \2002"
+      
+.signup-section
+  p
+    color: $BG_CENTRALBOX
+    background: $BG_MODAL_INFORMATIONBOX
+    display: block
+    float: none
+    clear: both
+    font-size: 18px
+    font-weight: bold
+    text-align: left
+    font-style: normal
+    padding: 1em 0em
+    
+  dl
+    font-size: medium
+    
+    dt
+      font-weight: bold
+      margin: 0.5em 0
+    
+    dd
+      font-size: small
+      font-style: italic
+      margin: 0 1.5em
+
+.freq_tr
+  tr
+    font-size: 0.9em
+    line-height: 0.8em 
+    font-family: Verdana
+    
+#accordion
+  width: 70%
+  margin: 0 auto
+  opacity: 0.85
+  
+  h3 a
+    font-size: 20px
+    text-decoration: none
+    text-align: left
+    font-weight: bold
+    color: $FG_HEADER
+    opacity: 0.9
+    &:hover
+      color: $HV_ALERTBOX
+
+  .startup-instructions
+    margin: 0
+    padding: 0
+    
+    p
+      color: $BG_CENTRALBOX
+      display: block
+      float: none
+      clear: both
+      font-size: medium
+      line-height: 1.25em
+      font-weight: normal
+      text-align: left
+      font-style: normal
+      padding: 0.5em
+    a
+      font-size: medium
+      &:hover
+        background: $HV_ALERTBOX
+    ul
+      padding: 0em 1em
+      margin-left: 1em
+      li
+        list-style-position: outside
+        list-style-type: disc
+
+    .todays-roster
+      margin: 0.5em 1em
+
+      table
+        width: 95%
+
+        tr
+          font-size: 0.8em
+          line-height: 0.9em
+          font-family: Verdana
+
+.burgers-served
+  margin-top: 5px
+  padding: 0.5em 0
+
+  p
+    text-align: center
+    font-size: small
+
+  h1
+    padding: 20px 0
+    text-align: center
+    font-size: 68px
+    font-weight: bold
+    letter-spacing: -4px
+    color: $HERO_PLAN_FG3
+
+
+  h4
+    text-align: center
+    font-size: 20px
+    font-weight: bold
+
+.pagination
+  // margin-top: 5px
+  text-align: right
+  padding: 1em
+  cursor: default
+
+  a, span, em
+    padding: 0.2em 0.5em
+
+  .disabled
+    color: #aaaaaa
+
+  .current
+    font-style: normal
+    font-weight: bold
+    color: #ff0084
+
+  a
+    border: 1px solid #dddddd
+    color: $FG_INFORMATIONBOX
+    // color: #0063dc
+    text-decoration: none
+
+    &:hover, &:focus
+      border-color: $FG_INFORMATIONBOX - #202020
+      background: $FG_INFORMATIONBOX
+      color: white
+
+  .page_info
+    color: #aaaaaa
+    padding-top: 0.8em
+
+  .previous_page, .next_page
+    border-width: 2px
+
+  .previous_page
+    margin-right: 1em
+
+  .next_page
+    margin-left: 1em
+
+#resource-list
+  font-style: italic
+  a
+    text-decoration: none
+    color: #333
+
+
+    &:hover
+      color: #000
+      background-color: #ccc
+      &:after
+        content: " \0ab delete"
+        background-color: #ddc
+        color: red
+
+

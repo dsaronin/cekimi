@@ -1,0 +1,29 @@
+-# (c) 2023 David Anderson / Cekimi, All rights reserved; 
+-# modifications, from whatever source, become IP of David Anderson
+-# 
+
+!!! 1.1
+%html(xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en") 
+  %head
+    %meta(http-equiv="content-type" content="text/html;charset=UTF-8")
+    %meta(http-equiv="X-UA-Compatible" content="chrome=1")
+    -# %link(rel="shortcut icon" href="https://punda.herokuapp.com/favicon.ico" type="image/x-icon")
+    -# %meta(name="google-site-verification" content="GabS43D6h2OysVqJsuKsq1pE7VJwaY9tMuC_fdehgRM")
+
+    %title Çekimi
+
+  %body
+    #header
+      .main-container
+        -# image_tag( "header_logo.png", {:class => 'logo',:alt => 'company logo'} )
+    
+    .main-container.clearfix2{ :id => 'work-section' }
+      .columnLeft
+        #inner-workLeft.inner-block-work-areas
+          = yield(:layout)
+    
+    #footer
+      .main-container{ :class => 'main-central-positioning' }
+        %p
+          &copy;&nbsp;
+          #{DUMA_COPYRIGHT} &emsp;&bull;&emsp;v #{DUMA_VERSION} &ensp;
