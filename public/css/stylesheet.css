@@ -1,7 +1,8 @@
 html {
   color: black;
   background-color: #adadec;
-  font-family: "Myriad Web", "Myriad Pro", Helvetica, Verdana, Arial, Tahoma, Sans-Serif;
+  font-family: "Roboto", "Myriad Web", "Myriad Pro", Helvetica, Verdana, Arial, Tahoma, Sans-Serif;
+  font-size: 18px;
 }
 html.pdf {
   background: none;
@@ -1258,40 +1259,32 @@ table.captioned_headline td {
 }
 
 .text-area {
-  padding: 0.5em;
+  padding: 0em;
 }
 .text-area h1, .text-area h2, .text-area h3, .text-area h4 {
-  padding: 0.5em 0 0.25em 0;
+  padding: 0.12em 0 0.12em 0;
   font-weight: bold;
 }
 .text-area h1 {
-  font-size: 20px;
+  font-size: 3.5em;
 }
 .text-area h2 {
-  font-size: 18px;
+  font-size: 2.8em;
 }
 .text-area h3 {
-  font-size: 16px;
+  font-size: 2.1em;
 }
 .text-area h4 {
-  font-size: 14px;
+  font-size: 1.8em;
 }
 .text-area p {
   padding-bottom: 0.25em;
-  font-size: medium;
+  font-size: 1em;
   cursor: default;
 }
 .text-area p strong {
   font-weight: bold;
   color: black;
-}
-.text-area ul {
-  padding: 0 20px;
-}
-.text-area ul li {
-  list-style-type: disc;
-  list-style-position: outside;
-  font-size: 14px;
 }
 .text-area dl {
   padding: 0 0.5em 0.5em 0.5em;
@@ -1385,21 +1378,28 @@ span.verb {
   border: 0;
 }
 
-#conj_box {
-  padding: 0.5em 0.5em;
-  width: 45%;
-  height: 5.5em;
-  border: 2px solid #9f9f9f;
+.conj_box {
+  padding: 0.3em 0.4em;
+  width: 46%;
+  height: 6em;
+  border: 1px solid #9f9f9f;
+  background-color: #fbfbf8;
 }
-#conj_box ul {
-  margin: 0 0;
-  text-align: left;
+.conj_box p {
   color: #E30A17;
+  font-style: italic;
+  font-size: small;
 }
-#conj_box li {
+.conj_box ul {
+  margin: 2px 1em;
+}
+.conj_box li {
   list-style-type: none;
   display: block;
-  padding: 0.5em;
+  padding: 0.12em;
+  text-align: left;
+  font-weight: bold;
+  font-size: 1.3em;
 }
 
 /*# sourceMappingURL=stylesheet.css.map */

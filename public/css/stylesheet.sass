@@ -210,14 +210,14 @@ $SUBTAB_SPACING: 5px
 html
   color: $BASIC_FG
   background-color: $BG_MAINPAGE
-  font-family: "Myriad Web", "Myriad Pro", Helvetica, Verdana, Arial, Tahoma, Sans-Serif
+  font-family: "Roboto", "Myriad Web", "Myriad Pro", Helvetica, Verdana, Arial, Tahoma, Sans-Serif
+  font-size: 18px
   &.pdf
     background: none
     border: none
 
 strong
   font-weight: bold
-
 
 em
   font-style: italic
@@ -1183,31 +1183,25 @@ table.captioned_headline
 
 // text-area where lots of text used to communicate
 .text-area
-  padding: 0.5em
+  padding: 0em
   h1,h2,h3,h4
-    padding: 0.5em 0 0.25em 0
+    padding: 0.12em 0 0.12em 0
     font-weight: bold
   h1
-    font-size: 20px
+    font-size: 3.5em
   h2
-    font-size: 18px
+    font-size: 2.8em
   h3
-    font-size: 16px
+    font-size: 2.1em
   h4
-    font-size: 14px
+    font-size: 1.8em
   p
     padding-bottom: 0.25em
-    font-size: medium
+    font-size: 1em
     cursor: default
     strong
       font-weight: bold
       color: $BASIC_FG
-  ul
-    padding: 0 20px
-    li
-      list-style-type: disc
-      list-style-position: outside
-      font-size: 14px
   dl
     padding: 0 0.5em 0.5em 0.5em
     font-size: 12px
@@ -1283,18 +1277,26 @@ span.verb
     vertical-align: bottom
     border: 0
 
-#conj_box
-  padding: 0.5em 0.5em
-  width: 45%
-  height: 5.5em
-  border: unquote("2px solid #{$FG_CENTRALBOX_BORDER}")
+.conj_box
+  padding: 0.3em 0.4em
+  width: 46%
+  height: 6em
+  border: unquote("1px solid #{$FG_CENTRALBOX_BORDER}")
+  background-color: $BG_WORK
+
+  p
+    color: $FG_HEADER
+    font-style: italic
+    font-size: small
 
   ul
-    margin: 0 0
-    text-align: left
-    color: $FG_HEADER
+    margin: 2px 1em
+
   li
     list-style-type: none
     display: block
-    padding: 0.5em
+    padding: 0.12em
+    text-align: left
+    font-weight: bold
+    font-size: 1.3em
 
