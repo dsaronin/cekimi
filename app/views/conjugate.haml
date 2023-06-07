@@ -1,9 +1,27 @@
 %h1= @verb
 .conj_box
   %p geniş zaman
-  %ul
-    %li alırım
-    %li alırsın
-    %li alır
+  .col_box
+    %ul
+      %li alırım
+      %li alırsın
+      %li alır
+  .col_box
+    %ul
+      %li alırız
+      %li alırsınız
+      %li alırlar
+.conj_box
+  %p geniş zaman
+  .col_box
+    %ul
+      %li alırım
+      %li alırsın
+      %li alır
+  .col_box
+    %ul
+      %li alırız
+      %li alırsınız
+      %li alırlar
 - @table_array.each do |str|
   %p= str

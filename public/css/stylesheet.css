@@ -1380,20 +1380,27 @@ span.verb {
 
 .conj_box {
   padding: 0.3em 0.4em;
+  margin-right: 0.5em;
   width: 46%;
   height: 6em;
   border: 1px solid #9f9f9f;
   background-color: #fbfbf8;
+  float: left;
 }
 .conj_box p {
   color: #E30A17;
   font-style: italic;
   font-size: small;
 }
-.conj_box ul {
+
+.col_box {
+  padding: 0.1em 0.5em;
+  float: left;
+}
+.col_box ul {
   margin: 2px 1em;
 }
-.conj_box li {
+.col_box li {
   list-style-type: none;
   display: block;
   padding: 0.12em;
