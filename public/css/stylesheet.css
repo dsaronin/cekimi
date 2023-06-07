@@ -94,10 +94,6 @@ body.pdf {
   font-weight: bold;
 }
 
-#nav {
-  padding: 5px 10px;
-}
-
 #section {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -780,45 +776,6 @@ img.logo {
   float: left;
 }
 
-#nav-path a {
-  font-size: 10px;
-  line-height: 10px;
-  text-transform: uppercase;
-  text-decoration: underline;
-  text-align: left;
-  font-weight: normal;
-  color: #E30A17;
-}
-#nav-path a:hover {
-  color: black;
-}
-
-#nav ul {
-  margin: 0.6em 0;
-  text-align: right;
-  text-transform: uppercase;
-  font-size: small;
-  font-weight: bold;
-  color: #E30A17;
-}
-#nav li {
-  display: inline;
-  border-left: 2px solid #E30A17;
-  padding: 0 10px;
-}
-#nav li:first-child {
-  border-left: none;
-}
-#nav a {
-  text-decoration: none;
-  text-align: right;
-  font-weight: bold;
-  color: #E30A17;
-}
-#nav a:hover {
-  color: white;
-}
-
 input.icon-submit {
   color: white;
   display: block;
@@ -1426,6 +1383,23 @@ span.verb {
 .thumbnails img {
   vertical-align: bottom;
   border: 0;
+}
+
+#conj_box {
+  padding: 0.5em 0.5em;
+  width: 45%;
+  height: 5.5em;
+  border: 2px solid #9f9f9f;
+}
+#conj_box ul {
+  margin: 0 0;
+  text-align: left;
+  color: #E30A17;
+}
+#conj_box li {
+  list-style-type: none;
+  display: block;
+  padding: 0.5em;
 }
 
 /*# sourceMappingURL=stylesheet.css.map */

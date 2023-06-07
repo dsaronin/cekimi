@@ -102,7 +102,6 @@ $BG_FORM_SUBMIT: #661315
 $FG_FORM_SUBMIT: $BASIC_BG
 
 $FG_INPUTLABEL_DARK: #485751
-$HERO_PLAN_FG3: #6caeff  // from pricing
 
 // DIMENSIONS
 
@@ -288,9 +287,6 @@ body
     padding: 8px 2px
     font-size: medium
     font-weight: bold
-
-#nav
-  padding: 5px 10px
 
 #section
   margin-top: $CENTRAL_MARGIN_TOP
@@ -790,41 +786,6 @@ img.logo
   margin-top: 2px
   float: left
 
-// nav-path is the top-most 'bread crumb' nav path
-
-#nav-path
-  a
-    font-size: 10px
-    line-height: 10px
-    text-transform: uppercase
-    text-decoration: underline
-    text-align: left
-    font-weight: normal
-    color: $FG_HEADER
-    &:hover
-      color: $BG_HEADER
-
-#nav
-  ul
-    margin: 0.6em 0
-    text-align: right
-    text-transform: uppercase
-    font-size: small
-    font-weight: bold
-    color: $FG_HEADER
-  li
-    display: inline
-    border-left: unquote("2px solid #{$FG_HEADER}")
-    padding: 0 10px
-    &:first-child
-      border-left: none
-  a
-    text-decoration: none
-    text-align: right
-    font-weight: bold
-    color: $FG_HEADER
-    &:hover
-      color: $HV_HEADER
 
 input.icon-submit
   color: $FG_FORM_SUBMIT
@@ -1321,3 +1282,19 @@ span.verb
   img
     vertical-align: bottom
     border: 0
+
+#conj_box
+  padding: 0.5em 0.5em
+  width: 45%
+  height: 5.5em
+  border: unquote("2px solid #{$FG_CENTRALBOX_BORDER}")
+
+  ul
+    margin: 0 0
+    text-align: left
+    color: $FG_HEADER
+  li
+    list-style-type: none
+    display: block
+    padding: 0.5em
+
