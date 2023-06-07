@@ -14,7 +14,8 @@ class CekimiApp < Sinatra::Application
   #  ------------------------------------------------------------
 
   get '/' do
-    @greeting = "Merhaba, kolay gelsin. Buyurun istemde bir fiil girin." 
+    @greeting = "Merhaba, kolay gelsin."
+    @hint = "Buyurun istemde bir fiil girin." 
     haml :index
   end
 
@@ -46,14 +47,8 @@ class CekimiApp < Sinatra::Application
 
 # http://localhost:3000/conj/gitmek
   get '/conj/:v' do
-    tables = CEKIMI.do_conjugate([params[:v]])
-    str = ""
-    tables.each do |left,right|
-      str << "#{left[0]}: #{left[1].gsub(/\n/,", ")} -- #{left[2].gsub(/\n/,", ")}" +
-      "<br>#{right[0]}: #{right[1].gsub(/\n/,", ")} -- #{right[2].gsub(/\n/,", ")}\n" 
-    end   # table output do block
+    @tables = CEKIMI.do_conjugate([params[:v]])
     @verb = params[:v]
-    @table_array = str.split(/\n/)
     haml  :conjugate
   end   # outer do block
 

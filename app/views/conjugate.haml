@@ -1,27 +1,3 @@
 %h1= @verb
-.conj_box
-  %p geniş zaman
-  .col_box
-    %ul
-      %li alırım
-      %li alırsın
-      %li alır
-  .col_box
-    %ul
-      %li alırız
-      %li alırsınız
-      %li alırlar
-.conj_box
-  %p geniş zaman
-  .col_box
-    %ul
-      %li alırım
-      %li alırsın
-      %li alır
-  .col_box
-    %ul
-      %li alırız
-      %li alırsınız
-      %li alırlar
-- @table_array.each do |str|
-  %p= str
+- @tables.each do |left,right|
+  = haml :table_pair, :locals => {:left_table => left, :right_table => right}

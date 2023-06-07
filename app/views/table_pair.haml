@@ -1,0 +1,23 @@
+-# table_pair -- outputs an html pair of conjugated tables
+-#
+.conj_box#left_table
+  %p= left_table[0]
+  .col_box
+    %ul
+      - left_table[1].split(/\n/).each do |row|
+        %li= row
+  .col_box
+    %ul
+      - left_table[2].split(/\n/).each do |row|
+        %li= row
+.conj_box#right_table
+  %p= right_table[0]
+  .col_box
+    %ul
+      - right_table[1].split(/\n/).each do |row|
+        %li= row
+  .col_box
+    %ul
+      - right_table[2].split(/\n/).each do |row|
+        %li= row
+
