@@ -790,21 +790,6 @@ img.logo
   margin-top: 2px
   float: left
 
-.page-help
-  p
-    padding: 1em
-  h1,h2,h3,h4,h5
-    font-weight: bold
-    padding: 0 1em
-  h1
-    font-size: 28px
-  h2
-    font-size: 24px
-  h3
-    font-size: 20px
-  h4
-    font-size: 16px
-
 // nav-path is the top-most 'bread crumb' nav path
 
 #nav-path
@@ -840,32 +825,6 @@ img.logo
     color: $FG_HEADER
     &:hover
       color: $HV_HEADER
-
-form.login-form
-  padding: 0.5em
-  float: none
-  display: block
-
-.login-form
-  label
-    color: $FG_HEADER
-    font-size: x-small
-    font-weight: bold
-    text-transform: uppercase
-    display: block
-    cursor: help
-  br
-    display: none
-  input
-    display: block
-    margin-bottom: 0.5em
-    width: 170px
-    border: unquote("solid 1px #{$FG_WORK_H2}")
-    font-size: small
-    font-weight: normal
-    color: $BG_INFORMATIONBOX
-    &:hover
-      color: $FG_ASIDEBOX_H2
 
 input.icon-submit
   color: $FG_FORM_SUBMIT
@@ -952,79 +911,6 @@ fieldset
     color: $FG_FORMCAPTION
     text-transform: uppercase
 
-.basic-form
-  form
-    margin: 0
-    padding: 0
-    float: none
-    display: block
-  label
-    color: $FG_INPUTLABEL
-    font-size: 12px
-    font-weight: bold
-    text-transform: uppercase
-    display: block
-    &:hover
-      background: $FG_INPUTBOX
-      cursor: help
-  br
-    display: none
-  input,textarea
-    margin: 0px 0 0.5em 0
-    display: block
-    line-height: 1.5em
-    width: 98%
-    border: unquote("solid 1px #{$FG_INPUTBOX}")
-    font-size: medium
-    font-weight: normal
-    color: $FG_FORMCAPTION
-  input:hover
-    background: $HV_CALL2ACTION
-  p
-    padding: 0
-    margin-right: 0.5em
-    font-style: italic
-    font-size: small
-    float: right
-    color: $FG_BASICFORM_P
-
-    &.left-just
-      float: left
-      text-align: left
-
-  a
-    display: inline
-    font-size: small
-
-    &.big-link
-      font-size: medium
-      font-weight: bold
-
-.modal-form
-  overflow: auto
-  max-height: 500px
-  a
-    padding: 0
-  h3
-    line-height: 2em
-  select
-    font-size: 11px
-    margin-left: 0
-    margin-right: 0
-
-.nonmodal-form
-  a
-    padding: 0
-  h3
-    line-height: 2em
-
-.form-fields
-  input
-    font-size: 12px
-    line-height: 1em
-  i
-    color: $FG_INPUTLABEL
-
 .form-lines
   label
     display: inline-block
@@ -1041,9 +927,6 @@ fieldset
 .no-width
   label
     width: auto
-
-.wizard-form a
-  padding-left: 3em
 
 input
   &.submit, &.submit-nohide
@@ -1101,6 +984,7 @@ input[type = "hidden"]
 img.icon-sized
   width: 64px
   height: 64px
+
 #main-title-box
   margin: 0
   padding: 10px 0 12px 0
@@ -1139,59 +1023,11 @@ img.icon-sized
       font-weight: bold
       font-family: "Myriad Web", "Myriad Pro", Helvetica, Verdana, Arial, Tahoma, Sans-Serif
 
-#main-title-right
-  margin-top: 20px
-  padding: 0
-  text-align: right
-  font-size: small
-  h1
-    display: inline
-    font-size: 20px
-    letter-spacing: 0px
-    line-height: 1em
-    text-transform: uppercase
-    text-align: right
-    color: $FG_WORK_H3_FADE
-    &.thin
-      font-weight: 100
-      font-family: "Myriad Pro Light", "Myriad Web", "Myriad Pro", Helvetica, Verdana, Arial, Tahoma, Sans-Serif
-    &.thick
-      font-weight: bold
-      font-family: "Myriad Web", "Myriad Pro", Helvetica, Verdana, Arial, Tahoma, Sans-Serif
-  h4
-    margin: 0
-    padding: 0
-    display: inline
-    font-size: small
-    font-weight: bold
-    text-transform: uppercase
-    text-align: right
-    color: $FG_WORK_H4_BOLD
-
-    &.fade
-      color: $FG_WORK_H4_FADE
-    a
-      color: $FG_WORK_H4_FADE
-      font-weight: bold
-      text-decoration: none
-
-      &:hover
-        background-color: $FG_WORK_APP_BUTTON
-        text-decoration: underline
-
-  img
-    float: right
-    margin-right: 15px
-    margin-top: 3px
-
 .name-title-right
   margin-left: 56%
 
 .work-title-right
   margin-left: 80%
-
-.wizard-title-right
-  margin-left: 55%
 
 .sub-title-box
   clear: both
@@ -1219,45 +1055,11 @@ img.icon-sized
   clear: both
   margin-left: 20px
 
-.sub-title
-  margin: 0
-  padding: 0
-  float: left
-  width: 50%
-  h3
-    display: inline
-    font-size: medium
-    font-weight: bold
-    text-transform: uppercase
-    color: $FG_WORK_H3_SUBTTL
-    &.title
-      color: $FG_WORK_H3_TITLE
-
 .shade-highlight
   background-color: $BG_WORK_HIGHLIGHT
 
 .wider_detail
   width: 58%
-
-.sub-title-listname
-  padding-left: 5px
-  min-height: 55px
-  h2, a
-    font-size: 18px
-    color: $FG_WORK_H1
-    font-weight: bold
-    text-transform: uppercase
-    text-decoration: none
-  h2 a:hover
-    background-color: $HV_ALERTBOX
-  a.sub-title-listname-action
-    color: $FG_WORK_H2_A
-    text-decoration: underline
-
-.wizard-title
-  width: 45%
-  h1
-    line-height: 2em !important
 
 .work-title
   width: 70%
@@ -1273,24 +1075,6 @@ img.icon-sized
 
 .full-width
   width: 100%
-
-.sub-title-right
-  text-align: right
-  margin-left: 60%
-  width: 270px
-  h4
-    display: inline
-    font-size: small
-    font-weight: bold
-    text-transform: uppercase
-    color: $FG_WORK_H4
-    text-align: right
-  h3
-    display: inline
-    font-size: 16px
-    font-weight: normal
-    text-transform: uppercase
-    color: $FG_WORK_H4_FADE
 
 .detail_group
   float: left
@@ -1364,22 +1148,6 @@ img.icon-sized
 .pdf-font
   font-size: 18px !important
 
-.nav_scroll_box
-  margin-top: -15px
-  margin-left: auto
-  margin-right: 0px
-  width: 98px
-  img
-    width: 48px
-    height: 48px
-
-.nav_expand_box
-  margin-left: auto
-  margin-right: 0px
-  img
-    width: 16px
-    height: 16px
-
 $CAPTION_ICON_HEIGHT: 62px
 $CAPTION_ICON_WIDTH: 67px
 
@@ -1387,14 +1155,6 @@ table.captioned_headline
   height: $CAPTION_ICON_HEIGHT
   td
     vertical-align: middle
-
-.captioned_pic
-  margin-top: 0px
-  float: left
-  overflow: hidden
-  img.icon_image
-    height: $CAPTION_ICON_HEIGHT
-    width: $CAPTION_ICON_WIDTH
 
 .caption_text
   width: $CAPTION_ICON_WIDTH
@@ -1450,27 +1210,6 @@ table.captioned_headline
     -o-transform: rotate(-90deg)
     transform: rotate(-90deg)
 
-.subtab_button
-  float: left
-  width: $SUBTAB_WIDTH
-  height: $SUBTAB_HEIGHT
-  margin-right: $SUBTAB_SPACING
-  +GRADIENT_BOX(#b0bbbe, #6a6e8c)
-  +BEVEL_CORNER(5px)
-  &:last-child
-    margin: 0
-  a
-    display: block
-    font-size: 12px
-    line-height: $SUBTAB_HEIGHT
-    font-weight: bold
-    text-align: center
-    text-decoration: none
-    text-transform: uppercase
-    color: $FG_SUBTAB_BUTTON
-    &:hover
-      color: $HV_SUBTAB_BUTTON
-
 // selected-subtab will override default subtab-button background
 .selected-subtab
   +GRADIENT_BOX(#b0bbbe, #152429)
@@ -1479,36 +1218,6 @@ table.captioned_headline
 .button-toggle
   float: right
   margin-right: 1em
-
-#action_bar
-  position: relative
-  top: 0
-  padding-bottom: 3px
-
-  .icon-id-group
-    display: block 
-    float: left
-
-  figure
-    display: block 
-    position: relative 
-    overflow: hidden 
-    float: left
-    margin: 0
-
-  figcaption 
-    margin: 0
-
-.heading-row
-  +GRADIENT_SIMPLE($TABLE_HEADER_BKGD_DK, $TABLE_HEADER_BKGD_LT)
-  th
-    font-size: x-small
-    font-weight: bold
-    text-transform: uppercase
-    text-align: center
-    line-height: 1.5em
-    color: $FG_ASIDEBOX_H1
-    padding: 1px 0 4px 0
 
 
 // text-area where lots of text used to communicate
@@ -1574,22 +1283,6 @@ p.flash-error
   color: $FG_ERROR !important
   font-weight: bold !important
 
-textarea.legal
-  font-size: 11px
-  line-height: 1em
-  font-family: Sans-Serif
-  color: $FG_INPUTLABEL
-  width: 98%
-  height: 75px
-
-.legal
-  margin: 0
-  padding: 0
-  float: none
-  clear: both
-  height: 100px
-  width: 550px
-
 .results-list
   padding: 0.5em
   p
@@ -1628,238 +1321,3 @@ span.verb
   img
     vertical-align: bottom
     border: 0
-
-.thumbnails-team
-  dl
-    float: left
-    text-align: center
-    font-size: 11px
-
-  dt, dd
-    width: 96px
-    float: left
-    color: #333
-    
-  a
-    font-size: 11px
-    color: #333
-  dt
-    margin-bottom: 5em
-    // vertical space between the images
-  dd
-    text-align: center
-    line-height: 1.2em
-    margin: 69px 0 0 -110px
-  img
-    vertical-align: bottom
-    border: 0
-    width: 66px
-
-.documents
-  dl
-    float: left
-    text-align: center
-    font-size: small
-  dt, dd
-    width: 110px
-    float: left
-  dt
-    margin-bottom: 4em
-    // vertical space between the images
-  dd
-    text-align: center
-    margin: 65px 0 0 -110px
-  img.icon_image
-    height: $CAPTION_ICON_HEIGHT
-    width: $CAPTION_ICON_WIDTH
-    vertical-align: bottom
-    margin-left: 20px
-    border: 0
-
-input.paypal-button
-  display: inline
-  border: none
-  vertical-align: middle
-  line-height: 1em
-  font-size: small
-
-#event_role_tabs
-    
-  li.tab_name
-    font-size: 18px
-    padding-top: 1em
-    font-weight: bold
-    float: none
-    clear: both
-    
-  ul li ul li
-    float: left
-    line-height: 0.9em
-    a
-      font-size: small
-      font-weight: bold
-    a:after
-      content: ", \2002"
-      
-.signup-section
-  p
-    color: $BG_CENTRALBOX
-    background: $BG_MODAL_INFORMATIONBOX
-    display: block
-    float: none
-    clear: both
-    font-size: 18px
-    font-weight: bold
-    text-align: left
-    font-style: normal
-    padding: 1em 0em
-    
-  dl
-    font-size: medium
-    
-    dt
-      font-weight: bold
-      margin: 0.5em 0
-    
-    dd
-      font-size: small
-      font-style: italic
-      margin: 0 1.5em
-
-.freq_tr
-  tr
-    font-size: 0.9em
-    line-height: 0.8em 
-    font-family: Verdana
-    
-#accordion
-  width: 70%
-  margin: 0 auto
-  opacity: 0.85
-  
-  h3 a
-    font-size: 20px
-    text-decoration: none
-    text-align: left
-    font-weight: bold
-    color: $FG_HEADER
-    opacity: 0.9
-    &:hover
-      color: $HV_ALERTBOX
-
-  .startup-instructions
-    margin: 0
-    padding: 0
-    
-    p
-      color: $BG_CENTRALBOX
-      display: block
-      float: none
-      clear: both
-      font-size: medium
-      line-height: 1.25em
-      font-weight: normal
-      text-align: left
-      font-style: normal
-      padding: 0.5em
-    a
-      font-size: medium
-      &:hover
-        background: $HV_ALERTBOX
-    ul
-      padding: 0em 1em
-      margin-left: 1em
-      li
-        list-style-position: outside
-        list-style-type: disc
-
-    .todays-roster
-      margin: 0.5em 1em
-
-      table
-        width: 95%
-
-        tr
-          font-size: 0.8em
-          line-height: 0.9em
-          font-family: Verdana
-
-.burgers-served
-  margin-top: 5px
-  padding: 0.5em 0
-
-  p
-    text-align: center
-    font-size: small
-
-  h1
-    padding: 20px 0
-    text-align: center
-    font-size: 68px
-    font-weight: bold
-    letter-spacing: -4px
-    color: $HERO_PLAN_FG3
-
-
-  h4
-    text-align: center
-    font-size: 20px
-    font-weight: bold
-
-.pagination
-  // margin-top: 5px
-  text-align: right
-  padding: 1em
-  cursor: default
-
-  a, span, em
-    padding: 0.2em 0.5em
-
-  .disabled
-    color: #aaaaaa
-
-  .current
-    font-style: normal
-    font-weight: bold
-    color: #ff0084
-
-  a
-    border: 1px solid #dddddd
-    color: $FG_INFORMATIONBOX
-    // color: #0063dc
-    text-decoration: none
-
-    &:hover, &:focus
-      border-color: #8989A9  // $FG_INFORMATIONBOX - #202020
-      background: $FG_INFORMATIONBOX
-      color: white
-
-  .page_info
-    color: #aaaaaa
-    padding-top: 0.8em
-
-  .previous_page, .next_page
-    border-width: 2px
-
-  .previous_page
-    margin-right: 1em
-
-  .next_page
-    margin-left: 1em
-
-#resource-list
-  font-style: italic
-  a
-    text-decoration: none
-    color: #333
-
-
-    &:hover
-      color: #000
-      background-color: #ccc
-      &:after
-        content: " \0ab delete"
-        background-color: #ddc
-        color: red
-
-
