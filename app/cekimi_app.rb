@@ -6,6 +6,7 @@
 #
 
   require 'sinatra'
+  require 'pp'   # pretty print
 
 class CekimiApp < Sinatra::Application
   set :root, File.dirname(__FILE__)
@@ -40,15 +41,29 @@ class CekimiApp < Sinatra::Application
     haml :help
   end
 
-  get '/version' do
+  get '/version/?' do
+    # pp request.env
+    
     @version = CEKIMI.do_version
     haml :version
   end
 
 # http://localhost:3000/conj/gitmek
   get '/conj/:v' do
-    @tables = CEKIMI.do_conjugate([params[:v]])
     @verb = params[:v]
+    query = request.env["rack.request.query_string"]
+
+    unless query.empty?  # check for extensions
+      @verb << case query
+        when /a/ then "#a"
+        when /c/ then "#c"
+        when /p/ then "#p"
+        else
+          ""
+        end  # case
+    end  # unless
+
+    @tables = CEKIMI.do_conjugate([@verb])
 
     @error = (
       @tables.nil? || @tables.empty?  ?  

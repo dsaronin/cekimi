@@ -1388,7 +1388,7 @@ span.verb {
 
 .conj_box {
   padding: 0.3em 0.4em;
-  height: 5.1em;
+  min-height: 5.1em;
   border: 1px solid #9f9f9f;
   background-color: #fbfbf8;
   float: left;
@@ -1413,6 +1413,7 @@ span.verb {
   text-align: left;
   font-weight: bold;
   font-size: 1em;
+  overflow: hidden;
 }
 
 /*# sourceMappingURL=stylesheet.css.map */
