@@ -12,6 +12,34 @@ class CekimiApp < Sinatra::Application
   set :root, File.dirname(__FILE__)
 
   #  ------------------------------------------------------------
+  #  prep_verb -- preprocessing for the verb & extensions
+  #  returns processed verb
+  #  ------------------------------------------------------------
+  def prep_verb()
+    verb = params[:v]
+    query = request.env["rack.request.query_string"]
+
+    unless query.empty?  # check for extensions
+      verb << case query
+        when /a/ then "#a"
+        when /c/ then "#c"
+        when /p/ then "#p"
+        else
+          ""
+        end  # case
+    end  # unless
+
+    return verb
+  end
+
+  def send_data(data, options={})
+    status       options[:status]   if options[:status]
+    attachment   options[:filename] if options[:disposition] == 'attachment'
+    content_type options[:type]     if options[:type]
+    halt data
+  end
+
+  #  ------------------------------------------------------------
   #  ------------------------------------------------------------
 
   get '/' do
@@ -50,20 +78,7 @@ class CekimiApp < Sinatra::Application
 
 # http://localhost:3000/conj/gitmek
   get '/conj/:v' do
-    @verb = params[:v]
-    query = request.env["rack.request.query_string"]
-
-    unless query.empty?  # check for extensions
-      @verb << case query
-        when /a/ then "#a"
-        when /c/ then "#c"
-        when /p/ then "#p"
-        else
-          ""
-        end  # case
-    end  # unless
-
-    (@verb, @tables) = CEKIMI.do_conjugate([@verb])
+    (@verb, @tables) = CEKIMI.do_conjugate([ prep_verb ])
 
     @error = (
       @tables.nil? || @tables.empty?  ?  
@@ -72,6 +87,11 @@ class CekimiApp < Sinatra::Application
     )
     haml  :conjugate
   end   # outer do block
+
+  get '/pdf/:v' do
+    p = CEKIMI.do_conjugate([ prep_verb ], true)
+    send_data( p.render, type: "application/pdf", disposition: "inline" )
+  end   # pdf
 
  
   #  ------------------------------------------------------------

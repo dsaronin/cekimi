@@ -199,8 +199,12 @@ class CekimiWork
   #  do_conjugate  -- kicks off a single conjugation rule
   #  args:
   #    list -- remaining cekimi cli token list
+  #    need_pdf  -- true if want pdf obj returned
+  #  returns:
+  #    gen_pdf obj IFF need_pdf
+  #    [infinitive, array of tables] IFF need_pdf false
   #  ------------------------------------------------------------
-  def do_conjugate( list )
+  def do_conjugate( list, need_pdf = false )
     begin
       p = GenPdf.new
       my_infinitive = nil
@@ -211,6 +215,7 @@ class CekimiWork
         table.show_table( Environ.flags.flag_pair_conjugate )
       end   # do block
       p.fileout( my_infinitive ) if Environ.flags.flag_render_pdf
+      return p if need_pdf
       return [my_infinitive, p.accum]    # returns the accumulated array of table arrays
   #  ------------------------------------------------------------
 
