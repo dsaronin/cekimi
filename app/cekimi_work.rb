@@ -217,6 +217,8 @@ class CekimiWork
       Environ.put_and_log_error( ">>  " + $!.message )
     end  # exception handling
 
+    return nil    # show error return
+
   end
 
   # DEPRECATED (design purpose only): pdf_design_output

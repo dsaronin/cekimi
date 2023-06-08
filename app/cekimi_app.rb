@@ -49,6 +49,12 @@ class CekimiApp < Sinatra::Application
   get '/conj/:v' do
     @tables = CEKIMI.do_conjugate([params[:v]])
     @verb = params[:v]
+
+    @error = (
+      @tables.nil? || @tables.empty?  ?  
+      @verb + ": is an invalid entry! Türkçe bir fiil değildir" : 
+      nil 
+    )
     haml  :conjugate
   end   # outer do block
 

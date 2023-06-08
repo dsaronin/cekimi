@@ -1,3 +1,7 @@
 %h1= @verb
-- @tables.each do |left,right|
-  = haml :table_pair, :locals => {:left_table => left, :right_table => right}
+- unless @error.nil?
+  #errorExplanation
+    %p.flash-error= @error
+- else
+  - @tables.each do |left,right|
+    = haml :table_pair, :locals => {:left_table => left, :right_table => right}

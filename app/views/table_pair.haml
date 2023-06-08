@@ -10,14 +10,15 @@
     %ul
       - left_table[2].split(/\n/).each do |row|
         %li= row
-.conj_box#right_table
-  %p= right_table[0]
-  .col_box
-    %ul
-      - right_table[1].split(/\n/).each do |row|
-        %li= row
-  .col_box
-    %ul
-      - right_table[2].split(/\n/).each do |row|
-        %li= row
+- unless right_table.empty?
+  .conj_box#right_table
+    %p= right_table[0]
+    .col_box
+      %ul
+        - right_table[1].split(/\n/).each do |row|
+          %li= row
+    .col_box
+      %ul
+        - right_table[2].split(/\n/).each do |row|
+          %li= row
 
