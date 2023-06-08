@@ -63,11 +63,11 @@ class CekimiApp < Sinatra::Application
         end  # case
     end  # unless
 
-    @tables = CEKIMI.do_conjugate([@verb])
+    (@verb, @tables) = CEKIMI.do_conjugate([@verb])
 
     @error = (
       @tables.nil? || @tables.empty?  ?  
-      @verb + ": is an invalid entry! Türkçe bir fiil değildir" : 
+      @verb + ": is an invalid entry! Türkçe bir fiil değildir." : 
       nil 
     )
     haml  :conjugate

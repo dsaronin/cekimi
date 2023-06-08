@@ -205,19 +205,20 @@ class CekimiWork
       p = GenPdf.new
       my_infinitive = nil
       # pop next entry; assume its a verb
-      CekimiRules.conjugate( list.shift, @main_rule, p ) do | table |
+      try_verb = list.shift
+      CekimiRules.conjugate( try_verb, @main_rule, p ) do | table |
         my_infinitive ||= table.verb_infinitive.downcase   # latch infinitive
         table.show_table( Environ.flags.flag_pair_conjugate )
       end   # do block
       p.fileout( my_infinitive ) if Environ.flags.flag_render_pdf
-      return p.accum    # returns the accumulated array of table arrays
+      return [my_infinitive, p.accum]    # returns the accumulated array of table arrays
   #  ------------------------------------------------------------
 
     rescue ArgumentError
       Environ.put_and_log_error( ">>  " + $!.message )
     end  # exception handling
 
-    return nil    # show error return
+    return [try_verb, nil]    # show error return
 
   end
 
