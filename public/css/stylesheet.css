@@ -1379,11 +1379,11 @@ span.verb {
 }
 
 #left_table {
-  width: 41%;
+  width: 43%;
 }
 
 #right_table {
-  width: 52%;
+  width: 50%;
 }
 
 .conj_box {
@@ -1413,7 +1413,9 @@ span.verb {
   text-align: left;
   font-weight: bold;
   font-size: 1em;
-  overflow: hidden;
+}
+.col_box li.shrinktext {
+  font-size: smaller;
 }
 
 /*# sourceMappingURL=stylesheet.css.map */

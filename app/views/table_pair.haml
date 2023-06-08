@@ -1,24 +1,37 @@
 -# table_pair -- outputs an html pair of conjugated tables
 -#
+- maxlen=18
 .conj_box#left_table
   %p= left_table[0]
   .col_box
     %ul
       - left_table[1].split(/\n/).each do |row|
-        %li= row
+        - if row.size < maxlen
+          %li= row
+        - else
+          %li.shrinktext= row
   .col_box
     %ul
       - left_table[2].split(/\n/).each do |row|
-        %li= row
+        - if row.size < maxlen
+          %li= row
+        - else
+          %li.shrinktext= row
 - unless right_table.empty?
   .conj_box#right_table
     %p= right_table[0]
     .col_box
       %ul
         - right_table[1].split(/\n/).each do |row|
-          %li= row
+          - if row.size < maxlen
+            %li= row
+          - else
+            %li.shrinktext= row
     .col_box
       %ul
         - right_table[2].split(/\n/).each do |row|
-          %li= row
+          - if row.size < maxlen
+            %li= row
+          - else
+            %li.shrinktext= row
 
