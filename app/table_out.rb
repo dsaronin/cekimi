@@ -107,7 +107,7 @@ class TableOut
     else
 
       str = sprintf( FORMAT_HEADER, caption_turk )
-      puts Environ.wrapCyanBold str
+      Environ.put_head str
 
       if !is_empty?
         t1_left_col  = ""
@@ -126,7 +126,7 @@ class TableOut
 
           str = sprintf( cellformat, t1_left, t1_right )
 
-          puts Environ.wrapYellow str
+          Environ.put_data str
         end  # each do
 
         t1_left_col.chop   # remove trailing new lines
@@ -159,7 +159,7 @@ class TableOut
     caption_left  = caption_turk
     caption_right = @my_pair.caption_turk
 
-    puts Environ.wrapCyanBold str
+    Environ.put_head str
 
     if !is_empty?
          # initialize column accumulators for pdf
@@ -181,7 +181,7 @@ class TableOut
  
         str = sprintf( cellformat, t1_left,t1_right, t2_left, t2_right )
 
-        puts Environ.wrapYellow str
+        Environ.put_data str
 
         t1_left_col   << t1_left  + "\n"
         t1_right_col  << t1_right + "\n"

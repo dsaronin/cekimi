@@ -15,6 +15,8 @@ configure do
   # set :root, File.dirname(__FILE__)
 
   set :haml, { escape_html: false }
+  Environ.put_info ">>>> turning off console output flag"
+  Environ.flags.parse_flags( [ '-o' ] )
 
 end  # configure
 
