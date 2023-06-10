@@ -53,7 +53,8 @@ class GenPdf
   HOST_ROBOTO_FAMILY   = JABARI_ROBOTO_FAMILY
 
   SYS_NAME = `uname -n`
-  USE_FONT = ( SYS_NAME =~ /(jabari)|(akili)/ ?  "Roboto" : "Helvetica" )
+  # USE_FONT = ( SYS_NAME =~ /(jabari)|(akili)/ ?  "Roboto" : "Helvetica" )
+  USE_FONT = "Roboto"   # always, even when hosted
 
   FONT_ROBOTO_FAMILY =  case  SYS_NAME
                         when /jabari/ then JABARI_ROBOTO_FAMILY
@@ -61,7 +62,6 @@ class GenPdf
                         else
                           HOST_ROBOTO_FAMILY
                         end
-
 
   ROBOTO_NORMAL   = "Roboto-Regular.ttf"
   ROBOTO_BOLD     = "Roboto-Bold.ttf"
