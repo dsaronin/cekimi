@@ -5,6 +5,8 @@ require_relative './app/cekimi_work'
 require_relative './app/cekimi_app'
 
 configure do
+  ENV['SINATRA_ENV'] ||= "development"
+  ENV['RACK_ENV']    ||= "development"
 
   CEKIMI = CekimiWork.new 
   CEKIMI.setup_work()    # initialization of everything
@@ -15,6 +17,7 @@ configure do
   # set :root, File.dirname(__FILE__)
 
   set :haml, { escape_html: false }
+
   Environ.put_info ">>>> changing default flags: o, f"
   Environ.flags.parse_flags( [ '-o', '-f' ] )
 
