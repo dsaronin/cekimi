@@ -115,7 +115,7 @@ class CekimiWork
        puts :indef_past.to_s + ":  " + CekimiRules.get_rule( :indef_past ).to_s
     end
 
-    return sts + "\n" + list_m + "\n" + list_s
+    return sts + "\n" + list_m   # + "\n" + list_s
   end
 
   #  ------------------------------------------------------------

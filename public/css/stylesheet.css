@@ -85,6 +85,7 @@ body.pdf {
 }
 
 #header {
+  margin: 0 auto;
   background-color: black;
   height: 35px;
 }
@@ -93,6 +94,7 @@ body.pdf {
   padding: 8px 2px;
   font-size: medium;
   font-weight: bold;
+  float: left;
 }
 
 #section {
@@ -775,6 +777,12 @@ img.logo {
   margin-left: 1em;
   margin-top: 2px;
   float: left;
+}
+
+img.flag {
+  margin-right: 1em;
+  margin-top: 2px;
+  float: right;
 }
 
 input.icon-submit {

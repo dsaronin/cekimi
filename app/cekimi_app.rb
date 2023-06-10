@@ -48,8 +48,8 @@ class CekimiApp < Sinatra::Application
     haml :index
   end
 
-  get '/list/:l' do
-    @list = CEKIMI.do_list( ['list'] ).split(/\n/)
+  get '/list/:l?' do
+    @list = CEKIMI.do_list( ['list', params[:l] || "" ] ).split(/\n/)
     haml :list
   end
 
@@ -59,8 +59,8 @@ class CekimiApp < Sinatra::Application
   end
 
 # http://localhost:3000/conj/+abc
-  get '/flags/:f' do
-    @flags = CEKIMI.do_flags( ['flags', params[:f]] ).split /, /
+  get '/flags/:f?' do
+    @flags = CEKIMI.do_flags( ['flags', params[:f] || "" ] ).split /, /
     haml :flags
   end
 
@@ -90,7 +90,7 @@ class CekimiApp < Sinatra::Application
 
   get '/pdf/:v' do
     p = CEKIMI.do_conjugate([ prep_verb ], true)
-    send_data( p.render, type: "application/pdf", disposition: "inline" )
+    send_data( p.render, type: "application/pdf", disposition: "attachment" )
   end   # pdf
 
  
