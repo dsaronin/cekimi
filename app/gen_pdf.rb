@@ -46,8 +46,11 @@ class GenPdf
   FONT_VERDANA  = "$HOME/.local/share/fonts/Unknown\ Vendor/TrueType/Verdana"
 
 
-  JABARI_ROBOTO_FAMILY   = "/home/daudi/Android/Sdk/platforms/android-29/data/fonts/"
-  AKILI_ROBOTO_FAMILY   = "/usr/share/fonts/truetype/roboto/unhinted/RobotoTTF/"
+  # JABARI_ROBOTO_FAMILY   = "/home/daudi/Android/Sdk/platforms/android-29/data/fonts/"
+  # AKILI_ROBOTO_FAMILY   = "/usr/share/fonts/truetype/roboto/unhinted/RobotoTTF/"
+  JABARI_ROBOTO_FAMILY   = File.join(File.dirname(__FILE__), 'fonts/')
+  AKILI_ROBOTO_FAMILY   = JABARI_ROBOTO_FAMILY
+  HOST_ROBOTO_FAMILY   = JABARI_ROBOTO_FAMILY
 
   SYS_NAME = `uname -n`
   USE_FONT = ( SYS_NAME =~ /(jabari)|(akili)/ ?  "Roboto" : "Helvetica" )
@@ -56,7 +59,7 @@ class GenPdf
                         when /jabari/ then JABARI_ROBOTO_FAMILY
                         when /akili/  then AKILI_ROBOTO_FAMILY
                         else
-                          nil
+                          HOST_ROBOTO_FAMILY
                         end
 
 
