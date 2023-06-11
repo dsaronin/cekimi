@@ -1190,7 +1190,7 @@ table.captioned_headline
 // text-area where lots of text used to communicate
 .text-area
   padding: 0em
-  h1,h2,h3,h4
+  h1,h2,h3,h4,h5
     padding: 0.12em 0 0.12em 0
     font-weight: bold
   h1
@@ -1201,6 +1201,8 @@ table.captioned_headline
     font-size: 2.1em
   h4
     font-size: 1.8em
+  h5
+    font-size: 1.2em
   p
     padding-bottom: 0.25em
     font-size: 1em
@@ -1208,6 +1210,30 @@ table.captioned_headline
     strong
       font-weight: bold
       color: $BASIC_FG
+  i
+    font-size: smaller
+  ul
+    margin: 2px 1.5em
+
+    li
+      list-style-type: disc
+      list-style-position: outside
+      padding: 0.2em 0
+      text-align: left
+      font-size: 1em
+  a
+    text-decoration: underline
+    font-weight: normal
+    font-size: 1em
+    border: none
+    color: $BG_INFORMATIONBOX
+    &.strong
+      font-weight: bold
+
+  a:hover
+    background-color: $FG_WORK_APP_BUTTON
+
+
   dl
     padding: 0 0.5em 0.5em 0.5em
     font-size: 12px

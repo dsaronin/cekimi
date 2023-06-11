@@ -1,12 +1,13 @@
 %h3= @greeting
 %h4= @hint
 %br
-%p
-  Things you can do (type in address bar after hostname):
-  %ul
-    %li /conj/xxxxx  -- conjugate verb xxxxx
-    %li /conj/xxxxx?=y  -- where y is 'a' for ability, 'c' for causative, 'p' for passive.
-    %li /list/aorist  -- (default) to conjugate five most common tenses
-    %li /list/must_shall  -- to conjugate five lesser tenses
-    %li /pdf/xxxxx  -- conjugate verb xxxxx and download pdf
-
+%h5
+  Things you can do: 
+%i
+  (type in address bar after hostname)
+%ul
+  %li /conj/xxxxx  -- conjugate verb xxxxx
+  %li /conj/xxxxx?=y  -- where y is 'a' for ability, 'c' for causative, 'p' for passive.
+  %li /pdf/xxxxx  -- conjugate verb xxxxx and download pdf
+  %li= %Q[<a href="/list/aorist" title="change conjugate chain to aorist" >Select five most common tense conjugations (default) &raquo;</a>]
+  %li= %Q[<a href="/list/must_shall" title="change conjugate chain to must_shall" >Select lesser tense conjugations &raquo;</a>]

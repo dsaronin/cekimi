@@ -1269,7 +1269,7 @@ table.captioned_headline td {
 .text-area {
   padding: 0em;
 }
-.text-area h1, .text-area h2, .text-area h3, .text-area h4 {
+.text-area h1, .text-area h2, .text-area h3, .text-area h4, .text-area h5 {
   padding: 0.12em 0 0.12em 0;
   font-weight: bold;
 }
@@ -1285,6 +1285,9 @@ table.captioned_headline td {
 .text-area h4 {
   font-size: 1.8em;
 }
+.text-area h5 {
+  font-size: 1.2em;
+}
 .text-area p {
   padding-bottom: 0.25em;
   font-size: 1em;
@@ -1293,6 +1296,32 @@ table.captioned_headline td {
 .text-area p strong {
   font-weight: bold;
   color: black;
+}
+.text-area i {
+  font-size: smaller;
+}
+.text-area ul {
+  margin: 2px 1.5em;
+}
+.text-area ul li {
+  list-style-type: disc;
+  list-style-position: outside;
+  padding: 0.2em 0;
+  text-align: left;
+  font-size: 1em;
+}
+.text-area a {
+  text-decoration: underline;
+  font-weight: normal;
+  font-size: 1em;
+  border: none;
+  color: #1d282d;
+}
+.text-area a.strong {
+  font-weight: bold;
+}
+.text-area a:hover {
+  background-color: #daddde;
 }
 .text-area dl {
   padding: 0 0.5em 0.5em 0.5em;
