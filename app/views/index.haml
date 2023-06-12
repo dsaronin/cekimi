@@ -1,13 +1,15 @@
+- title1 = "geniş zaman, şimdi zaman, gelecek zaman, belirli geçmis zaman, belirlisiz geçmis zaman"
+- title2 = "gereklilik kipi, dilek kipi, şart kipi, geçmiş mükemmel zaman, şüpheli uzak geçmiş zaman"
+-#
 %h3= @greeting
 %h4= @hint
 %br
 %h5
-  Things you can do: 
-%i
-  (type in address bar after hostname)
+  Böyle yapabileceğin şeyler: 
+-#
 %ul
-  %li /conj/xxxxx  -- conjugate verb xxxxx
-  %li /conj/xxxxx?=y  -- where y is 'a' for ability, 'c' for causative, 'p' for passive.
-  %li /pdf/xxxxx  -- conjugate verb xxxxx and download pdf
-  %li= %Q[<a href="/list/aorist" title="change conjugate chain to aorist" >Select five most common tense conjugations (default) &raquo;</a>]
-  %li= %Q[<a href="/list/must_shall" title="change conjugate chain to must_shall" >Select lesser tense conjugations &raquo;</a>]
+  %li /conj/xxxxx &emsp;&emsp; &emsp; xxxxx fiilini birleştirmek.
+  %li /conj/xxxxx?=y  &emsp;&emsp;y = 'a' yetenik için, 'c' nedensel için, 'p' pasif için.
+  %li /pdf/xxxxx  &emsp; &emsp; &emsp; xxxxx fiilini birleştirmek ve pdf olarak indir.
+  %li= %Q[<a href="/list/aorist" title="#{title1}" >Birincil konjugasyonları seçin &raquo;</a>]
+  %li= %Q[<a href="/list/must_shall" title="#{title2}" >İkincil konjugasyonları seçin &raquo;</a>]

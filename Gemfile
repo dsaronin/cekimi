@@ -14,4 +14,3 @@ gem 'logger'
 gem 'yaml'
 gem "matrix", "~> 0.4"
 gem 'haml'
-

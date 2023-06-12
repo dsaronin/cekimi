@@ -390,7 +390,7 @@
   !ruby/object:CekimiRules
     my_key: must_shall
     caption_eng: must shall tense
-    caption_turk: must shall
+    caption_turk: gereklilik kipi
     grammar_role: :must_shall
     lexical_rule: ['~V',  'M',  '@A2',  'L',  '@A4',  '&_sfx_pers'] 
     parent_conj: ~
@@ -402,7 +402,7 @@
   !ruby/object:CekimiRules
     my_key: neg_must_shall
     caption_eng: negative must shall tense
-    caption_turk: ne zaman
+    caption_turk: olumsuz gereklilik kipi
     grammar_role: :must_shall
     lexical_rule: ['~V',  'M',  '@A2',  'M',  '@A2',  'L',  '@A4',  '&_sfx_pers']
     parent_conj: ~
@@ -414,7 +414,7 @@
   !ruby/object:CekimiRules
     my_key: may_wish
     caption_eng: may wish tense
-    caption_turk: may wish
+    caption_turk: dilek kipi
     grammar_role: :may_wish
     lexical_rule: ['~W',  '@Y',  '@A2',  '&_sfx_maywish'] 
     parent_conj: must_shall
@@ -426,7 +426,7 @@
   !ruby/object:CekimiRules
     my_key: neg_may_wish
     caption_eng: negative may wish
-    caption_turk: neg may wish
+    caption_turk: olumsuz dilek kipi
     grammar_role: :may_wish
     lexical_rule: ['~V',  'M',  '@A2',  'Y',  '@A2',  '&_sfx_maywish'] 
     parent_conj: neg_must_shall
@@ -439,7 +439,7 @@
   !ruby/object:CekimiRules
     my_key: conditional
     caption_eng: conditional tense
-    caption_turk: conditional
+    caption_turk: şart kipi
     grammar_role: :conditional
     lexical_rule: ['~V',  '@Y',  'S',  '@A2',  '&_sfx_if'] 
     parent_conj: may_wish
@@ -451,7 +451,7 @@
   !ruby/object:CekimiRules
     my_key: neg_conditional
     caption_eng: conditional tense
-    caption_turk: neg conditional
+    caption_turk: olumsuz şart kipi
     grammar_role: :conditional
     lexical_rule: ['~V',  'MES',  '@A2',  '&_sfx_if'] 
     parent_conj: neg_may_wish
@@ -463,7 +463,7 @@
   !ruby/object:CekimiRules
     my_key: past_perf_narrative
     caption_eng: past perfect narrative tense
-    caption_turk: past perfect narrative
+    caption_turk: geçmiş mükemmel zaman
     grammar_role: :past_perf_narrative
     lexical_rule: ['~V',  'M',  '@A4',  'Ş',  'T',  '@A4',  '&_sfx_past'] 
     parent_conj: conditional
@@ -475,7 +475,7 @@
   !ruby/object:CekimiRules
     my_key: neg_past_perf_narrative
     caption_eng: past perfect narrative tense
-    caption_turk: neg past perfect narrative
+    caption_turk: olumsuz geçmiş mükemmel zaman
     grammar_role: :past_perf_narrative
     lexical_rule: ['~V',  'M',  '@A2', 'M',  '@A4',  'Ş',  'T',  '@A4',  '&_sfx_past'] 
     parent_conj: neg_conditional
@@ -488,7 +488,7 @@
   !ruby/object:CekimiRules
     my_key: doubt_farpast
     caption_eng: doubt_farpast tense
-    caption_turk: doubt far past
+    caption_turk: şüpheli uzak geçmiş zaman
     grammar_role: :doubt_farpast
     lexical_rule: ['~V',  'M',  '@A4',  'ŞM',  '@A4',  'Ş',  '&_sfx_dd_past'] 
     parent_conj: past_perf_narrative
@@ -501,7 +501,7 @@
   !ruby/object:CekimiRules
     my_key: neg_doubt_farpast
     caption_eng: must shall tense
-    caption_turk: neg doubt far past
+    caption_turk: olumsuz şüpheli uzak geçmiş zaman
     grammar_role: :doubt_farpast
     lexical_rule: ['~V',  'M',  '@A2',  'M',  '@A4',  'ŞM',  '@A4',  'Ş',  '&_sfx_dd_past'] 
     parent_conj: neg_perf_narrative
@@ -540,7 +540,7 @@
   !ruby/object:CekimiRules
     my_key: ability
     caption_eng: ability formation
-    caption_turk: ability
+    caption_turk: yetenik
     grammar_role: :ability
     lexical_rule: ['~W',  '@Y',  '@A2',  'BIL', '~Z' ] 
     is_neg: false
@@ -555,7 +555,7 @@
   !ruby/object:CekimiRules
     my_key: causative
     caption_eng: causative formation
-    caption_turk: causative
+    caption_turk: nedensel
     grammar_role: :causative
     is_neg: false
     lexical_rule: ['~V',  '~S',  '~Z' ] 
@@ -586,7 +586,7 @@
   !ruby/object:CekimiRules
     my_key: passive
     caption_eng: passive formation
-    caption_turk: passive
+    caption_turk: pasif
     grammar_role: :passive
     is_neg: false
     lexical_rule: ['~V',  '~S',  '~Z' ] 

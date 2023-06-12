@@ -7,6 +7,7 @@
 
   require 'sinatra'
   require 'pp'   # pretty print
+  require_relative 'view_helpers'
 
 class CekimiApp < Sinatra::Application
   set :root, File.dirname(__FILE__)
