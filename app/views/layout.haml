@@ -20,7 +20,8 @@
 
   %body
     #header
-      %img{ :src => "/logo-50-red.png", :class => 'logo', :alt => 'çekimi logo' }
+      -# %img{ :src => "/logo-50-red.png", :class => 'logo', :alt => 'çekimi logo' }
+      = link_to( image_tag( "/logo-50-red.png", {:class => 'logo',:alt => 'çekimi logo'} ) , '/', { :title => "main page" } )
       .main-container
         %p Otomatik fiil çekimi yazılımı
       %img{ :src => "/turk-flag-50.png", :class => 'flag', :alt => 'türk flag' }

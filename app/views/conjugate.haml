@@ -5,3 +5,11 @@
 - else
   - @tables.each do |left,right|
     = haml :table_pair, :locals => {:left_table => left, :right_table => right}
+%br
+= form('/conj', method=:post) do |f|
+  = f.label(:verb, 'fiilini birleştirmek:', {:title => "istemde bir fiil girin (~mak/mek)"})
+  = f.input(:verb)
+  = f.checkbox(:pdf,%w{pdf}, {:title => "pdf çıktı seçin"})
+  &emsp;&emsp; 
+  = f.radio(:ext,%w{yetenik nedensel pasif}, {:title => "fiil modifikasyonları seçin"})
+ 

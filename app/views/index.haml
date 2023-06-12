@@ -8,10 +8,17 @@
   Böyle yapabileceğin şeyler: 
 -#
 %ul
-  %li /conj/xxxxx &emsp;&emsp; &emsp; xxxxx fiilini birleştirmek.
-  %li /conj/xxxxx?=y  &emsp;&emsp;y = 'a' yetenik için, 'c' nedensel için, 'p' pasif için.
-  %li /pdf/xxxxx  &emsp; &emsp; &emsp; xxxxx fiilini birleştirmek ve pdf olarak indir.
+  = form('/conj', method=:post) do |f|
+    %li
+      = f.label(:verb, 'fiilini birleştirmek:', {:title => "istemde bir fiil girin (~mak/mek)"})
+      = f.input(:verb)
+      = f.checkbox(:pdf,%w{pdf}, {:title => "pdf çıktı seçin"})
+      &emsp;&emsp; 
+      = f.radio(:ext,%w{yetenik nedensel pasif}, {:title => "fiil modifikasyonları seçin"})
   %li= link_to( "Birincil konjugasyonları seçin &raquo;", "/list/aorist", { :title => title1 } )
   %li= link_to( "İkincil konjugasyonları seçin &raquo;", "/list/must_shall", { :title => title2 } )
- 
+
 -#  %li= %Q[<a href="/list/must_shall" title="#{title2}" >İkincil konjugasyonları seçin &raquo;</a>]
+-#  %li /conj/xxxxx &emsp;&emsp; &emsp; xxxxx fiilini birleştirmek.
+-#  %li /conj/xxxxx?=y  &emsp;&emsp;y = 'a' yetenik için, 'c' nedensel için, 'p' pasif için.
+-#  %li /pdf/xxxxx  &emsp; &emsp; &emsp; xxxxx fiilini birleştirmek ve pdf olarak indir.

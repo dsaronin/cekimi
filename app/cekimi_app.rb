@@ -8,6 +8,7 @@
   require 'sinatra'
   require 'pp'   # pretty print
   require_relative 'view_helpers'
+  require 'sinatra/form_helpers'
 
 class CekimiApp < Sinatra::Application
   set :root, File.dirname(__FILE__)
@@ -79,7 +80,6 @@ class CekimiApp < Sinatra::Application
   end
 
   get '/version/?' do
-    # pp request.env
     
     @version = CEKIMI.do_version
     haml :version
@@ -102,6 +102,26 @@ class CekimiApp < Sinatra::Application
     send_data( p.render, type: "application/pdf", disposition: "attachment" )
   end   # pdf
 
+  post '/conj' do
+    # pp request.env
+    parms = params[:conj]
+    # pp parms
+    verb = parms[:verb] 
+    verb = "silmek" if verb.empty?
+    verb << case parms[:ext]
+      when /yetenik/  then "?=a"
+      when /nedensel/ then "?=c"
+      when /pasif/    then "?=p"
+      else
+        ""
+      end   # case
+
+    if parms[:pdf].nil?
+      redirect "/conj/#{verb}"
+    else
+      redirect "/pdf/#{verb}"
+    end
+  end
  
   #  ------------------------------------------------------------
   #  ------------------------------------------------------------
