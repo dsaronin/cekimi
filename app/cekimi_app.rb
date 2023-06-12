@@ -51,11 +51,16 @@ class CekimiApp < Sinatra::Application
     haml :index
   end
 
-  get '/list/:l?' do
+  get '/list/:l' do
     @list = CEKIMI.do_list( ['list', params[:l] || "" ] ).split(/\n/)
-    # haml :list
     redirect '/'
   end
+
+  get '/list' do
+    @list = CEKIMI.do_list( ['list'] ).split(/\n/)
+    haml :list
+  end
+
 
   get '/status' do
     @status = CEKIMI.do_status

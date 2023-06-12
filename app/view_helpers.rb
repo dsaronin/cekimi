@@ -58,7 +58,7 @@ BOOLEAN_ATTRIBUTES = %w(allowfullscreen async autofocus autoplay checked compact
 
 # File actionview/lib/action_view/helpers/tag_helper.rb, line 150
   def to_html_attributes(options, escape = true)
-    return if options.blank?
+    return "" if options.empty?
     output = ""
     sep    = " ".freeze
     options.each_pair do |key, value|

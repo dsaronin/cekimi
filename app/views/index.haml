@@ -11,5 +11,7 @@
   %li /conj/xxxxx &emsp;&emsp; &emsp; xxxxx fiilini birleştirmek.
   %li /conj/xxxxx?=y  &emsp;&emsp;y = 'a' yetenik için, 'c' nedensel için, 'p' pasif için.
   %li /pdf/xxxxx  &emsp; &emsp; &emsp; xxxxx fiilini birleştirmek ve pdf olarak indir.
-  %li= %Q[<a href="/list/aorist" title="#{title1}" >Birincil konjugasyonları seçin &raquo;</a>]
-  %li= %Q[<a href="/list/must_shall" title="#{title2}" >İkincil konjugasyonları seçin &raquo;</a>]
+  %li= link_to( "Birincil konjugasyonları seçin &raquo;", "/list/aorist", { :title => title1 } )
+  %li= link_to( "İkincil konjugasyonları seçin &raquo;", "/list/must_shall", { :title => title2 } )
+ 
+-#  %li= %Q[<a href="/list/must_shall" title="#{title2}" >İkincil konjugasyonları seçin &raquo;</a>]
