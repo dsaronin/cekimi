@@ -54,6 +54,9 @@ class CekimiApp < Sinatra::Application
     haml :list
   end
 
+  get '/about' do
+    haml :about
+  end
 
   get '/status' do
     @status = CEKIMI.do_status

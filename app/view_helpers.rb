@@ -24,7 +24,26 @@ module Sinatra
         halt data
       end
 
-     
+# ------------------------------------------------------
+# ------------------------------------------------------
+# File lib/erb.rb, line 992
+    def url_encode(s)
+      s.to_s.b.gsub(/[^a-zA-Z0-9_\-.~]/) { |m|
+        sprintf("%%%02X", m.unpack1("C"))
+      }
+    end
+
+# ------------------------------------------------------
+# ------------------------------------------------------
+# modified from: File actionview/lib/action_view/helpers/url_helper.rb, line 482
+      def mail_to(email_address, name = nil, html_options = {} )
+        html_options = (html_options || {})
+
+        encoded_email_address = url_encode(email_address).gsub("%40", "@")
+
+        link_to(name || email_address, "mailto:#{encoded_email_address}", html_options)
+      end
+
 # ------------------------------------------------------
     # File actionview/lib/action_view/helpers/tag_helper.rb, line 174
 # ------------------------------------------------------
