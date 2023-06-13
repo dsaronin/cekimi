@@ -47,7 +47,7 @@ class CekimiApp < Sinatra::Application
   #  ------------------------------------------------------------
 
   get '/' do
-    @greeting = "Merhaba, kolay gelsin."
+    @greeting = "Merhaba, Çekimi'ne hoşgeldiniz."
     @hint = "Buyurun istemde bir fiil girin." 
     haml :index
   end
