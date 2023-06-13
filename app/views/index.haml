@@ -10,7 +10,7 @@
 %ul
   = form('/conj', method=:post) do |f|
     %li
-      = f.label(:verb, 'fiilini birleştir:', {:title => "istemde bir fiil girin (~mak/mek)"})
+      = f.label(:verb, 'Fiilini birleştir:', {:title => "istemde bir fiil girin (~mak/mek)"})
       = f.input(:verb)
       = f.checkbox(:pdf,%w{pdf}, {:title => "pdf çıktı seçin"})
       &emsp;

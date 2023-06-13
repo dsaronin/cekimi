@@ -33,15 +33,7 @@ class CekimiApp < Sinatra::Application
 
     return verb
   end
-
-  def send_data(data, options={})
-    status       options[:status]   if options[:status]
-    attachment   options[:filename] if options[:disposition] == 'attachment'
-    content_type options[:type]     if options[:type]
-    halt data
-  end
-
-    
+   
 
   #  ------------------------------------------------------------
   #  ------------------------------------------------------------
