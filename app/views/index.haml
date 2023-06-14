@@ -10,13 +10,17 @@
 %ul
   = form('/conj', method=:post) do |f|
     %li
-      = f.label(:verb, 'Fiilini birleştir:', {:title => "istemde bir fiil girin (~mak/mek)"})
+      = f.label(:verb, 'Fiilini birleştir:', {:title => "istemde bir fiil girin (~mak/mek). göndermek için enter'a tıklayın."})
       = f.input(:verb)
       = f.checkbox(:pdf,%w{pdf}, {:title => "pdf çıktı seçin"})
       &emsp;
       = f.radio(:ext,%w{yetenik nedensel pasif sıfırla}, {:title => "fiil modifikasyonları seçin yoksa bütün sıfırla"})
   %li= link_to( "Birincil konjugasyonları seçin &raquo;", "/list/aorist", { :title => title1 } )
   %li= link_to( "İkincil konjugasyonları seçin &raquo;", "/list/must_shall", { :title => title2 } )
+%br
+%h5
+  Örnek konjugasyon: 
+= image_tag( "/cekimi_screenshot.png", {:class => 'screenshot',:alt => 'çekimi screenshot'} )
 
 -#  %li= %Q[<a href="/list/must_shall" title="#{title2}" >İkincil konjugasyonları seçin &raquo;</a>]
 -#  %li /conj/xxxxx &emsp;&emsp; &emsp; xxxxx fiilini birleştirmek.

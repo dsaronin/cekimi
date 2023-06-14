@@ -1276,6 +1276,11 @@ table.captioned_headline td {
   margin-right: 1em;
 }
 
+.screenshot {
+  margin: 0 auto;
+  padding: 0 3em;
+}
+
 .text-area {
   padding: 0em;
 }
