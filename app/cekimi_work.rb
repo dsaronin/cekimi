@@ -9,6 +9,7 @@ class CekimiWork
   require_relative 'cekimi_rules'
   require_relative 'verb'
   require_relative "gen_pdf"
+  require_relative 'verb_dict'
 
 
   #  ------------------------------------------------------------
@@ -20,8 +21,9 @@ class CekimiWork
   #  ------------------------------------------------------------
   def initialize()
     
-    @my_env = Environ.instance
-    @my_rules = CekimiRules.new
+    @my_env    = Environ.instance
+    @my_dict   = VerbDict.instance
+    @my_rules  = CekimiRules.new
     @main_rule = STARTING_RULE
   end
 

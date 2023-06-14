@@ -14,11 +14,10 @@ configure do
   PUBLIC_DIR = File.join(File.dirname(__FILE__), 'public')
   set :public_folder, PUBLIC_DIR
   set :root, File.dirname(__FILE__)
-  puts "PUBLIC_DIR: #{PUBLIC_DIR}"
-
   set :haml, { escape_html: false }
 
-  Environ.put_info ">>>> changing default flags: o, f"
+  Environ.log_info  "PUBLIC_DIR: #{PUBLIC_DIR}"
+  Environ.log_info  ">>>> changing default flags: o, f"
   Environ.flags.parse_flags( [ '-o', '-f' ] )
 
 end  # configure

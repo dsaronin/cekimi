@@ -17,6 +17,7 @@ class Flags
   RENDER_PDF      = false # true if render as pdf
   CLI_OUTPUT      = true  # output to console
   LOG_LEVEL_QUIET    = Logger::WARN 
+  LOG_LEVEL_INFO     = Logger::INFO  
   LOG_LEVEL_VERBOSE  = Logger::DEBUG 
 
   #  ------------------------------------------------------------

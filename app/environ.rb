@@ -20,7 +20,7 @@ class Environ
 # constants ... #TODO replace with config file?
   APP_NAME = "Çekimi"
   APP_NAME_HEAD = APP_NAME + ": "
-  CEKIMI_VERSION = "1.01"
+  CEKIMI_VERSION = "2.01"
   CEKIMI_HELP = "list (l), status (s), options (o), help (h), quit (q), exit (x)"
   #  ------------------------------------------------------------
   EXIT_CMD  = "q"  # default CLI exit command used if EOF
@@ -45,7 +45,7 @@ class Environ
   #  logger setup
   #  ------------------------------------------------------------
   @@logger = Logger.new(STDERR)
-  @@logger.level = Flags::LOG_LEVEL_QUIET
+  @@logger.level = Flags::LOG_LEVEL_INFO
   
   #  ------------------------------------------------------------
   #  Flags setup
