@@ -39,7 +39,7 @@
 class TableOut
 
   attr_accessor  :verb_infinitive, :stub, :my_table, :last_vowel
-  attr_accessor  :cell_width, :empty, :my_pair
+  attr_accessor  :cell_width, :empty, :my_pair, :verb_stem
   attr_accessor  :caption_eng, :caption_turk, :grammar_role, :is_neg
 
   #  ----------------------------------------------------------------
@@ -58,6 +58,7 @@ class TableOut
   #  ----------------------------------------------------------------
   def initialize(my_verb, caption_eng, caption_turk, grammar_role, is_neg, pdf)
     @verb_infinitive = my_verb.verb_infinitive
+    @verb_stem = my_verb.verb_stem.downcase  # stem used as english dict key
     @caption_eng = caption_eng
     @caption_turk = caption_turk
     @grammar_role = grammar_role
@@ -70,6 +71,11 @@ class TableOut
     @my_table = Array.new(2){ Array.new(3) }
     @empty = true    # will be false if table has anything in it
     @pdf = pdf
+  end
+
+  def replace_infinitive(verb_str)
+    @verb_infinitive = verb_str.downcase  # replace infinitive
+    @verb_stem = Verb.form_stem( @verb_infinitive )
   end
 
   #  ----------------------------------------------------------------

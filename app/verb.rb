@@ -69,6 +69,14 @@ class Verb
     end
   end
   #  -------------------------------------------------------------------
+  #  -------------------------------------------------------------------
+
+  #  -------------------------------------------------------------------
+  #  form_stem -- form the verb stem from an infinitive
+  #  -------------------------------------------------------------------
+  def Verb.form_stem( verb_str )
+    return verb_str.gsub( STRIP_INFIN_SUFFIX , "" )
+  end
 
   #  -------------------------------------------------------------------
   #  to_s  -- inspect object as a string
@@ -83,7 +91,7 @@ class Verb
   #  set_stem -- verb stem setup
   #  -------------------------------------------------------------------
   def set_stem
-    @verb_stem = @verb_infinitive.gsub( STRIP_INFIN_SUFFIX , "" )
+    @verb_stem = Verb.form_stem( @verb_infinitive )
     @stem_syllables = @verb_stem.count TURK_VOWELS
   end
 

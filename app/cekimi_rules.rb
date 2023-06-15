@@ -169,8 +169,7 @@ class CekimiRules
 
       verb_stem_neg = ( pp_type =~ PP_ABILITY  ? verb_str.sub(/bilmek$/i, "") : nil )
       puts ">>>>> new infinitive formed: #{verb_str}, neg_stem: #{verb_stem_neg} <<<<<<"
-      table_out.verb_infinitive = verb_str.downcase  # replace infinitive
-
+      table_out.replace_infinitive( verb_str )
     end  # if preproc verb requested
 
     return CekimiRules.get_verb_obj( verb_str, verb_stem_neg )
