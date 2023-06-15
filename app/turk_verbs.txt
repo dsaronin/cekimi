@@ -9,8 +9,8 @@ ağar	to become white [< az]
 ağla	to weep, cry	parkta ağlayan çocuğu gördün mü?
 ağlayabilir	can cry
 ağrı	hurts, paining	bacaklarım ağrıyor.
-ak	to run, flow
-ak	flow, discharge, leak, drain, run out	burnun akıyor mu?
+ak	to run out, flow
+ak	discharge, leak, drain	burnun akıyor mu?
 aksat	hamper, hinder, disturb, disrupt; bir işi gereği gibi yürütmemek	çalişmayı aksatmıyorsundur umarım.
 aksat	paralyze, make limp
 al	to buy, possess

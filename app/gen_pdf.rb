@@ -93,7 +93,8 @@ class GenPdf
     #  Roboto
   #  ------------------------------------------------------------
   def GenPdf.register_fonts( p )
-
+    Prawn::Fonts::AFM.hide_m17n_warning = true
+    # puts FONT_ROBOTO_FAMILY+ROBOTO_NORMAL
     unless FONT_ROBOTO_FAMILY.nil?
       p.font_families.update(
         'Roboto' => {

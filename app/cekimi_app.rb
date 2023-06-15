@@ -82,7 +82,7 @@ class CekimiApp < Sinatra::Application
 
 # http://localhost:3000/conj/gitmek
   get '/conj/:v' do
-    (@verb, @tables) = CEKIMI.do_conjugate([ prep_verb ])
+    (@verb,  @definition, @tables) = CEKIMI.do_conjugate([ prep_verb ])
 
     @error = (
       @tables.nil? || @tables.empty?  ?  

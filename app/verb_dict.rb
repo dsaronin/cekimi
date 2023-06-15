@@ -26,7 +26,7 @@ class VerbDict
     Environ.log_info "Loading verb dictionary..."
     File.open(file, "r") do |f|
       while n = f.gets
-        fields = n.split( FIELD_DELIMITER )
+        fields = n.chomp.split( FIELD_DELIMITER )
         key = fields[ ENTRY ]
         @@verbs[key] ||= []
         @@verbs[key] <<= fields[ DEF ] 

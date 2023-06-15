@@ -95,6 +95,16 @@ class TableOut
   #  ----------------------------------------------------------------
   #  ----------------------------------------------------------------
 
+  #  ----------------------------------------------------------------
+  #  ----------------------------------------------------------------
+  FORMAT_MAIN_HEADER = "%s:\n%s"
+  def show_header()
+    my_def = VerbDict.get_english( @verb_stem )
+    str = sprintf( FORMAT_MAIN_HEADER, @verb_infinitive, my_def.join("\n"))
+    Environ.put_head str
+    return [@verb_infinitive, my_def]
+  end
+
   FORMAT_HEADER = "\n%s:"
   # DEPRECATED: FORMAT_HEADER = "\n%s: %s --> %s"
   FORMAT_LINE   = "    %-Xs\t%-Xs"
