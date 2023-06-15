@@ -107,12 +107,6 @@ body.pdf {
   margin-bottom: 10px;
 }
 
-.aside {
-  width: 215px;
-  float: right;
-  overflow: hidden;
-}
-
 #footer {
   clear: both;
   background-color: black;
@@ -854,9 +848,11 @@ input.icon-submit:hover {
   margin-left: 1.5em;
 }
 
-#page_title, #section_header {
+.page_title {
   margin: 0;
   padding: 0;
+  width: 455px;
+  float: left;
 }
 
 #page_title h2 {
@@ -1352,6 +1348,20 @@ table.captioned_headline td {
   font-weight: lighter;
 }
 
+.aside {
+  width: 285px;
+  display: inline;
+  overflow: hidden;
+  padding: 0.2em 0.3em;
+}
+.aside p {
+  padding: 0;
+  text-align: right;
+  font-size: small;
+  font-style: italic;
+  color: #a5a5a5;
+}
+
 .centered th, .centered td {
   text-align: center;
 }
@@ -1431,7 +1441,7 @@ span.verb {
 }
 
 #left_table {
-  width: 43%;
+  width: 45%;
 }
 
 #right_table {

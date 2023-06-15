@@ -113,7 +113,6 @@ büyütür	make bigger	ben hala parmağımı deliğine sokup büyütürken.
 çak	strike, hammer, flash
 çalış	to work, work hard
 çalış	work
-çal	knock
 çal	knock, blow
 çal	play {instrument]	gitar çalmayı seviyor musun?
 çal	steal, thieve, hijack

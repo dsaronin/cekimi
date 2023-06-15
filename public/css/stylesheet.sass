@@ -106,12 +106,13 @@ $FG_INPUTLABEL_DARK: #485751
 // DIMENSIONS
 
 $CENTRAL_WIDTH: 740px
-$ASIDE_WIDTH: 215px
+$ASIDE_WIDTH: 285px
 $HORIZONTAL_MARGIN: 10px
 // $CONTAINER_WIDTH: $CENTRAL_WIDTH + $ASIDE_WIDTH + $HORIZONTAL_MARGIN
 $CONTAINER_WIDTH: $CENTRAL_WIDTH + $HORIZONTAL_MARGIN
 $CONTAINER_WIDTH_PDF: 185mm
 $PAGE_HEIGHT: 225mm
+$PAGE_TITLE_WIDTH: $CENTRAL_WIDTH - $ASIDE_WIDTH
 
 $CENTRAL_HEIGHT: 335px
 $CENTRAL_WORK_HEIGHT: 450px
@@ -297,11 +298,6 @@ body
 #work-section
   margin-top: $CENTRAL_WORK_MARGIN_TOP
   margin-bottom: $CENTRAL_WORK_MARGIN_BTM
-
-.aside
-  width: $ASIDE_WIDTH
-  float: right
-  overflow: hidden
 
 #footer
   clear: both
@@ -851,9 +847,11 @@ input.icon-submit
     list-style-position: outside
     margin-left: 1.5em
 
-#page_title, #section_header
+.page_title
   margin: 0
   padding: 0
+  width: $PAGE_TITLE_WIDTH
+  float: left
 
 #page_title h2
   margin: 0
@@ -1258,6 +1256,19 @@ table.captioned_headline
   dd
     font-weight: lighter
 
+.aside
+  width: $ASIDE_WIDTH
+  display: inline
+  overflow: hidden
+  padding: 0.2em 0.3em
+
+  p
+    padding: 0
+    text-align: right
+    font-size: small
+    font-style: italic
+    color: $FG_WORK_H3_FADE
+
 .centered
   th,td
     text-align: center
@@ -1323,7 +1334,7 @@ span.verb
     border: 0
 
 #left_table
-  width: 43%
+  width: 45%
 #right_table
   width: 50%
 

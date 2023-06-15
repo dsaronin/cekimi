@@ -1,4 +1,11 @@
-%h1= @verb
+.page_title
+  %h1= @verb
+.aside
+  -# limit to just 4 lines of definition; max 40 char/line
+  -# strip off any sub turkish definition
+  - @definition.slice(0..3).each do |d|
+    %p= d.gsub(/;.*$/,"").slice(0..40)
+
 - unless @error.nil?
   #errorExplanation
     %p.flash-error= @error
