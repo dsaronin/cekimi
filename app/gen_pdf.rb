@@ -18,6 +18,8 @@ class GenPdf
   PDF_EXT = ".pdf"
 
   DEF_FONT_SIZE = 14
+  PAGE_WIDTH = 19.cm
+  PAGE_HEIGHT = 25.cm
 
   BOX_TITLE_FONT_SIZE = 10
   BOX_FONT_SIZE = 14
@@ -34,11 +36,18 @@ class GenPdf
   INNER_WIDTH  = 43.mm
   INNER_HEIGHT = 25.mm
 
-  HEADING_POSITION = [0,25.cm]
-  HEADING_HEIGHT = 35.mm
-  HEADING_WIDTH = 19.cm
+  HEADING_POSITION = [0,PAGE_HEIGHT]
+  HEADING_HEIGHT = 30.mm
+  HEADING_WIDTH = 13.cm
   HEADING_PADDING = 5.mm
-  HEADING_FONT_SIZE = 64
+  HEADING_FONT_SIZE = 50
+
+  ASIDE_POSITION = [HEADING_WIDTH, PAGE_HEIGHT]
+  ASIDE_WIDTH = PAGE_WIDTH - HEADING_WIDTH
+  ASIDE_HEIGHT = HEADING_HEIGHT
+  ASIDE_PADDING = HEADING_PADDING
+  ASIDE_COLOR = 'A5A5A5'
+  ASIDE_FONT_SIZE = 10
 
   FONT_PALATINO = "$HOME/.local/share/fonts/Linotype\ GmbH/TrueType/Palatino\ Linotype"
   FONT_TAHOMA   = "$HOME/.local/share/fonts/Microsoft\ Corporation/TrueType/Tahoma"
@@ -145,7 +154,7 @@ class GenPdf
   #  heading -- renders the heading with verb and possible definition
   #  verb
   #  -----------------------------------------------------------------
-  def heading( str )
+  def heading( str, definition )
     unless @done_heading
       @done_heading = true
       @pdf.bounding_box( 
@@ -159,6 +168,24 @@ class GenPdf
         }
         #  @pdf.transparent( 0.4 ) { @pdf.stroke_bounds }
       end  # bounding box block
+
+      @pdf.bounding_box( 
+          ASIDE_POSITION, 
+          height: ASIDE_HEIGHT,
+          width: ASIDE_WIDTH
+      ) do
+        @pdf.font_size ASIDE_FONT_SIZE 
+        @pdf.pad( ASIDE_PADDING ) {
+          definition.slice(0..3).each do |d|
+            @pdf.text( 
+                d.gsub(/;.*$/,"").slice(0..40), 
+                style: :italic, align: :right, color: ASIDE_COLOR 
+            )
+          end
+        }
+        #  @pdf.transparent( 0.4 ) { @pdf.stroke_bounds }
+      end  # bounding box block
+
     end   # unless
   end
 

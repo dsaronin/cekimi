@@ -115,7 +115,7 @@ class TableOut
   #    pair_tables -- true if output pair of neg/poz tables
   #  ----------------------------------------------------------------
   def show_table( pair_tables )
-    @pdf.heading(@verb_infinitive)
+    @pdf.heading(@verb_infinitive, VerbDict.get_english(@verb_stem) )
 
     if pair_tables && @my_pair && !@my_pair.is_empty?
     then

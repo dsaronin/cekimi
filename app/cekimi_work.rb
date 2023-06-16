@@ -240,7 +240,7 @@ class CekimiWork
   #  ----------------------------------------------------------------
   def pdf_design_output()
     r = GenPdf.new(  )
-    r.heading("Gitmek")
+    r.heading("Gitmek", ["sample definition english"])
     top_edge = r.show_left_table("geniş zaman", "giderim\ngidersin\ngider", "gideriz\ngidersiniz\ngiderler")
     top_edge = r.show_right_table( top_edge, "olumsuz genis zaman", "giderim\ngidersin\ngider", "gideriz\ngidersiniz\ngiderler" )
     top_edge = r.show_left_table("geniş zaman", "giderim\ngidersin\ngider", "gideriz\ngidersiniz\ngiderler")

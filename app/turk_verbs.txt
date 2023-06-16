@@ -225,6 +225,7 @@ geçil	to be crossed over
 geçir	convey, disseminate, promote, propagate
 geçir	pass, make pass, carry, transfer, see off
 geç	pass sth	ders çok güzel geçti.
+gel	come
 gel	arise, be born; ortaya çıkmak, doğmak
 gel	be picked up and transported smwh; bir yerden alınıp bir yere ulaştırılmak
 gel	be/reach/measure/rival; kadar … olmak
