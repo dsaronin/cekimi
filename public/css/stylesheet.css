@@ -108,8 +108,20 @@ body.pdf {
 }
 
 #footer {
-  clear: both;
+  margin: 0 auto;
   background-color: black;
+  position: fixed;
+  bottom: 0;
+  clear: both;
+  width: 100%;
+}
+#footer p, #footer a {
+  color: #49466d;
+  padding: 4px;
+  font-size: x-small;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .main-container {
@@ -137,7 +149,7 @@ body.pdf {
 }
 
 #inner-workLeft {
-  min-height: 450px;
+  min-height: 800px;
 }
 
 #inner-columnRight-index {
@@ -165,14 +177,6 @@ body.pdf {
   color: #e2f1fc;
 }
 
-#footer-innerLeft {
-  margin: 20px 0px 0 0;
-}
-
-#footer-innerworkLeft {
-  margin: 10px 0px 0 0;
-}
-
 .footer-inner {
   height: 208px;
 }
@@ -188,45 +192,6 @@ body.pdf {
   font-weight: bold;
   padding: 1em;
   color: #e2f1fc;
-}
-
-#footer-innerRight {
-  padding: 1em 0 1em 0.5em;
-  margin-left: 10px;
-  margin-top: 12px;
-  height: 282px;
-}
-#footer-innerRight p {
-  font-size: small;
-}
-#footer-innerRight a {
-  font-size: small;
-  color: #a9a9e9;
-  text-decoration: none;
-  cursor: pointer;
-}
-#footer-innerRight a:hover {
-  color: white;
-}
-#footer-innerRight ul {
-  padding: 0 20px;
-}
-#footer-innerRight ul li {
-  list-style-type: disc;
-  list-style-position: outside;
-  font-size: 12px;
-}
-
-#footer-workRight {
-  margin-left: 10px;
-  margin-top: 12px;
-  height: 208px;
-}
-
-#footer-button-block {
-  height: 87px;
-  margin-top: 12px;
-  padding: 0;
 }
 
 #main-button-block {
@@ -752,26 +717,6 @@ img.app_button {
   height: 160px;
 }
 
-#footer > .main-container > p {
-  color: #49466d;
-  clear: both;
-  padding: 4px;
-  font-size: x-small;
-  text-align: center;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-#footer a {
-  color: #49466d;
-  clear: both;
-  padding: 4px;
-  font-size: x-small;
-  text-align: center;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
 img.icon-middle {
   vertical-align: middle;
   padding-right: 0.5em;
@@ -968,13 +913,13 @@ input[type=hidden] {
 
 #main-work-box {
   margin: 0 15px;
-  min-height: 430px;
+  min-height: 800px;
 }
 
 #scroll-box {
   margin: 0;
   padding: 0;
-  height: 450px;
+  height: 800px;
   overflow: auto;
 }
 

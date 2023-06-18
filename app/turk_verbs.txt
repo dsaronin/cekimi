@@ -724,3 +724,8 @@ kaybetmek	lose
 dök	pour, empty
 boz	spoil, contaminate, botch, mess up, foul, deface, taint
 biçimlendir	form, model, shape, carve out, fashion sth
+göç	emigrate, immigrate, trek
+göç	subside  (tech)
+göç	collapse [under weight of], dent, fall in
+ürk	startle, get a fright, take fright, boggle
+ürk	lose nerve, balk at, dread

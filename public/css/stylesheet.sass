@@ -115,10 +115,7 @@ $PAGE_HEIGHT: 225mm
 $PAGE_TITLE_WIDTH: $CENTRAL_WIDTH - $ASIDE_WIDTH
 
 $CENTRAL_HEIGHT: 335px
-$CENTRAL_WORK_HEIGHT: 450px
-
-$SPLASH_HEIGHT: $CENTRAL_WORK_HEIGHT - 20
-$SPLASH_WIDTH: $CENTRAL_WIDTH - 30
+$CENTRAL_WORK_HEIGHT: 800px
 
 $HEADER_HEIGHT: 35px
 
@@ -300,8 +297,19 @@ body
   margin-bottom: $CENTRAL_WORK_MARGIN_BTM
 
 #footer
-  clear: both
+  margin: 0 auto
   background-color: $BG_HEADER
+  position: fixed
+  bottom: 0
+  clear: both
+  width: 100%
+  p, a
+    color: $FG_FOOTER
+    padding: 4px
+    font-size: x-small
+    text-align: center
+    font-weight: bold
+    text-transform: uppercase
 
 .main-container
   margin: 0 auto
@@ -345,12 +353,6 @@ body
     strong
       color: $BG_INPUTFORM
 
-#footer-innerLeft
-  margin: unquote("#{$CENTRAL_MARGIN_TOP} 0px 0 0")
-
-#footer-innerworkLeft
-  margin: unquote("#{$CENTRAL_WORK_MARGIN_TOP} 0px 0 0")
-
 .footer-inner
   height: $INNER_MEDIUM_HEIGHT
   p
@@ -363,37 +365,6 @@ body
     font-weight: bold
     padding: 1em
     color: $BG_INPUTFORM
-
-#footer-innerRight
-  padding: 1em 0 1em 0.5em
-  margin-left: $ASIDE_INDEX_MARGIN_LEFT
-  margin-top: $FOOTER_INNER_MARGIN_TOP
-  height: $INNER_FOOTER_RIGHT_HEIGHT
-  p
-    font-size: small
-  a
-    font-size: small
-    color: $FG_INFORMATIONBOX
-    text-decoration: none
-    cursor: pointer
-    &:hover
-      color: $HV_HEADER
-  ul
-    padding: 0 20px
-    li
-      list-style-type: disc
-      list-style-position: outside
-      font-size: 12px
-
-#footer-workRight
-  margin-left: $ASIDE_INDEX_MARGIN_LEFT
-  margin-top: $FOOTER_INNER_MARGIN_TOP
-  height: $INNER_MEDIUM_HEIGHT
-
-#footer-button-block
-  height: 87px
-  margin-top: $FOOTER_INNER_MARGIN_TOP
-  padding: 0
 
 #main-button-block
   padding-bottom: 10px
@@ -766,25 +737,6 @@ img.app_button
   img
     height: 160px
 
-#footer > .main-container > p
-  color: $FG_FOOTER
-  clear: both
-  padding: 4px
-  font-size: x-small
-  text-align: center
-  font-weight: bold
-  text-transform: uppercase
-
-#footer
-  a
-    color: $FG_FOOTER
-    clear: both
-    padding: 4px
-    font-size: x-small
-    text-align: center
-    font-weight: bold
-    text-transform: uppercase
-
 img.icon-middle
   vertical-align: middle
   padding-right: 0.5em
@@ -948,7 +900,7 @@ input[type = "hidden"]
 
 #main-work-box
   margin: 0 15px
-  min-height: $SPLASH_HEIGHT
+  min-height: $CENTRAL_WORK_HEIGHT
 
 #scroll-box
   margin: 0
