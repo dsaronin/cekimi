@@ -125,7 +125,7 @@
   !ruby/object:CekimiRules
     my_key: progressive
     caption_eng: progressive tense
-    caption_turk: şimdi zaman
+    caption_turk: şimdiki zaman
     grammar_role: :present_tense
     lexical_rule: ['~W', '@X', '@Y', '@A4', 'YOR', '&_sfx_pers']
     parent_conj: aorist
@@ -139,7 +139,7 @@
   !ruby/object:CekimiRules
     my_key: neg_progressive
     caption_eng: negative progressive tense
-    caption_turk: olumsuz şimdi zaman
+    caption_turk: olumsuz şimdiki zaman
     grammar_role: :present_tense
     lexical_rule: ['~V', 'M', '@A4', 'YOR', '&_sfx_pers']
     parent_conj: neg_aorist
@@ -558,7 +558,7 @@
     caption_turk: nedensel
     grammar_role: :causative
     is_neg: false
-    lexical_rule: ['~V',  '~S',  '~Z' ] 
+    lexical_rule: ['~W',  '~S',  '~Z' ] 
     rule_info:
       - [ '[aeiouıöü]', false, [ 'T' ] ]
       - [ '[çş]', false, [ '@A4', 'R' ] ]
@@ -589,7 +589,7 @@
     caption_turk: pasif
     grammar_role: :passive
     is_neg: false
-    lexical_rule: ['~V',  '~S',  '~Z' ] 
+    lexical_rule: ['~W',  '~S',  '~Z' ] 
     rule_info:
       - [ '[aeiouıöü]', false, [ 'N' ] ]
       - [ 'l', false, [ '@A4', 'N' ] ]
