@@ -204,6 +204,9 @@ $SUBTAB_SPACING: 5px
   +ACTION_COMMON
 
 // ---------------------------------------------------------------------
+html, body
+  margin: 0
+  padding: 0
 
 html
   color: $BASIC_FG
@@ -241,15 +244,8 @@ select
     background: $TABLE_HEADER_BKGD_LT
 
 body
-  color: $BG_CENTRALBOX
-  +GRADIENT_SPREAD( $BASIC_BG, $BG_AUTO_MARGIN )
-
-  &.modal
-    background: $BASIC_BG
-  &.pdf
-    background: none
-    page-size: portrait
-    border: none
+  height: 100vh
+  width: 100vw
 
 .modal
   background: $BASIC_BG
@@ -271,10 +267,18 @@ body
   visibility: hidden
 
 *
+  box-sizing: border-box
   html .clearfix
     height: 1%
   &:first-child+html .clearfix
     min-height: 1px
+
+.container
+  margin: 0 auto
+  height: 100%
+  width: 100%
+  color: $BG_CENTRALBOX
+  +GRADIENT_SPREAD( $BASIC_BG, $BG_AUTO_MARGIN )
 
 #header
   margin: 0 auto
@@ -314,31 +318,6 @@ body
 .main-container
   margin: 0 auto
   width: $CONTAINER_WIDTH
-
-.pdf-main-container
-  margin: 0 auto
-  width: $CONTAINER_WIDTH_PDF
-
-.main-central-positioning
-  margin-top: $CENTRAL_MARGIN_TOP
-  margin-bottom: $CENTRAL_MARGIN_BTM
-
-.columnLeft
-  float: left
-  width: $CENTRAL_WIDTH
-
-#inner-columnLeft
-  min-height: $CENTRAL_HEIGHT
-
-#inner-workLeft
-  min-height: $CENTRAL_WORK_HEIGHT
-
-#inner-columnRight-index
-  margin-left: $ASIDE_INDEX_MARGIN_LEFT
-
-#inner-columnRight
-  margin-left: $ASIDE_INDEX_MARGIN_LEFT
-  // height: $INNER_MEDIUM_HEIGHT - 2
 
 #modal-main
   margin: 0
@@ -821,13 +800,6 @@ input.icon-submit
   color: $FG_WORK_H3
 
 fieldset
-  &.modal-fieldset
-    padding: 0.5em
-    margin-bottom: 10px
-    border: unquote("1px solid #{$FG_INPUTBOX}")
-    background: #DAE9F4  // $BG_INPUTFORM - #080808
-  &.teamarea
-    background: #C2D1DC  // $BG_INPUTFORM - #202020
   &.wizard-fieldset
     margin: 0.5em 0
     border: none
@@ -1152,6 +1124,7 @@ table.captioned_headline
 
 // text-area where lots of text used to communicate
 .text-area
+  margin: 10px 0
   padding: 0em
   h1,h2,h3,h4,h5
     padding: 0.12em 0 0.12em 0

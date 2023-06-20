@@ -1,8 +1,10 @@
-- title1 = "geniş zaman, şimdi zaman, gelecek zaman, belirli geçmis zaman, belirlisiz geçmis zaman"
+- title1 = "geniş zaman, şimdiki zaman, gelecek zaman, belirli geçmis zaman, belirlisiz geçmis zaman"
 - title2 = "gereklilik kipi, dilek kipi, şart kipi, geçmiş mükemmel zaman, şüpheli uzak geçmiş zaman"
 -#
-%h3= @greeting
-%h4= @hint
+%h3 
+  Merhaba, Fiil Çekimi'ne hoşgeldiniz.
+%h4 
+  Buyurun aşağıdaki boşluğa bir fiil girin.
 %br
 %h5
   Böyle yapabileceğin şeyler: 
@@ -10,13 +12,18 @@
 %ul
   = form('/conj', method=:post) do |f|
     %li
-      = f.label(:verb, 'Fiilini birleştir:', {:title => "istemde bir fiil girin (~mak/mek). göndermek için enter'a tıklayın."})
+      = f.label(:verb, 'Fiili yaz:', {:title => "bir fiil girin (~mak/mek). göndermek için enter'a tıklayın."})
       = f.input(:verb)
+    %li 
+      = f.label(:ext, 'Fiil modifikasyoni seçin:')
+      = f.radio(:ext,%w{hiçbiri yetenik nedensel pasif dönüşlü-şekil}, {:title => "fiil modifikasyoni seçin yoksa hiçbiri varsayılan."})
+    %li
+      = f.label(:pdf, 'PDF çıktı seçin:')
       = f.checkbox(:pdf,%w{pdf}, {:title => "pdf çıktı seçin"})
-      &emsp;
-      = f.radio(:ext,%w{yetenik nedensel pasif sıfırla}, {:title => "fiil modifikasyonları seçin yoksa bütün sıfırla"})
-  %li= link_to( "Birincil konjugasyonları seçin &raquo;", "/list/aorist", { :title => title1 } )
-  %li= link_to( "İkincil konjugasyonları seçin &raquo;", "/list/must_shall", { :title => title2 } )
+  %li
+    = link_to( "Birincil konjugasyonları seçin &raquo;", "/list/aorist", { :title => title1 } )
+    &emsp;yoksa&emsp;
+    = link_to( "İkincil konjugasyonları seçin &raquo;", "/list/must_shall", { :title => title2 } )
 %br
 %h5
   Örnek konjugasyon: 

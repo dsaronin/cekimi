@@ -19,22 +19,22 @@
     %title Çekimi
 
   %body
-    #header
-      -# %img{ :src => "/logo-50-red.png", :class => 'logo', :alt => 'çekimi logo' }
-      = link_to( image_tag( "/logo-50-red.png", {:class => 'logo',:alt => 'çekimi logo'} ) , '/', { :title => "main page" } )
+    .container.clearfix2
+      #header
+        -# %img{ :src => "/logo-50-red.png", :class => 'logo', :alt => 'çekimi logo' }
+        = link_to( image_tag( "/logo-50-red.png", {:class => 'logo',:alt => 'çekimi logo'} ) , '/', { :title => "main page" } )
+        .main-container
+          %p Otomatik fiil çekimi yazılımı
+        = link_to( image_tag( "/turk-flag-50.png", {:class => 'flag',:alt => 'türk flag & national anthem'} ) , '/istiklal-marsi.ogg', {:target => "_blank"} )
+        -# %img{ :src => "/turk-flag-50.png", :class => 'flag', :alt => 'türk flag' }
+      
       .main-container
-        %p Otomatik fiil çekimi yazılımı
-      = link_to( image_tag( "/turk-flag-50.png", {:class => 'flag',:alt => 'türk flag & national anthem'} ) , '/istiklal-marsi.ogg', {:target => "_blank"} )
-      -# %img{ :src => "/turk-flag-50.png", :class => 'flag', :alt => 'türk flag' }
-    
-    .main-container.clearfix2{ :id => 'work-section' }
-      .columnLeft
-        #inner-workLeft.text-area
+        .text-area
           != yield
-    
-    #footer
-      .main-container
-        %p
-          &copy;&nbsp;
-          =link_to("Copyright 2023 David S. Anderson, All rights reserved ","/about")
-          &emsp;&bull;&emsp;v 1.01 &ensp;
+      
+      #footer
+        .main-container
+          %p
+            &copy;&nbsp;
+            =link_to("Copyright 2023 David S. Anderson, All rights reserved ","/about")
+            = "&emsp;&bull;&emsp;v #{Environ.cekimi_version} &ensp;"

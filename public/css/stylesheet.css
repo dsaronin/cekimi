@@ -1,3 +1,8 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 html {
   color: black;
   background-color: #adadec;
@@ -41,18 +46,8 @@ select:hover {
 }
 
 body {
-  color: #0f1d23;
-  background-image: -moz-linear-gradient(bottom, #7D7DBC, white );
-  background-image: -webkit-gradient(linear,left bottom, left top, color-stop(0, #7D7DBC), color-stop(0.9, white)  );
-  background-image: -ms-linear-gradient(bottom, white, #7D7DBC );
-}
-body.modal {
-  background: white;
-}
-body.pdf {
-  background: none;
-  page-size: portrait;
-  border: none;
+  height: 100vh;
+  width: 100vw;
 }
 
 .modal {
@@ -77,11 +72,24 @@ body.pdf {
   visibility: hidden;
 }
 
+* {
+  box-sizing: border-box;
+}
 * html .clearfix {
   height: 1%;
 }
 *:first-child + html .clearfix {
   min-height: 1px;
+}
+
+.container {
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+  color: #0f1d23;
+  background-image: -moz-linear-gradient(bottom, #7D7DBC, white );
+  background-image: -webkit-gradient(linear,left bottom, left top, color-stop(0, #7D7DBC), color-stop(0.9, white)  );
+  background-image: -ms-linear-gradient(bottom, white, #7D7DBC );
 }
 
 #header {
@@ -127,37 +135,6 @@ body.pdf {
 .main-container {
   margin: 0 auto;
   width: 750px;
-}
-
-.pdf-main-container {
-  margin: 0 auto;
-  width: 185mm;
-}
-
-.main-central-positioning {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.columnLeft {
-  float: left;
-  width: 740px;
-}
-
-#inner-columnLeft {
-  min-height: 335px;
-}
-
-#inner-workLeft {
-  min-height: 800px;
-}
-
-#inner-columnRight-index {
-  margin-left: 10px;
-}
-
-#inner-columnRight {
-  margin-left: 10px;
 }
 
 #modal-main {
@@ -817,15 +794,6 @@ input.icon-submit:hover {
   color: #1d282d;
 }
 
-fieldset.modal-fieldset {
-  padding: 0.5em;
-  margin-bottom: 10px;
-  border: 1px solid #d2d6d3;
-  background: #DAE9F4;
-}
-fieldset.teamarea {
-  background: #C2D1DC;
-}
 fieldset.wizard-fieldset {
   margin: 0.5em 0;
   border: none;
@@ -1223,6 +1191,7 @@ table.captioned_headline td {
 }
 
 .text-area {
+  margin: 10px 0;
   padding: 0em;
 }
 .text-area h1, .text-area h2, .text-area h3, .text-area h4, .text-area h5 {

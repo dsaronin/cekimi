@@ -14,9 +14,9 @@
     = haml :table_pair, :locals => {:left_table => left, :right_table => right}
 %br
 = form('/conj', method=:post) do |f|
-  = f.label(:verb, 'Fiilini birleştir:', {:title => "istemde bir fiil girin (~mak/mek)"})
+  = f.label(:verb, 'Fiili yaz:', {:title => "bir fiil girin (~mak/mek)"})
   = f.input(:verb)
   = f.checkbox(:pdf,%w{pdf}, {:title => "pdf çıktı seçin"})
   &emsp;
-  = f.radio(:ext,%w{yetenik nedensel pasif sıfırla}, {:title => "fiil modifikasyonları seçin yoksa bütün sıfırla"})
+  = f.radio(:ext,%w{hiçbiri yetenik nedensel pasif dönüşlü-şekil}, {:title => "fiil modifikasyoni seçin yoksa hiçbiri varsayılan"})
  
